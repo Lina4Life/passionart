@@ -24,6 +24,7 @@ export default function Navbar() {
     <nav style={{ position: 'sticky', top: 0, zIndex: 10, background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', padding: '0.5rem 2rem', borderBottom: '1px solid #eee', marginBottom: '2rem' }}>
       <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none', margin: 0, padding: 0 }}>
         <li><NavLink to="/" style={linkStyle}>Gallery</NavLink></li>
+        <li><NavLink to="/community" style={linkStyle}>🎨 Community</NavLink></li>
         {token && <li><NavLink to="/upload" style={linkStyle}>Upload</NavLink></li>}
         {token && <li><NavLink to="/profile" style={linkStyle}>Profile</NavLink></li>}
         {!token && <li><NavLink to="/login" style={linkStyle}>Login</NavLink></li>}

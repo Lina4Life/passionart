@@ -1,0 +1,173 @@
+import React, { useState } from 'react';
+
+const Store = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("featured");
+  const [viewMode, setViewMode] = useState("grid");
+  const [priceRange, setPriceRange] = useState([0, 200]);
+  const [hoveredProduct, setHoveredProduct] = useState(null);
+
+  const categories = ["All", "Prints", "Books", "Merchandise", "Art Supplies", "Digital Art"];
+
+  const products = [
+    {
+      id: 1,
+      name: "Urban Dreamscape Print",
+      artist: "Sarah Chen",
+      price: 75.00,
+      originalPrice: 95.00,
+      category: "Prints",
+      description: "Limited edition fine art print, signed and numbered.",
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+      inStock: true,
+      rating: 4.8,
+      reviews: 24
+    },
+    {
+      id: 2,
+      name: "Contemporary Art: A History",
+      artist: "Dr. Maria Garcia",
+      price: 45.00,
+      category: "Books",
+      description: "A comprehensive guide to contemporary art movements.",
+      image: "https://images.unsplash.com/photo-1544967082-d9d25d867d66",
+      inStock: true,
+      rating: 4.9,
+      reviews: 32
+    },
+    {
+      id: 3,
+      name: "Artist's Essential Kit",
+      price: 120.00,
+      originalPrice: 150.00,
+      category: "Art Supplies",
+      description: "Professional-grade art supplies kit.",
+      image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f",
+      inStock: true,
+      rating: 4.7,
+      reviews: 89
+    }
+  ];
+
+  // Filter products based on all criteria
+  const filteredAndSortedProducts = products
+    .filter(product => {
+      const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
+      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          (product.artist && product.artist.toLowerCase().includes(searchQuery.toLowerCase()));
+      const matchesPrice = product.price <= priceRange[1];
+      return matchesCategory && matchesSearch && matchesPrice;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "priceAsc":
+          return a.price - b.price;
+        case "priceDesc":
+          return b.price - a.price;
+        case "rating":
+          return b.rating - a.rating;
+        default:
+          return 0;
+      }
+    });
+
+  return (
+    <div className="store-container">
+      <div className="store-content">
+        {/* Header */}
+        <div className="store-header">
+          <h1>Art Shop</h1>
+          <p>Discover exclusive art prints, books, and curated merchandise</p>
+
+          {/* Search and Controls */}
+          <div className="search-controls">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="featured">Featured</option>
+              <option value="priceAsc">Price: Low to High</option>
+              <option value="priceDesc">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </div>
+
+          {/* Categories */}
+          <div className="categories">
+            {categories.map((category, idx) => (
+              <button
+                key={idx}
+                onClick={() => setSelectedCategory(category)}
+                className={category === selectedCategory ? 'active' : ''}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {/* Price Range */}
+          <div className="price-range">
+            <label>Price Range: $0 - ${priceRange[1]}</label>
+            <input
+              type="range"
+              min="0"
+              max="200"
+              value={priceRange[1]}
+              onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
+            />
+          </div>
+        </div>
+
+        {/* Product Grid */}
+        <div className={`product-grid ${viewMode}`}>
+          {filteredAndSortedProducts.map((product) => (
+            <div
+              key={product.id}
+              className="product-card"
+              onMouseEnter={() => setHoveredProduct(product.id)}
+              onMouseLeave={() => setHoveredProduct(null)}
+            >
+              <div className="product-image">
+                <img src={product.image} alt={product.name} />
+                {product.originalPrice && (
+                  <div className="discount-badge">
+                    Save {Math.round((1 - product.price / product.originalPrice) * 100)}%
+                  </div>
+                )}
+              </div>
+              <div className="product-info">
+                <div className="product-meta">
+                  <span className="category">{product.category}</span>
+                  <span className="rating">⭐ {product.rating} ({product.reviews})</span>
+                </div>
+                <h2>{product.name}</h2>
+                <p>{product.description}</p>
+                <div className="product-footer">
+                  <div className="price">
+                    <span className="current-price">${product.price}</span>
+                    {product.originalPrice && (
+                      <span className="original-price">${product.originalPrice}</span>
+                    )}
+                  </div>
+                  <button className="add-to-cart">
+                    🛒 Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Store;

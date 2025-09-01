@@ -1,21 +1,45 @@
-const pool = require('../config/db');
+const db = require('../config/database');
 
-const saveArtwork = async (userId, title, description, keywords, imagePath) => {
-  const res = await pool.query(
-    `INSERT INTO artworks (user_id, title, description, keywords, image_path, created_at)
-     VALUES ($1,$2,$3,$4,$5,NOW()) RETURNING *`,
-    [userId, title, description, keywords, imagePath]
-  );
-  return res.rows[0];
+const saveArtwork = async (userId, title, description, keywords, imagePath, category, paymentIntentId) => {
+  return new Promise((resolve, reject) => {
+    const query = `
+      INSERT INTO artworks (user_id, title, description, keywords, image_url, category, payment_intent_id, status, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, 'active', CURRENT_TIMESTAMP)
+    `;
+    
+    db.run(query, [userId, title, description, keywords, imagePath, category, paymentIntentId], function(err) {
+      if (err) {
+        reject(err);
+      } else {
+        // Get the created artwork
+        db.get("SELECT * FROM artworks WHERE id = ?", [this.lastID], (err, row) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(row);
+          }
+        });
+      }
+    });
+  });
 };
 
 const listArtworks = async () => {
-  const res = await pool.query(
-    `SELECT id, user_id, title, description, keywords,
-            image_path AS image_url, created_at
-     FROM artworks ORDER BY id DESC`
-  );
-  return res.rows;
+  return new Promise((resolve, reject) => {
+    const query = `
+      SELECT id, user_id, title, description, 
+             image_url, status, created_at
+      FROM artworks ORDER BY id DESC
+    `;
+    
+    db.all(query, (err, rows) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
 };
 
 module.exports = { saveArtwork, listArtworks };

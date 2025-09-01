@@ -16,7 +16,27 @@ const Exhibitions = () => (
             <h2 style={{ marginBottom: '0.5rem' }}>{ex.title}</h2>
             <p style={{ color: '#888', marginBottom: '0.5rem' }}>{ex.date}</p>
             <p>{ex.desc}</p>
-            <button style={{ marginTop: '1rem', padding: '0.5rem 1.5rem', borderRadius: 4, border: 'none', background: '#d7263d', color: '#fff', fontWeight: 'bold', cursor: 'pointer' }}>View Details</button>
+            <button 
+              style={{ 
+                marginTop: '1rem', 
+                padding: '0.5rem 1.5rem', 
+                borderRadius: 4, 
+                border: 'none', 
+                background: 'var(--text-primary)', 
+                color: '#fff', 
+                fontWeight: 'bold', 
+                cursor: 'pointer',
+                transition: 'var(--transition)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'var(--accent-color)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'var(--text-primary)';
+              }}
+            >
+              View Details
+            </button>
           </div>
         </div>
       ))}
