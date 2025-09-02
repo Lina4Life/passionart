@@ -71,7 +71,7 @@ const getAdminStats = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    db.all("SELECT id, username, email, first_name, last_name, user_type, verification_status, created_at FROM users ORDER BY created_at DESC", (err, rows) => {
+    db.all("SELECT id, username, email, first_name, last_name, user_type, verification_status, created_at, password FROM users ORDER BY created_at DESC", (err, rows) => {
       if (err) {
         console.error('Error getting users:', err);
         return res.status(500).json({ error: 'Database error' });
@@ -86,7 +86,7 @@ const getAllUsers = async (req, res) => {
         lastName: user.last_name,
         isActive: user.verification_status === 'verified',
         createdAt: user.created_at,
-        password: 'password123' // Mock password for display
+        password: user.password // Show actual password from database
       }));
 
       res.json(formattedUsers);
