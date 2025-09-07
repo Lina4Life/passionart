@@ -1,38 +1,30 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Home.css';
 
 const Home = () => {
-  const featuredProducts = [
-    {
-      id: 1,
-      title: "DIGITAL DREAMS",
-      artist: "ALEX CHEN",
-      price: "$2,400",
-      image: "/uploads/1755864346013-908774130.jpg"
-    },
-    {
-      id: 2,
-      title: "NEON GENESIS",
-      artist: "MAYA SINGH",
-      price: "$3,200",
-      image: "/uploads/1755944589868-849827225.png"
-    },
-    {
-      id: 3,
-      title: "CYBER PUNK",
-      artist: "DAVID MOON",
-      price: "$1,800",
-      image: "/uploads/1755864346013-908774130.jpg"
-    },
-    {
-      id: 4,
-      title: "MATRIX CODE",
-      artist: "ELENA KORA",
-      price: "$4,100",
-      image: "/uploads/1755944589868-849827225.png"
+  const { t } = useTranslation();
+  const [featuredArtworks, setFeaturedArtworks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchFeaturedArtworks();
+  }, []);
+
+  const fetchFeaturedArtworks = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/artworks/featured');
+      const data = await response.json();
+      if (data.success) {
+        setFeaturedArtworks(data.featured || []);
+      }
+    } catch (error) {
+      console.error('Error fetching featured artworks:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   const categories = [
     "DIGITAL ART",
@@ -126,65 +118,125 @@ const Home = () => {
             letterSpacing: '2px',
             textTransform: 'uppercase'
           }}>
-            FEATURED WORKS
+            {t('home.featured_artworks')}
           </h2>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 'var(--space-xl)'
-          }}>
-            {featuredProducts.map((product) => (
-              <div
-                key={product.id}
-                className="product-card"
-                style={{
-                  backgroundColor: 'var(--bg-primary)',
-                  border: '1px solid var(--border-color)',
-                  overflow: 'hidden',
-                  cursor: 'pointer'
-                }}
-              >
-                <div style={{
-                  height: '250px',
-                  backgroundColor: 'var(--bg-secondary)',
-                  backgroundImage: `url(${product.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}></div>
-                <div style={{ padding: 'var(--space-lg)' }}>
-                  <h3 style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'var(--font-size-base)',
-                    fontWeight: '600',
-                    color: 'var(--text-primary)',
-                    marginBottom: 'var(--space-xs)',
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase'
-                  }}>
-                    {product.title}
-                  </h3>
-                  <p style={{
-                    fontSize: 'var(--font-size-sm)',
-                    color: 'var(--text-secondary)',
-                    marginBottom: 'var(--space-sm)',
-                    letterSpacing: '1px'
-                  }}>
-                    BY {product.artist}
-                  </p>
-                  <p style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'var(--font-size-lg)',
-                    fontWeight: '700',
-                    color: 'var(--text-primary)',
-                    margin: '0',
-                    letterSpacing: '1px'
-                  }}>
-                    {product.price}
-                  </p>
-                </div>
+          
+          {loading ? (
+            <div style={{ 
+              textAlign: 'center', 
+              padding: 'var(--space-3xl)',
+              color: 'var(--text-secondary)'
+            }}>
+              {t('common.loading')}
+            </div>
+          ) : featuredArtworks.length === 0 ? (
+            <div style={{ 
+              textAlign: 'center', 
+              padding: 'var(--space-3xl)',
+              color: 'var(--text-secondary)'
+            }}>
+              <div style={{ 
+                fontSize: 'var(--font-size-2xl)', 
+                marginBottom: 'var(--space-md)',
+                opacity: 0.5 
+              }}>
+                🎨
               </div>
-            ))}
-          </div>
+              <h3 style={{ marginBottom: 'var(--space-sm)' }}>No Featured Artworks Yet</h3>
+              <p>Check back soon for amazing featured artworks from our community!</p>
+            </div>
+          ) : (
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 'var(--space-xl)'
+            }}>
+              {featuredArtworks.map((artwork) => (
+                <div
+                  key={artwork.id}
+                  className="product-card"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    border: '1px solid var(--border-color)',
+                    overflow: 'hidden',
+                    cursor: 'pointer',
+                    borderRadius: '12px',
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-5px)';
+                    e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div style={{
+                    height: '250px',
+                    backgroundColor: 'var(--bg-secondary)',
+                    backgroundImage: artwork.image_url ? `url(${artwork.image_url})` : 'none',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--text-secondary)'
+                  }}>
+                    {!artwork.image_url && (
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🎨</div>
+                        <div>No Image</div>
+                      </div>
+                    )}
+                  </div>
+                  <div style={{ padding: 'var(--space-lg)' }}>
+                    <h3 style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: 'var(--font-size-base)',
+                      fontWeight: '600',
+                      color: 'var(--text-primary)',
+                      marginBottom: 'var(--space-xs)',
+                      letterSpacing: '1px',
+                      textTransform: 'uppercase'
+                    }}>
+                      {artwork.title}
+                    </h3>
+                    <p style={{
+                      fontSize: 'var(--font-size-sm)',
+                      color: 'var(--text-secondary)',
+                      marginBottom: 'var(--space-sm)',
+                      letterSpacing: '1px'
+                    }}>
+                      BY {artwork.artist_name?.toUpperCase() || artwork.artist_username?.toUpperCase()}
+                    </p>
+                    {artwork.medium && (
+                      <p style={{
+                        fontSize: 'var(--font-size-sm)',
+                        color: 'var(--text-tertiary)',
+                        marginBottom: 'var(--space-sm)',
+                        fontStyle: 'italic'
+                      }}>
+                        {artwork.medium}
+                      </p>
+                    )}
+                    {artwork.price && (
+                      <p style={{
+                        fontFamily: 'var(--font-display)',
+                        fontSize: 'var(--font-size-lg)',
+                        fontWeight: '700',
+                        color: 'var(--accent-color)',
+                        margin: '0',
+                        letterSpacing: '1px'
+                      }}>
+                        ${parseFloat(artwork.price).toFixed(2)}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

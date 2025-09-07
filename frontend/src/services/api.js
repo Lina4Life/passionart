@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3001/api').replace(/\/$/, '');
 
 export const API_ORIGIN = (() => {
   try {
@@ -35,7 +35,7 @@ export const uploadArtwork = (formData) =>
 
 // Admin API functions
 export const getAdminStats = () =>
-  api.get('/admin/stats').then(r => r.data);
+  api.get('/admin/stats?t=' + Date.now()).then(r => r.data);
 
 export const getAllUsers = () =>
   api.get('/admin/users').then(r => r.data);
@@ -54,8 +54,14 @@ export const createProduct = (productData) => {
   }
 };
 
-export const updateProductStatus = (productId, status) =>
-  api.put(`/admin/products/${productId}/status`, { status }).then(r => r.data);
+export const updateProductStatus = (productId, updateData) => {
+  // Handle both old format (just status string) and new format (object with status and rejectionReason)
+  const requestBody = typeof updateData === 'string' 
+    ? { status: updateData } 
+    : updateData;
+  
+  return api.put(`/admin/products/${productId}/status`, requestBody).then(r => r.data);
+};
 
 export const deleteProduct = (productId) =>
   api.delete(`/admin/products/${productId}`).then(r => r.data);

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Community.css';
 
 const Community = () => {
+  const { t } = useTranslation();
   const [activeGroup, setActiveGroup] = useState('general');
   const [groupMessages, setGroupMessages] = useState({
     general: [],
@@ -15,12 +17,12 @@ const Community = () => {
   const [userName, setUserName] = useState('');
 
   const communityGroups = {
-    general: { name: 'General Chat', description: 'General discussion about art and creativity' },
-    digital: { name: 'Digital Art', description: 'Digital painting, 3D modeling, and digital techniques' },
-    traditional: { name: 'Traditional Art', description: 'Painting, drawing, sculpture, and traditional media' },
-    photography: { name: 'Photography', description: 'Photo sharing, techniques, and critiques' },
-    critique: { name: 'Art Critique', description: 'Get feedback and improve your artwork' },
-    commissions: { name: 'Commissions', description: 'Commission opportunities and client connections' }
+    general: { name: t('community.general'), description: 'General discussion about art and creativity' },
+    digital: { name: t('community.digital_art'), description: 'Digital painting, 3D modeling, and digital techniques' },
+    traditional: { name: t('community.traditional_art'), description: 'Painting, drawing, sculpture, and traditional media' },
+    photography: { name: t('community.photography'), description: 'Photo sharing, techniques, and critiques' },
+    critique: { name: t('community.critique'), description: 'Get feedback and improve your artwork' },
+    commissions: { name: t('community.commissions'), description: 'Commission opportunities and client connections' }
   };
 
   useEffect(() => {
@@ -43,13 +45,22 @@ const Community = () => {
 
   const fetchMessages = async (group) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/chat/messages/${group}`);
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:5000/api/chat/messages/${group}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
       if (response.ok) {
-        const messages = await response.json();
+        const data = await response.json();
+        const messages = data.messages || [];
         setGroupMessages(prev => ({
           ...prev,
           [group]: messages
         }));
+      } else {
+        console.error('Failed to fetch messages:', response.status);
       }
     } catch (error) {
       console.error('Error fetching messages:', error);
@@ -66,21 +77,26 @@ const Community = () => {
     };
 
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:5000/api/chat/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(messageData)
       });
 
       if (response.ok) {
-        const savedMessage = await response.json();
+        const data = await response.json();
+        const savedMessage = data.message;
         setGroupMessages(prev => ({
           ...prev,
           [activeGroup]: [...prev[activeGroup], savedMessage]
         }));
         setNewMessage('');
+      } else {
+        console.error('Failed to send message:', response.status);
       }
     } catch (error) {
       console.error('Error sending message:', error);

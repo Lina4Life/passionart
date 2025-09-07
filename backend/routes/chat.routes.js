@@ -1,133 +1,93 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+const { verifyToken } = require('../utils/jwt');
 const router = express.Router();
 
-// Database connection
-const dbPath = path.join(__dirname, '../config/database.db');
-let db;
+// In-memory storage for testing (temporary)
+let messages = [];
+let onlineUsers = [];
+let groups = [
+  { id: 1, name: 'General Chat', description: 'Main community chat' }
+];
 
-try {
-  db = new sqlite3.Database(dbPath, (err) => {
-    if (err) {
-      console.error('Error opening chat database:', err);
-    } else {
-      console.log('Chat database connected');
-      // Initialize the chat messages table if it doesn't exist
-      db.run(`
-        CREATE TABLE IF NOT EXISTS chat_messages (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          group_name TEXT NOT NULL,
-          username TEXT NOT NULL,
-          message TEXT NOT NULL,
-          timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-        )
-      `, (err) => {
-        if (err) {
-          console.error('Error creating chat_messages table:', err);
-        } else {
-          console.log('Chat messages table ready');
-        }
-      });
+// Send message endpoint
+router.post('/send', verifyToken, (req, res) => {
+  try {
+    const { group, message, timestamp } = req.body;
+    const user = req.user; // From JWT token
+    
+    const newMessage = {
+      id: messages.length + 1,
+      group: group || 'general',
+      username: user.username || user.email.split('@')[0],
+      userId: user.id,
+      email: user.email,
+      message: message,
+      timestamp: timestamp || new Date().toISOString(),
+      message_type: 'text'
+    };
+    
+    messages.push(newMessage);
+    
+    // Get the Socket.IO instance from the app
+    const io = req.app.get('io');
+    if (io) {
+      // Broadcast the message to all users in the group
+      io.to(newMessage.group).emit('new-message', newMessage);
+      console.log(`Broadcasting message to group ${newMessage.group}:`, newMessage);
     }
-  });
-} catch (error) {
-  console.error('Database connection error:', error);
-}
+    
+    console.log('Message received:', newMessage);
+    
+    res.status(200).json({
+      success: true,
+      message: newMessage
+    });
+  } catch (error) {
+    console.error('Error sending message:', error);
+    res.status(500).json({ error: 'Failed to send message' });
+  }
+});
 
-// Get messages for a specific group
-router.get('/messages/:group', (req, res) => {
+// Get messages endpoint
+router.get('/messages/:group', verifyToken, (req, res) => {
   try {
     const { group } = req.params;
-    const { limit = 50 } = req.query;
+    const groupMessages = messages.filter(msg => msg.group === group);
     
-    if (!db) {
-      return res.status(500).json({ error: 'Database not connected' });
-    }
-    
-    const query = `
-      SELECT * FROM chat_messages 
-      WHERE group_name = ? 
-      ORDER BY timestamp ASC 
-      LIMIT ?
-    `;
-    
-    db.all(query, [group, parseInt(limit)], (err, rows) => {
-      if (err) {
-        console.error('Error fetching messages:', err);
-        return res.status(500).json({ error: 'Failed to fetch messages' });
-      }
-      res.json(rows || []);
+    res.status(200).json({
+      success: true,
+      messages: groupMessages
     });
   } catch (error) {
-    console.error('Route error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('Error fetching messages:', error);
+    res.status(500).json({ error: 'Failed to fetch messages' });
   }
 });
 
-// Send a message to a group
-router.post('/send', (req, res) => {
+// Get groups endpoint
+router.get('/groups', (req, res) => {
   try {
-    const { group, username, message } = req.body;
-    
-    if (!group || !username || !message) {
-      return res.status(400).json({ error: 'Group, username, and message are required' });
-    }
-    
-    if (!db) {
-      return res.status(500).json({ error: 'Database not connected' });
-    }
-    
-    const query = `
-      INSERT INTO chat_messages (group_name, username, message, timestamp)
-      VALUES (?, ?, ?, datetime('now'))
-    `;
-    
-    db.run(query, [group, username, message], function(err) {
-      if (err) {
-        console.error('Error sending message:', err);
-        return res.status(500).json({ error: 'Failed to send message' });
-      }
-      
-      // Get the created message
-      const getMessageQuery = `
-        SELECT * FROM chat_messages WHERE id = ?
-      `;
-      
-      db.get(getMessageQuery, [this.lastID], (err, row) => {
-        if (err) {
-          console.error('Error fetching created message:', err);
-          return res.status(500).json({ error: 'Message sent but failed to retrieve' });
-        }
-        
-        res.status(201).json(row);
-      });
+    res.status(200).json({
+      success: true,
+      groups: groups
     });
   } catch (error) {
-    console.error('Route error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('Error fetching groups:', error);
+    res.status(500).json({ error: 'Failed to fetch groups' });
   }
 });
 
-// Get recent activity across all groups
-router.get('/activity', (req, res) => {
-  const { limit = 20 } = req.query;
-  
-  const query = `
-    SELECT group_name, COUNT(*) as message_count, MAX(timestamp) as last_activity
-    FROM chat_messages 
-    GROUP BY group_name 
-    ORDER BY last_activity DESC 
-    LIMIT ?
-  `;
-  
-  db.all(query, [parseInt(limit)], (err, rows) => {
-    if (err) {
-      console.error('Error fetching activity:', err);
-      return res.status(500).json({ error: 'Failed to fetch activity' });
-    }
-    res.json(rows);
-  });
+// Get online users endpoint
+router.get('/online-users', (req, res) => {
+  try {
+    res.status(200).json({
+      success: true,
+      onlineUsers: onlineUsers
+    });
+  } catch (error) {
+    console.error('Error fetching online users:', error);
+    res.status(500).json({ error: 'Failed to fetch online users' });
+  }
 });
 
 module.exports = router;

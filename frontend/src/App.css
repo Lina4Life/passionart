@@ -1,6 +1,9 @@
 /* Import sci-fi fonts */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Import artist component theme enhancements */
+@import './components/artists/theme-enhancements.css';
+
 /* Reset and base styles */
 * {
   margin: 0;
@@ -52,6 +55,18 @@
   --space-3xl: 64px;
   
   /* Transitions */
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  
+  /* Border radius */
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  
+  /* Transitions */
   --transition: all 0.2s ease-in-out;
 }
 
@@ -65,9 +80,9 @@
   --text-secondary: #b3b3b3;
   --text-muted: #888888;
   --border-color: #333333;
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #242424;
-  --bg-tertiary: #2a2a2a;
+  --bg-primary: #000000 !important;
+  --bg-secondary: #111111 !important;
+  --bg-tertiary: #1a1a1a !important;
   --bg-hover: rgba(255, 255, 255, 0.05);
   --shadow: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 0, 0, 0.4);
@@ -75,8 +90,15 @@
   /* Theme Toggle Colors */
   --toggle-bg: #333333;
   --toggle-bg-hover: #404040;
-  --toggle-thumb: #1a1a1a;
+  --toggle-thumb: #000000;
   --toggle-icon: #00d4aa;
+}
+
+/* Force black background in dark mode */
+[data-theme="dark"] body,
+[data-theme="dark"] #root,
+[data-theme="dark"] .artists-container {
+  background-color: #000000 !important;
 }
 
 /* Base body styling */

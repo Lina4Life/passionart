@@ -53,7 +53,7 @@ Once logged in as admin, you'll have access to:
 - Revenue and order tracking
 
 👥 **User Management**
-- View all registered users (Artists, Galleries, Sponsors)
+- View all registered users (Artists, Galleries, Collectors, Institutions)
 - Activate/deactivate accounts
 - View user profiles and details
 

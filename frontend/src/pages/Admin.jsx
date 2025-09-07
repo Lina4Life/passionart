@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar, Line, Doughnut } from 'react-chartjs-2';
 import { 
   getAdminStats, 
   getAllUsers, 
@@ -14,7 +28,21 @@ import {
 import ThemeToggle from '../components/ThemeToggle';
 import './Admin.css';
 
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 function Admin() {
+  const { t } = useTranslation();
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [stats, setStats] = useState({
@@ -55,6 +83,12 @@ function Admin() {
   const [addUserError, setAddUserError] = useState('');
   const [addProductError, setAddProductError] = useState('');
   const [updatingProductStatus, setUpdatingProductStatus] = useState(null);
+  const [showRejectionModal, setShowRejectionModal] = useState(false);
+  const [rejectionData, setRejectionData] = useState({
+    productId: null,
+    productTitle: '',
+    rejectionReason: ''
+  });
   const [emailData, setEmailData] = useState({
     subject: '',
     message: '',
@@ -65,6 +99,13 @@ function Admin() {
   const [emailStats, setEmailStats] = useState({ totalUsers: 0, verifiedUsers: 0, unverifiedUsers: 0 });
   const [editingUser, setEditingUser] = useState(null);
   const [showEditUserModal, setShowEditUserModal] = useState(false);
+  // Feedback state
+  const [feedback, setFeedback] = useState([]);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [feedbackFilter, setFeedbackFilter] = useState('all');
+  const [feedbackPagination, setFeedbackPagination] = useState({ page: 1, limit: 10, total: 0, pages: 0 });
+  const [selectedFeedback, setSelectedFeedback] = useState(null);
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [editUserData, setEditUserData] = useState({
     email: '',
     firstName: '',
@@ -72,8 +113,22 @@ function Admin() {
     userType: 'user',
     password: ''
   });
+  const [artworks, setArtworks] = useState([]);
+  const [featuredArtworks, setFeaturedArtworks] = useState([]);
+  const [artworksLoading, setArtworksLoading] = useState(false);
+  const [featuringArtwork, setFeaturingArtwork] = useState(null);
   const [editUserLoading, setEditUserLoading] = useState(false);
   const [editUserError, setEditUserError] = useState('');
+  
+  // Order management states
+  const [orderFilter, setOrderFilter] = useState('all'); // all, paid, pending, failed
+  const [orderSearch, setOrderSearch] = useState('');
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [updatingOrderStatus, setUpdatingOrderStatus] = useState(null);
+  const [editingPrice, setEditingPrice] = useState(null);
+  const [newPrice, setNewPrice] = useState('');
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -101,6 +156,13 @@ function Admin() {
     loadAdminData();
   }, [navigate]);
 
+  useEffect(() => {
+    // Load feedback when feedback tab is active
+    if (activeTab === 'feedback') {
+      fetchFeedback();
+    }
+  }, [activeTab, feedbackFilter, feedbackPagination.page]);
+
   const loadAdminData = async () => {
     try {
       setLoading(true);
@@ -110,7 +172,9 @@ function Admin() {
       console.log('Fetching stats...');
       const statsData = await getAdminStats();
       console.log('Stats received:', statsData);
+      console.log('Setting stats state to:', statsData);
       setStats(statsData);
+      console.log('Stats state should now be:', statsData);
       
       // Fetch all data for tables
       console.log('Fetching all tables data...');
@@ -145,6 +209,94 @@ function Admin() {
       setUsers(usersData);
     } catch (error) {
       console.error('Error fetching users:', error);
+    }
+  };
+
+  const fetchArtworks = async () => {
+    setArtworksLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/artworks', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        const artworksData = await response.json();
+        setArtworks(artworksData);
+      } else {
+        console.error('Failed to fetch artworks:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching artworks:', error);
+    } finally {
+      setArtworksLoading(false);
+    }
+  };
+
+  const fetchFeaturedArtworks = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/artworks/featured');
+      if (response.ok) {
+        const featuredData = await response.json();
+        setFeaturedArtworks(featuredData);
+      } else {
+        console.error('Failed to fetch featured artworks:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching featured artworks:', error);
+    }
+  };
+
+  const handleFeatureArtwork = async (artworkId) => {
+    setFeaturingArtwork(artworkId);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:5000/api/artworks/${artworkId}/feature`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        await fetchFeaturedArtworks();
+        await fetchArtworks();
+      } else {
+        console.error('Failed to feature artwork');
+      }
+    } catch (error) {
+      console.error('Error featuring artwork:', error);
+    } finally {
+      setFeaturingArtwork(null);
+    }
+  };
+
+  const handleUnfeatureArtwork = async (artworkId) => {
+    setFeaturingArtwork(artworkId);
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:5000/api/artworks/${artworkId}/feature`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        await fetchFeaturedArtworks();
+        await fetchArtworks();
+      } else {
+        console.error('Failed to unfeature artwork');
+      }
+    } catch (error) {
+      console.error('Error unfeaturing artwork:', error);
+    } finally {
+      setFeaturingArtwork(null);
     }
   };
 
@@ -363,12 +515,17 @@ function Admin() {
     }
   };
 
-  const handleUpdateProductStatus = async (productId, newStatus) => {
+  const handleUpdateProductStatus = async (productId, newStatus, rejectionReason = null) => {
     try {
       setUpdatingProductStatus(productId);
       console.log(`Updating product ${productId} status to: ${newStatus}`);
       
-      await updateProductStatus(productId, newStatus);
+      const updateData = { status: newStatus };
+      if (rejectionReason) {
+        updateData.rejectionReason = rejectionReason;
+      }
+      
+      await updateProductStatus(productId, updateData);
       
       // Refresh products list to show updated status
       const productsData = await getAllProducts();
@@ -379,6 +536,8 @@ function Admin() {
       // Show success feedback
       if (newStatus === 'approved') {
         console.log('✅ Product approved! It will now appear in the store.');
+      } else if (newStatus === 'rejected') {
+        console.log('❌ Product rejected. Artist will be notified.');
       }
       
     } catch (error) {
@@ -388,6 +547,39 @@ function Admin() {
     } finally {
       setUpdatingProductStatus(null);
     }
+  };
+
+  const handleRejectProduct = (productId, productTitle) => {
+    setRejectionData({
+      productId,
+      productTitle,
+      rejectionReason: ''
+    });
+    setShowRejectionModal(true);
+  };
+
+  const handleRejectionSubmit = async () => {
+    if (!rejectionData.rejectionReason.trim()) {
+      alert('Please provide a reason for rejection');
+      return;
+    }
+
+    await handleUpdateProductStatus(
+      rejectionData.productId, 
+      'rejected', 
+      rejectionData.rejectionReason
+    );
+    
+    setShowRejectionModal(false);
+    setRejectionData({
+      productId: null,
+      productTitle: '',
+      rejectionReason: ''
+    });
+  };
+
+  const handleApproveProduct = async (productId) => {
+    await handleUpdateProductStatus(productId, 'approved');
   };
 
   const handleDeleteProduct = async (productId) => {
@@ -485,6 +677,61 @@ function Admin() {
     }
   };
 
+  const fetchFeedback = async () => {
+    try {
+      setFeedbackLoading(true);
+      const token = localStorage.getItem('token');
+      const params = new URLSearchParams({
+        status: feedbackFilter,
+        page: feedbackPagination.page,
+        limit: feedbackPagination.limit
+      });
+      
+      const response = await fetch(`/api/feedback/admin?${params}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setFeedback(data.feedback);
+        setFeedbackPagination(data.pagination);
+      } else {
+        console.error('Failed to fetch feedback:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching feedback:', error);
+    } finally {
+      setFeedbackLoading(false);
+    }
+  };
+
+  const updateFeedbackStatus = async (feedbackId, status, adminNotes = '') => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`/api/feedback/${feedbackId}/status`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status, adminNotes })
+      });
+      
+      if (response.ok) {
+        // Refresh feedback list
+        fetchFeedback();
+        setShowFeedbackModal(false);
+      } else {
+        console.error('Failed to update feedback status');
+      }
+    } catch (error) {
+      console.error('Error updating feedback status:', error);
+    }
+  };
+
   // User Management Functions
   const handleEditUser = (user) => {
     setEditingUser(user);
@@ -567,59 +814,260 @@ function Admin() {
     }
   };
 
-  const renderDashboard = () => (
-    <div className="admin-dashboard">
-      <div className="stats-grid">
-        <div className="stat-card">
-          <h3>Total Users</h3>
-          <div className="stat-number">{stats.totalUsers}</div>
-          <div className="stat-label">Registered Users</div>
-        </div>
-        <div className="stat-card">
-          <h3>Products</h3>
-          <div className="stat-number">{stats.totalProducts}</div>
-          <div className="stat-label">Art Pieces</div>
-        </div>
-        <div className="stat-card">
-          <h3>Articles</h3>
-          <div className="stat-number">{stats.totalArticles}</div>
-          <div className="stat-label">Published Articles</div>
-        </div>
-        <div className="stat-card">
-          <h3>Orders</h3>
-          <div className="stat-number">{stats.totalOrders}</div>
-          <div className="stat-label">Total Orders</div>
-        </div>
-      </div>
+  const renderDashboard = () => {
+    // Process data for charts
+    const orderStatusData = {
+      labels: ['Paid', 'Pending', 'Failed'],
+      datasets: [
+        {
+          label: 'Orders by Status',
+          data: [
+            orders.filter(o => o.status === 'paid').length,
+            orders.filter(o => o.status === 'pending').length,
+            orders.filter(o => o.status === 'failed').length,
+          ],
+          backgroundColor: [
+            '#10b981',
+            '#f59e0b', 
+            '#ef4444',
+          ],
+          borderColor: [
+            '#059669',
+            '#d97706',
+            '#dc2626',
+          ],
+          borderWidth: 2,
+        },
+      ],
+    };
 
-      <div className="recent-activity">
-        <h3>Recent Activity</h3>
-        <div className="activity-list">
-          <div className="activity-item">
-            <div className="activity-icon">👤</div>
-            <div className="activity-content">
-              <div className="activity-title">New user registered</div>
-              <div className="activity-time">2 hours ago</div>
+    // Revenue data by month (mock data for demonstration)
+    const revenueData = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      datasets: [
+        {
+          label: 'Total Revenue Received by Admin',
+          data: [1200, 1900, 800, 1600, 2000, 1700, 2200, 2400, 2100],
+          borderColor: '#00b4a6',
+          backgroundColor: 'rgba(0, 180, 166, 0.1)',
+          fill: true,
+          tension: 0.4,
+        },
+        {
+          label: 'Amount Sent to Artists (After Admin Cut)',
+          data: [120, 190, 80, 160, 200, 170, 220, 240, 210],
+          borderColor: '#ff6b6b',
+          backgroundColor: 'rgba(255, 107, 107, 0.1)',
+          fill: true,
+          tension: 0.4,
+        },
+      ],
+    };
+
+    // User growth data
+    const userGrowthData = {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+      datasets: [
+        {
+          label: 'New Users',
+          data: [12, 19, 8, 16],
+          backgroundColor: 'rgba(64, 224, 208, 0.8)',
+          borderColor: '#40e0d0',
+          borderWidth: 2,
+        },
+        {
+          label: 'New Artists',
+          data: [3, 7, 2, 5],
+          backgroundColor: 'rgba(255, 107, 107, 0.8)',
+          borderColor: '#ff6b6b',
+          borderWidth: 2,
+        },
+      ],
+    };
+
+    const totalRevenue = orders
+      .filter(order => order.status === 'paid')
+      .reduce((sum, order) => sum + parseFloat(order.total_amount), 0);
+
+    const adminCutCalculation = totalRevenue * 0.9; // Admin keeps 90%
+    const artistPaymentCalculation = totalRevenue * 0.1; // Amount to be sent to artists (10%)
+
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            color: 'var(--admin-text-primary)',
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: 'var(--admin-text-secondary)',
+          },
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)',
+          },
+        },
+        y: {
+          ticks: {
+            color: 'var(--admin-text-secondary)',
+          },
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)',
+          },
+        },
+      },
+    };
+
+    const doughnutOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: 'var(--admin-text-primary)',
+            padding: 20,
+          },
+        },
+      },
+    };
+
+    return (
+      <div className="admin-dashboard">
+        {/* Enhanced Stats Grid */}
+        <div className="dashboard-header">
+          <h2>📊 Admin Dashboard Overview</h2>
+          <div className="revenue-summary">
+            <div className="revenue-card admin-revenue">
+              <h4>💰 Total Revenue Received</h4>
+              <div className="amount">${totalRevenue.toFixed(2)}</div>
+              <div className="note">All customer payments received by admin</div>
             </div>
-          </div>
-          <div className="activity-item">
-            <div className="activity-icon">🎨</div>
-            <div className="activity-content">
-              <div className="activity-title">New artwork uploaded</div>
-              <div className="activity-time">5 hours ago</div>
-            </div>
-          </div>
-          <div className="activity-item">
-            <div className="activity-icon">📝</div>
-            <div className="activity-content">
-              <div className="activity-title">Article published</div>
-              <div className="activity-time">1 day ago</div>
+            <div className="revenue-card artist-revenue">
+              <h4>💸 To Send to Artists (10%)</h4>
+              <div className="amount">${artistPaymentCalculation.toFixed(2)}</div>
+              <div className="note">Amount calculated for artist payments</div>
             </div>
           </div>
         </div>
+
+        <div className="stats-grid">
+          <div className="stat-card users">
+            <div className="stat-icon">👥</div>
+            <div className="stat-content">
+              <h3>Total Users</h3>
+              <div className="stat-number">{stats.totalUsers}</div>
+              <div className="stat-label">Registered Users</div>
+            </div>
+          </div>
+          <div className="stat-card products">
+            <div className="stat-icon">🎨</div>
+            <div className="stat-content">
+              <h3>Artworks</h3>
+              <div className="stat-number">{stats.totalProducts}</div>
+              <div className="stat-label">Art Pieces</div>
+            </div>
+          </div>
+          <div className="stat-card articles">
+            <div className="stat-icon">📝</div>
+            <div className="stat-content">
+              <h3>Articles</h3>
+              <div className="stat-number">{stats.totalArticles}</div>
+              <div className="stat-label">Published Articles</div>
+            </div>
+          </div>
+          <div className="stat-card orders">
+            <div className="stat-icon">🛒</div>
+            <div className="stat-content">
+              <h3>Orders</h3>
+              <div className="stat-number">{stats.totalOrders}</div>
+              <div className="stat-label">Total Orders</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Charts Section */}
+        <div className="charts-grid">
+          <div className="chart-container">
+            <h3>📈 Revenue & Artist Payments</h3>
+            <div className="chart-wrapper">
+              <Line data={revenueData} options={chartOptions} />
+            </div>
+            <div className="chart-note">
+              <p>💡 <strong>Payment Flow:</strong> Admin receives 100% → Calculates 10% for artists → Sends artist payments manually</p>
+            </div>
+          </div>
+
+          <div className="chart-container">
+            <h3>📊 Order Status Distribution</h3>
+            <div className="chart-wrapper doughnut">
+              <Doughnut data={orderStatusData} options={doughnutOptions} />
+            </div>
+          </div>
+
+          <div className="chart-container">
+            <h3>👥 User Growth (Weekly)</h3>
+            <div className="chart-wrapper">
+              <Bar data={userGrowthData} options={chartOptions} />
+            </div>
+          </div>
+
+          <div className="chart-container quick-stats">
+            <h3>⚡ Quick Stats</h3>
+            <div className="quick-stats-grid">
+              <div className="quick-stat">
+                <span className="quick-stat-number">{orders.filter(o => o.status === 'pending').length}</span>
+                <span className="quick-stat-label">Pending Orders</span>
+              </div>
+              <div className="quick-stat">
+                <span className="quick-stat-number">${(totalRevenue / stats.totalOrders || 0).toFixed(2)}</span>
+                <span className="quick-stat-label">Avg Order Value</span>
+              </div>
+              <div className="quick-stat">
+                <span className="quick-stat-number">{((orders.filter(o => o.status === 'paid').length / orders.length) * 100 || 0).toFixed(1)}%</span>
+                <span className="quick-stat-label">Success Rate</span>
+              </div>
+              <div className="quick-stat">
+                <span className="quick-stat-number">{users.filter(u => u.user_type === 'artist').length}</span>
+                <span className="quick-stat-label">Active Artists</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Recent Activity */}
+        <div className="recent-activity">
+          <h3>🔥 Recent Activity</h3>
+          <div className="activity-list">
+            {orders.slice(0, 5).map((order, index) => (
+              <div key={order.id} className="activity-item">
+                <div className={`activity-icon ${order.status}`}>
+                  {order.status === 'paid' ? '�' : order.status === 'pending' ? '⏳' : '❌'}
+                </div>
+                <div className="activity-content">
+                  <div className="activity-title">
+                    Order #{order.id} - {order.product_title}
+                  </div>
+                  <div className="activity-meta">
+                    <span>{order.customer_email}</span>
+                    <span>${order.total_amount}</span>
+                    <span className={`status-badge status-${order.status}`}>
+                      {order.status.toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="activity-time">{formatDate(order.created_at)}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderUsers = () => (
     <div className="admin-section">
@@ -697,12 +1145,26 @@ function Admin() {
     </div>
   );
 
-  const renderProducts = () => (
-    <div className="admin-section">
-      <div className="section-header">
-        <h2>Product Management</h2>
-        <button className="admin-btn primary" onClick={handleAddProductClick}>Add Product</button>
-      </div>
+  const renderProducts = () => {
+    console.log('Rendering Products - products:', products.length, 'featuredArtworks:', featuredArtworks.length);
+    return (
+      <div className="admin-section">
+        <div className="section-header">
+          <h2>Product Management</h2>
+          <div className="section-header-actions">
+            <button 
+              className="admin-btn secondary"
+              onClick={() => {
+                console.log('Refresh Featured clicked');
+                fetchArtworks();
+                fetchFeaturedArtworks();
+              }}
+            >
+              🔄 Refresh Featured
+            </button>
+            <button className="admin-btn primary" onClick={handleAddProductClick}>Add Product</button>
+          </div>
+        </div>
       <div className="table-container">
         <table className="admin-table">
           <thead>
@@ -713,6 +1175,7 @@ function Admin() {
               <th>Price</th>
               <th>Category</th>
               <th>Status</th>
+              <th>Featured</th>
               <th>Created</th>
               <th>Actions</th>
             </tr>
@@ -720,67 +1183,131 @@ function Admin() {
           <tbody>
             {products.length === 0 ? (
               <tr>
-                <td colSpan="8" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)' }}>
+                <td colSpan="9" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)' }}>
                   No products found
                 </td>
               </tr>
             ) : (
-              products.map(product => (
-                <tr key={product.id}>
-                  <td>{product.id.toString().slice(0, 8)}...</td>
-                  <td>{product.title}</td>
-                  <td>{product.artistName || product.artistEmail || product.artist || 'Unknown'}</td>
-                  <td>${product.price}</td>
-                  <td>{product.category}</td>
-                  <td>
-                    <select 
-                      value={product.status || 'pending'} 
-                      onChange={(e) => handleUpdateProductStatus(product.id, e.target.value)}
-                      className="status-select"
-                      disabled={updatingProductStatus === product.id}
-                      style={{
-                        opacity: updatingProductStatus === product.id ? 0.5 : 1,
-                        cursor: updatingProductStatus === product.id ? 'wait' : 'pointer'
-                      }}
-                    >
-                      <option value="pending">Pending</option>
-                      <option value="approved">Approved ✅</option>
-                      <option value="rejected">Rejected ❌</option>
-                      <option value="available">Available 🛍️</option>
-                    </select>
-                    {updatingProductStatus === product.id && (
-                      <span style={{ 
-                        marginLeft: '8px', 
-                        fontSize: '12px', 
-                        color: 'var(--accent-color)' 
-                      }}>
-                        Updating...
-                      </span>
-                    )}
-                  </td>
-                  <td>{formatDate(product.created_at || product.createdAt)}</td>
-                  <td>
-                    <button 
-                      className="admin-btn small" 
-                      onClick={() => handleEditProductClick(product)}
-                    >
-                      Edit
-                    </button>
-                    <button 
-                      className="admin-btn small danger" 
-                      onClick={() => handleDeleteProduct(product.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))
+              products.map(product => {
+                const isFeatured = featuredArtworks.some(fa => fa.id === product.id);
+                return (
+                  <tr key={product.id}>
+                    <td>{product.id.toString().slice(0, 8)}...</td>
+                    <td>{product.title}</td>
+                    <td>{product.artistName || product.artistEmail || product.artist || 'Unknown'}</td>
+                    <td>${product.price}</td>
+                    <td>{product.category}</td>
+                    <td>
+                      <div className="status-management">
+                        <span className={`status-badge ${product.status}`}>
+                          {product.status === 'pending' && '⏳ Pending'}
+                          {product.status === 'approved' && '✅ Approved'}
+                          {product.status === 'rejected' && '❌ Rejected'}
+                          {product.status === 'available' && '🛍️ Available'}
+                          {product.status === 'sold' && '💰 Sold'}
+                          {product.status === 'reserved' && '🔒 Reserved'}
+                        </span>
+                        
+                        {product.status === 'pending' && (
+                          <div className="status-actions">
+                            <button 
+                              className="admin-btn small success"
+                              onClick={() => handleApproveProduct(product.id)}
+                              disabled={updatingProductStatus === product.id}
+                              title="Approve this artwork"
+                            >
+                              ✅ Approve
+                            </button>
+                            <button 
+                              className="admin-btn small danger"
+                              onClick={() => handleRejectProduct(product.id, product.title)}
+                              disabled={updatingProductStatus === product.id}
+                              title="Reject this artwork"
+                            >
+                              ❌ Reject
+                            </button>
+                          </div>
+                        )}
+                        
+                        {product.status !== 'pending' && (
+                          <select 
+                            value={product.status || 'pending'} 
+                            onChange={(e) => {
+                              if (e.target.value === 'rejected') {
+                                handleRejectProduct(product.id, product.title);
+                              } else {
+                                handleUpdateProductStatus(product.id, e.target.value);
+                              }
+                            }}
+                            className="status-select small"
+                            disabled={updatingProductStatus === product.id}
+                          >
+                            <option value="pending">⏳ Pending</option>
+                            <option value="approved">✅ Approved</option>
+                            <option value="rejected">❌ Rejected</option>
+                            <option value="available">🛍️ Available</option>
+                            <option value="sold">💰 Sold</option>
+                            <option value="reserved">🔒 Reserved</option>
+                          </select>
+                        )}
+                        
+                        {updatingProductStatus === product.id && (
+                          <span className="updating-indicator">Updating...</span>
+                        )}
+                      </div>
+                    </td>
+                    <td>
+                      <div className="featured-control">
+                        <label className="featured-checkbox">
+                          <input
+                            type="checkbox"
+                            checked={isFeatured}
+                            onChange={() => {
+                              if (isFeatured) {
+                                handleUnfeatureArtwork(product.id);
+                              } else {
+                                handleFeatureArtwork(product.id);
+                              }
+                            }}
+                            disabled={featuringArtwork === product.id || (!isFeatured && featuredArtworks.length >= 6)}
+                          />
+                          <span className="checkmark">
+                            {isFeatured ? '⭐' : '☆'}
+                          </span>
+                        </label>
+                        {featuringArtwork === product.id && (
+                          <span className="updating-indicator">Updating...</span>
+                        )}
+                        {!isFeatured && featuredArtworks.length >= 6 && (
+                          <span className="hint-text">Max 6</span>
+                        )}
+                      </div>
+                    </td>
+                    <td>{formatDate(product.created_at || product.createdAt)}</td>
+                    <td>
+                      <button 
+                        className="admin-btn small" 
+                        onClick={() => handleEditProductClick(product)}
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        className="admin-btn small danger" 
+                        onClick={() => handleDeleteProduct(product.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>
       </div>
     </div>
   );
+};
 
   const renderArticles = () => (
     <div className="admin-section">
@@ -836,56 +1363,445 @@ function Admin() {
     </div>
   );
 
-  const renderOrders = () => (
-    <div className="admin-section">
-      <div className="section-header">
-        <h2>Order Management</h2>
-      </div>
-      <div className="table-container">
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th>Order ID</th>
-              <th>Customer</th>
-              <th>Product</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.length === 0 ? (
+  const renderOrders = () => {
+    // Filter orders based on status and search
+    const filteredOrders = orders.filter(order => {
+      const matchesFilter = orderFilter === 'all' || order.status === orderFilter;
+      const matchesSearch = orderSearch === '' || 
+        order.customer_email.toLowerCase().includes(orderSearch.toLowerCase()) ||
+        order.product_title.toLowerCase().includes(orderSearch.toLowerCase()) ||
+        order.id.toString().includes(orderSearch);
+      return matchesFilter && matchesSearch;
+    });
+
+    const handleUpdateOrderStatus = async (orderId, newStatus) => {
+      setUpdatingOrderStatus(orderId);
+      try {
+        // TODO: Implement order status update API
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://localhost:5000/api/admin/orders/${orderId}/status`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ status: newStatus })
+        });
+
+        if (response.ok) {
+          // Update local state
+          setOrders(prev => prev.map(order => 
+            order.id === orderId ? { ...order, status: newStatus } : order
+          ));
+        }
+      } catch (error) {
+        console.error('Error updating order status:', error);
+      } finally {
+        setUpdatingOrderStatus(null);
+      }
+    };
+
+    const handleUpdateOrderPrice = async (orderId, newOrderPrice) => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://localhost:5000/api/admin/orders/${orderId}/price`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ price: newOrderPrice })
+        });
+
+        if (response.ok) {
+          // Update local state
+          setOrders(prev => prev.map(order => 
+            order.id === orderId ? { ...order, total_amount: parseFloat(newOrderPrice).toFixed(2) } : order
+          ));
+          setEditingPrice(null);
+          setNewPrice('');
+        }
+      } catch (error) {
+        console.error('Error updating order price:', error);
+      }
+    };
+
+    const handlePriceEdit = (orderId, currentPrice) => {
+      setEditingPrice(orderId);
+      setNewPrice(currentPrice);
+    };
+
+    const handleViewOrder = (order) => {
+      setSelectedOrder(order);
+      setShowOrderModal(true);
+    };
+
+    const getStatusColor = (status) => {
+      switch(status) {
+        case 'paid': return '#10b981';
+        case 'pending': return '#f59e0b';
+        case 'failed': return '#ef4444';
+        default: return '#6b7280';
+      }
+    };
+
+    const getTotalRevenue = () => {
+      return filteredOrders
+        .filter(order => order.status === 'paid')
+        .reduce((sum, order) => sum + parseFloat(order.total_amount), 0)
+        .toFixed(2);
+    };
+
+    return (
+      <div className="admin-section">
+        <div className="section-header">
+          <h2>💼 Order Management</h2>
+          <div className="order-stats">
+            <div className="stat-card">
+              <span className="stat-number">{filteredOrders.length}</span>
+              <span className="stat-label">Total Orders</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-number">${getTotalRevenue()}</span>
+              <span className="stat-label">Revenue (Paid)</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-number">{filteredOrders.filter(o => o.status === 'pending').length}</span>
+              <span className="stat-label">Pending</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Order Filters and Search */}
+        <div className="order-controls">
+          <div className="filter-section">
+            <label>Filter by Status:</label>
+            <select 
+              value={orderFilter} 
+              onChange={(e) => setOrderFilter(e.target.value)}
+              className="filter-select"
+            >
+              <option value="all">All Orders</option>
+              <option value="paid">Paid</option>
+              <option value="pending">Pending</option>
+              <option value="failed">Failed</option>
+            </select>
+          </div>
+          
+          <div className="search-section">
+            <input
+              type="text"
+              placeholder="Search orders by customer, product, or order ID..."
+              value={orderSearch}
+              onChange={(e) => setOrderSearch(e.target.value)}
+              className="search-input"
+            />
+          </div>
+        </div>
+
+        {/* Orders Table */}
+        <div className="table-container">
+          <table className="admin-table orders-table">
+            <thead>
               <tr>
-                <td colSpan="7" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)' }}>
-                  No orders found
-                </td>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
-            ) : (
-              orders.map(order => (
-                <tr key={order.id}>
-                  <td>#{order.id.slice(0, 8)}</td>
-                  <td>{order.customer_email || 'Unknown'}</td>
-                  <td>{order.product_title || 'N/A'}</td>
-                  <td>${order.total_amount}</td>
-                  <td>
-                    <span className={`status ${order.status === 'completed' ? 'active' : 'pending'}`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td>{formatDate(order.created_at)}</td>
-                  <td>
-                    <button className="admin-btn small">View</button>
-                    <button className="admin-btn small">Update</button>
+            </thead>
+            <tbody>
+              {filteredOrders.length === 0 ? (
+                <tr>
+                  <td colSpan="7" style={{ textAlign: 'center', color: 'rgba(255,255,255,0.5)', padding: '40px' }}>
+                    {orderSearch || orderFilter !== 'all' ? 'No orders match your filters' : 'No orders found'}
                   </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                filteredOrders.map(order => (
+                  <tr key={order.id} className={`order-row status-${order.status}`}>
+                    <td>
+                      <strong>#{order.id}</strong>
+                    </td>
+                    <td>
+                      <div className="customer-info">
+                        <div className="customer-name">{order.customer_name || 'Unknown'}</div>
+                        <div className="customer-email">{order.customer_email}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="product-info">
+                        {order.product_image && (
+                          <img 
+                            src={order.product_image} 
+                            alt={order.product_title}
+                            className="product-thumb"
+                          />
+                        )}
+                        <div>
+                          <div className="product-title">{order.product_title}</div>
+                          <div className="product-price">${order.product_price}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      {editingPrice === order.id ? (
+                        <div className="price-edit">
+                          <input
+                            type="number"
+                            step="0.01"
+                            value={newPrice}
+                            onChange={(e) => setNewPrice(e.target.value)}
+                            className="price-input"
+                            onKeyPress={(e) => {
+                              if (e.key === 'Enter') {
+                                handleUpdateOrderPrice(order.id, newPrice);
+                              }
+                            }}
+                          />
+                          <div className="price-actions">
+                            <button 
+                              className="price-btn save"
+                              onClick={() => handleUpdateOrderPrice(order.id, newPrice)}
+                            >
+                              ✓
+                            </button>
+                            <button 
+                              className="price-btn cancel"
+                              onClick={() => {
+                                setEditingPrice(null);
+                                setNewPrice('');
+                              }}
+                            >
+                              ✗
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="amount-display">
+                          <strong>${order.total_amount}</strong>
+                          <button 
+                            className="edit-price-btn"
+                            onClick={() => handlePriceEdit(order.id, order.total_amount)}
+                            title="Edit price (Admin power)"
+                          >
+                            ✏️
+                          </button>
+                        </div>
+                      )}
+                    </td>
+                    <td>
+                      <div className="status-cell">
+                        <span 
+                          className={`status-badge status-${order.status}`}
+                          style={{ backgroundColor: getStatusColor(order.status) }}
+                        >
+                          {order.status.toUpperCase()}
+                        </span>
+                        {order.status === 'pending' && (
+                          <div className="status-actions">
+                            <button 
+                              className="status-btn success"
+                              onClick={() => handleUpdateOrderStatus(order.id, 'paid')}
+                              disabled={updatingOrderStatus === order.id}
+                            >
+                              ✓ Mark Paid
+                            </button>
+                            <button 
+                              className="status-btn danger"
+                              onClick={() => handleUpdateOrderStatus(order.id, 'failed')}
+                              disabled={updatingOrderStatus === order.id}
+                            >
+                              ✗ Mark Failed
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                    <td>
+                      <div className="date-info">
+                        <div>{formatDate(order.created_at)}</div>
+                        <div className="time-info">
+                          {new Date(order.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="action-buttons">
+                        <button 
+                          className="admin-btn small primary"
+                          onClick={() => handleViewOrder(order)}
+                        >
+                          📋 View Details
+                        </button>
+                        {order.status === 'pending' && (
+                          <button 
+                            className="admin-btn small secondary"
+                            onClick={() => handleUpdateOrderStatus(order.id, 'paid')}
+                            disabled={updatingOrderStatus === order.id}
+                          >
+                            💳 Process Payment
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Order Details Modal */}
+        {showOrderModal && selectedOrder && (
+          <div className="modal-overlay" onClick={() => setShowOrderModal(false)}>
+            <div className="modal-content order-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-header">
+                <h3>📋 Order Details - #{selectedOrder.id}</h3>
+                <button 
+                  className="close-btn"
+                  onClick={() => setShowOrderModal(false)}
+                >
+                  ✕
+                </button>
+              </div>
+              
+              <div className="modal-body">
+                <div className="order-details-grid">
+                  <div className="detail-section">
+                    <h4>👤 Customer Information</h4>
+                    <div className="detail-row">
+                      <span>Name:</span>
+                      <span>{selectedOrder.customer_name || 'Not provided'}</span>
+                    </div>
+                    <div className="detail-row">
+                      <span>Email:</span>
+                      <span>{selectedOrder.customer_email}</span>
+                    </div>
+                    {selectedOrder.shipping_address && (
+                      <div className="detail-row">
+                        <span>Shipping:</span>
+                        <span>{selectedOrder.shipping_address}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="detail-section">
+                    <h4>🎨 Product Information</h4>
+                    <div className="product-detail">
+                      {selectedOrder.product_image && (
+                        <img 
+                          src={selectedOrder.product_image} 
+                          alt={selectedOrder.product_title}
+                          className="product-image-large"
+                        />
+                      )}
+                      <div>
+                        <div className="detail-row">
+                          <span>Title:</span>
+                          <span>{selectedOrder.product_title}</span>
+                        </div>
+                        <div className="detail-row">
+                          <span>Price:</span>
+                          <span>${selectedOrder.product_price}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="detail-section">
+                    <h4>💰 Payment Information</h4>
+                    <div className="detail-row">
+                      <span>Total Amount:</span>
+                      <span><strong>${selectedOrder.total_amount}</strong></span>
+                    </div>
+                    <div className="detail-row">
+                      <span>Received by Admin:</span>
+                      <span><strong>${selectedOrder.total_amount}</strong> (100%)</span>
+                    </div>
+                    <div className="detail-row">
+                      <span>Admin Keeps:</span>
+                      <span><strong>${(parseFloat(selectedOrder.total_amount) * 0.9).toFixed(2)}</strong> (90%)</span>
+                    </div>
+                    <div className="detail-row">
+                      <span>To Send to Artist:</span>
+                      <span><strong>${(parseFloat(selectedOrder.total_amount) * 0.1).toFixed(2)}</strong> (10%)</span>
+                    </div>
+                    <div className="detail-row">
+                      <span>Status:</span>
+                      <span 
+                        className={`status-badge status-${selectedOrder.status}`}
+                        style={{ backgroundColor: getStatusColor(selectedOrder.status) }}
+                      >
+                        {selectedOrder.status.toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="detail-row">
+                      <span>Order Date:</span>
+                      <span>{new Date(selectedOrder.created_at).toLocaleString()}</span>
+                    </div>
+                    <div className="payment-flow-info">
+                      <h5>💳 Actual Payment Flow:</h5>
+                      <div className="flow-step">
+                        <span className="step-number">1</span>
+                        <span>Customer pays ${selectedOrder.total_amount}</span>
+                      </div>
+                      <div className="flow-step">
+                        <span className="step-number">2</span>
+                        <span>Admin receives ALL ${selectedOrder.total_amount} (100%)</span>
+                      </div>
+                      <div className="flow-step">
+                        <span className="step-number">3</span>
+                        <span>Admin calculates: Keep ${(parseFloat(selectedOrder.total_amount) * 0.9).toFixed(2)} (90%)</span>
+                      </div>
+                      <div className="flow-step">
+                        <span className="step-number">4</span>
+                        <span>Admin manually sends ${(parseFloat(selectedOrder.total_amount) * 0.1).toFixed(2)} to artist</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="modal-actions">
+                  {selectedOrder.status === 'pending' && (
+                    <>
+                      <button 
+                        className="admin-btn success"
+                        onClick={() => {
+                          handleUpdateOrderStatus(selectedOrder.id, 'paid');
+                          setShowOrderModal(false);
+                        }}
+                      >
+                        ✓ Mark as Paid
+                      </button>
+                      <button 
+                        className="admin-btn danger"
+                        onClick={() => {
+                          handleUpdateOrderStatus(selectedOrder.id, 'failed');
+                          setShowOrderModal(false);
+                        }}
+                      >
+                        ✗ Mark as Failed
+                      </button>
+                    </>
+                  )}
+                  <button 
+                    className="admin-btn secondary"
+                    onClick={() => setShowOrderModal(false)}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderMail = () => {
     return (
@@ -1016,6 +1932,176 @@ function Admin() {
     );
   };
 
+  const renderFeedback = () => {
+    return (
+      <div className="admin-section">
+        <div className="section-header">
+          <h2>💬 User Feedback</h2>
+          <div className="feedback-controls">
+            <select 
+              value={feedbackFilter} 
+              onChange={(e) => setFeedbackFilter(e.target.value)}
+              className="filter-select"
+            >
+              <option value="all">All Feedback</option>
+              <option value="pending">Pending</option>
+              <option value="reviewing">Reviewing</option>
+              <option value="resolved">Resolved</option>
+              <option value="dismissed">Dismissed</option>
+            </select>
+            <button 
+              className="admin-btn primary"
+              onClick={fetchFeedback}
+              disabled={feedbackLoading}
+            >
+              {feedbackLoading ? 'Loading...' : '🔄 Refresh'}
+            </button>
+          </div>
+        </div>
+
+        {feedbackLoading ? (
+          <div className="loading">Loading feedback...</div>
+        ) : (
+          <>
+            <div className="feedback-list">
+              {feedback.length === 0 ? (
+                <div className="no-feedback">
+                  <p>No feedback found for the selected filter.</p>
+                </div>
+              ) : (
+                feedback.map((item) => (
+                  <div key={item.id} className="feedback-item">
+                    <div className="feedback-header">
+                      <div className="feedback-info">
+                        <h4>{item.issue}</h4>
+                        <div className="feedback-meta">
+                          <span className="user-info">
+                            👤 {item.user_name} ({item.user_email})
+                          </span>
+                          <span className="date">
+                            📅 {new Date(item.created_at).toLocaleDateString()}
+                          </span>
+                          <span className={`status status-${item.status}`}>
+                            {item.status.toUpperCase()}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="feedback-actions">
+                        <button
+                          className="admin-btn secondary small"
+                          onClick={() => {
+                            setSelectedFeedback(item);
+                            setShowFeedbackModal(true);
+                          }}
+                        >
+                          👁️ View
+                        </button>
+                      </div>
+                    </div>
+                    <div className="feedback-preview">
+                      {item.feedback.length > 100 
+                        ? `${item.feedback.substring(0, 100)}...` 
+                        : item.feedback}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* Pagination */}
+            {feedbackPagination.pages > 1 && (
+              <div className="pagination">
+                <button
+                  className="admin-btn secondary"
+                  disabled={feedbackPagination.page === 1}
+                  onClick={() => setFeedbackPagination(prev => ({ ...prev, page: prev.page - 1 }))}
+                >
+                  Previous
+                </button>
+                <span className="page-info">
+                  Page {feedbackPagination.page} of {feedbackPagination.pages}
+                </span>
+                <button
+                  className="admin-btn secondary"
+                  disabled={feedbackPagination.page === feedbackPagination.pages}
+                  onClick={() => setFeedbackPagination(prev => ({ ...prev, page: prev.page + 1 }))}
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* Feedback Modal */}
+        {showFeedbackModal && selectedFeedback && (
+          <div className="modal-overlay">
+            <div className="modal-content feedback-modal">
+              <div className="modal-header">
+                <h2>Feedback Details</h2>
+                <button 
+                  className="modal-close"
+                  onClick={() => setShowFeedbackModal(false)}
+                >
+                  ×
+                </button>
+              </div>
+              
+              <div className="feedback-details">
+                <div className="detail-group">
+                  <h4>User Information</h4>
+                  <p><strong>Name:</strong> {selectedFeedback.user_name}</p>
+                  <p><strong>Email:</strong> {selectedFeedback.user_email}</p>
+                  <p><strong>Date:</strong> {new Date(selectedFeedback.created_at).toLocaleString()}</p>
+                </div>
+                
+                <div className="detail-group">
+                  <h4>Issue/Topic</h4>
+                  <p>{selectedFeedback.issue}</p>
+                </div>
+                
+                <div className="detail-group">
+                  <h4>Feedback</h4>
+                  <div className="feedback-content">
+                    {selectedFeedback.feedback}
+                  </div>
+                </div>
+                
+                <div className="detail-group">
+                  <h4>Status & Notes</h4>
+                  <div className="status-controls">
+                    <select 
+                      defaultValue={selectedFeedback.status}
+                      onChange={(e) => {
+                        const newStatus = e.target.value;
+                        const notes = prompt(`Update status to ${newStatus}. Add admin notes (optional):`);
+                        if (notes !== null) {
+                          updateFeedbackStatus(selectedFeedback.id, newStatus, notes);
+                        }
+                      }}
+                      className="status-select"
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="reviewing">Reviewing</option>
+                      <option value="resolved">Resolved</option>
+                      <option value="dismissed">Dismissed</option>
+                    </select>
+                  </div>
+                  {selectedFeedback.admin_notes && (
+                    <div className="admin-notes">
+                      <strong>Admin Notes:</strong>
+                      <p>{selectedFeedback.admin_notes}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
@@ -1030,6 +2116,8 @@ function Admin() {
         return renderOrders();
       case 'mail':
         return renderMail();
+      case 'feedback':
+        return renderFeedback();
       default:
         return renderDashboard();
     }
@@ -1102,6 +2190,12 @@ function Admin() {
             >
               📧 Mail
             </button>
+            <button
+              className={`admin-nav-item ${activeTab === 'feedback' ? 'active' : ''}`}
+              onClick={() => setActiveTab('feedback')}
+            >
+              💬 Feedback
+            </button>
           </nav>
         </div>
 
@@ -1160,7 +2254,8 @@ function Admin() {
                   >
                     <option value="artist">Artist</option>
                     <option value="gallery">Gallery</option>
-                    <option value="sponsor">Sponsor</option>
+                    <option value="collector">Collector</option>
+                    <option value="institution">Institution</option>
                     <option value="user">Regular User</option>
                   </select>
                 </div>
@@ -1312,6 +2407,9 @@ function Admin() {
                 >
                   <option value="user">User</option>
                   <option value="artist">Artist</option>
+                  <option value="gallery">Gallery</option>
+                  <option value="collector">Collector</option>
+                  <option value="institution">Institution</option>
                   <option value="admin">Admin</option>
                 </select>
               </div>
@@ -1454,6 +2552,7 @@ function Admin() {
                     <option value="sculpture">Sculpture</option>
                     <option value="photography">Photography</option>
                     <option value="digital">Digital Art</option>
+                    <option value="collage">Collage</option>
                     <option value="mixed-media">Mixed Media</option>
                     <option value="drawing">Drawing</option>
                     <option value="printmaking">Printmaking</option>
@@ -1526,6 +2625,72 @@ function Admin() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Rejection Modal */}
+      {showRejectionModal && (
+        <div className="modal-overlay">
+          <div className="modal-content rejection-modal">
+            <div className="modal-header">
+              <h2>🚫 Reject Artwork</h2>
+              <button 
+                className="modal-close" 
+                onClick={() => setShowRejectionModal(false)}
+                type="button"
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className="modal-body">
+              <div className="rejection-info">
+                <p><strong>Artwork:</strong> {rejectionData.productTitle}</p>
+                <p className="rejection-warning">
+                  ⚠️ This artwork will be rejected and the artist will be notified.
+                </p>
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="rejectionReason" className="form-label">
+                  Reason for Rejection *
+                </label>
+                <textarea
+                  id="rejectionReason"
+                  value={rejectionData.rejectionReason}
+                  onChange={(e) => setRejectionData({
+                    ...rejectionData,
+                    rejectionReason: e.target.value
+                  })}
+                  className="form-textarea"
+                  rows="4"
+                  placeholder="Please provide a clear reason for rejection (e.g., inappropriate content, poor quality, doesn't meet guidelines, etc.)"
+                  required
+                />
+                <small className="form-help">
+                  This reason will be sent to the artist to help them understand why their artwork was rejected.
+                </small>
+              </div>
+            </div>
+            
+            <div className="modal-footer">
+              <button 
+                type="button" 
+                className="admin-btn secondary"
+                onClick={() => setShowRejectionModal(false)}
+              >
+                Cancel
+              </button>
+              <button 
+                type="button" 
+                className="admin-btn danger"
+                onClick={handleRejectionSubmit}
+                disabled={!rejectionData.rejectionReason.trim()}
+              >
+                🚫 Reject Artwork
+              </button>
+            </div>
           </div>
         </div>
       )}

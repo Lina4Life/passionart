@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: var(--bg-primary, #ffffff);
+            color: var(--text-primary, #000000);
+        }
+        
+        .test-element {
+            padding: 20px;
+            margin: 10px 0;
+            background-color: var(--accent-color, #00b4a6);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .test-secondary {
+            background-color: var(--accent-color-secondary, #6dd5ed);
+        }
+        
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .btn-ocean { background: linear-gradient(135deg, #2193b0, #6dd5ed); }
+        .btn-sunset { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+        .btn-forest { background: linear-gradient(135deg, #134e5e, #71b280); }
+        .btn-royal { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .btn-cosmic { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .btn-default { background: linear-gradient(135deg, #00b4a6, #6dd5ed); }
+    </style>
+</head>
+<body>
+    <h1>Color Theme Test</h1>
+    <p>This page tests if CSS custom properties are being updated when themes change.</p>
+    
+    <div class="test-element">
+        Primary Accent Color Element
+    </div>
+    
+    <div class="test-element test-secondary">
+        Secondary Accent Color Element
+    </div>
+    
+    <h2>Test Buttons</h2>
+    <button class="btn-default" onclick="setTheme('default')">Default</button>
+    <button class="btn-ocean" onclick="setTheme('ocean')">Ocean Blue</button>
+    <button class="btn-sunset" onclick="setTheme('sunset')">Sunset Orange</button>
+    <button class="btn-forest" onclick="setTheme('forest')">Forest Green</button>
+    <button class="btn-royal" onclick="setTheme('royal')">Royal Purple</button>
+    <button class="btn-cosmic" onclick="setTheme('cosmic')">Cosmic Pink</button>
+    
+    <script>
+        const colorThemes = {
+            default: { primary: '#00b4a6', secondary: '#6dd5ed' },
+            ocean: { primary: '#2193b0', secondary: '#6dd5ed' },
+            sunset: { primary: '#ff7e5f', secondary: '#feb47b' },
+            forest: { primary: '#134e5e', secondary: '#71b280' },
+            royal: { primary: '#667eea', secondary: '#764ba2' },
+            cosmic: { primary: '#f093fb', secondary: '#f5576c' }
+        };
+        
+        function setTheme(themeName) {
+            const theme = colorThemes[themeName];
+            if (theme) {
+                document.documentElement.style.setProperty('--accent-color', theme.primary);
+                document.documentElement.style.setProperty('--accent-color-secondary', theme.secondary);
+                document.documentElement.style.setProperty('--accent-color-dark', theme.primary);
+                console.log(`Applied ${themeName} theme:`, theme);
+            }
+        }
+        
+        // Apply default theme on load
+        setTheme('default');
+    </script>
+</body>
+</html>

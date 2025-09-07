@@ -5,6 +5,16 @@ const path = require('path');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_dummy_key_for_development');
 const { verifyToken } = require('../utils/jwt');
 const { saveArtwork, listArtworks } = require('../models/artworks.model');
+const {
+  getAllArtworks,
+  getFeaturedArtworks,
+  featureArtwork,
+  unfeatureArtwork,
+  getArtworkById,
+  createArtwork,
+  updateArtwork,
+  deleteArtwork
+} = require('../controllers/artworks.controller');
 
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, path.join(__dirname, '..', '..', 'uploads')),
@@ -50,5 +60,10 @@ router.get('/', async (_req, res) => {
     res.status(500).json({ error: 'Fetch failed' });
   }
 });
+
+// Featured artworks routes
+router.get('/featured', getFeaturedArtworks);
+router.post('/:id/feature', featureArtwork);
+router.delete('/:id/feature', unfeatureArtwork);
 
 module.exports = router;

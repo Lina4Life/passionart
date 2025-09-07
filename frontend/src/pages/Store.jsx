@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllProducts } from '../services/api';
+import ShareButton from '../components/common/ShareButton';
 import './Store_clean.css';
 
 const Store = () => {
@@ -56,6 +57,19 @@ const Store = () => {
             medium: "Digital Art, NFT",
             year: "2025",
             edition: "Limited Edition 1/10"
+          },
+          {
+            id: 2,
+            title: "URBAN FRAGMENTS",
+            artist: "MAYA COLLAGE",
+            price: "$850",
+            category: "Collage",
+            image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96",
+            description: "Mixed media collage exploring urban landscapes through layered paper and digital elements.",
+            dimensions: "24\" x 18\"",
+            medium: "Mixed Media Collage",
+            year: "2024",
+            edition: "Original"
           }
         ]);
       } finally {
@@ -392,7 +406,8 @@ const Store = () => {
                   <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    gap: 'var(--space-sm)'
                   }}>
                     <p style={{
                       fontFamily: 'var(--font-display)',
@@ -404,12 +419,19 @@ const Store = () => {
                     }}>
                       {artwork.price}
                     </p>
-                    <button 
-                      className="view-button"
-                      onClick={() => openModal(artwork)}
-                    >
-                      VIEW
-                    </button>
+                    <div style={{ display: 'flex', gap: 'var(--space-xs)' }}>
+                      <ShareButton 
+                        artwork={artwork} 
+                        size="small" 
+                        showText={false}
+                      />
+                      <button 
+                        className="view-button"
+                        onClick={() => openModal(artwork)}
+                      >
+                        VIEW
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -688,6 +710,18 @@ const Store = () => {
                   >
                     Purchase Now
                   </button>
+
+                  <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'center',
+                    marginBottom: 'var(--space-md)'
+                  }}>
+                    <ShareButton 
+                      artwork={selectedProduct} 
+                      size="medium" 
+                      showText={true}
+                    />
+                  </div>
 
                   <p style={{
                     fontSize: 'var(--font-size-xs)',

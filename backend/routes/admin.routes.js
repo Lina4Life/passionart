@@ -8,7 +8,12 @@ const {
   updateUser,
   getAllProducts: getAllArtworks,
   getAllArticles,
-  getPayments: getAllOrders
+  getAllOrders,
+  updateOrderStatus,
+  updateOrderPrice,
+  updateProductStatus,
+  deleteProduct,
+  getRejectionHistory
 } = require('../controllers/admin_sqlite.controller');
 
 // Middleware to check if user is admin (basic check for now)
@@ -41,7 +46,12 @@ router.put('/users/:id', isAdmin, updateUser);
 router.delete('/users/:id', isAdmin, deleteUser);
 router.get('/products', isAdmin, getAllArtworks);
 router.get('/artworks', isAdmin, getAllArtworks);
+router.put('/products/:id/status', isAdmin, updateProductStatus);
+router.delete('/products/:id', isAdmin, deleteProduct);
+router.get('/products/:productId/rejections', isAdmin, getRejectionHistory);
 router.get('/articles', isAdmin, getAllArticles);
 router.get('/orders', isAdmin, getAllOrders);
+router.put('/orders/:id/status', isAdmin, updateOrderStatus);
+router.put('/orders/:id/price', isAdmin, updateOrderPrice);
 
 module.exports = router;

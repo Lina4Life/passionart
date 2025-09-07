@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ShareButton from '../common/ShareButton';
 
 const artworks = [
   {
@@ -29,6 +30,13 @@ const artworks = [
     img: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba',
     desc: 'Night Photography',
     category: 'Photography'
+  },
+  {
+    title: 'Digital Analog',
+    artist: 'Maya Thompson',
+    img: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262',
+    desc: 'Contemporary Mixed Media Collage',
+    category: 'Collage'
   }
 ];
 
@@ -142,10 +150,30 @@ const FeaturedArtworks = () => {
                 <p style={{
                   fontSize: '0.9rem',
                   color: 'rgba(255, 255, 255, 0.6)',
-                  display: hoveredIndex === idx ? 'block' : 'none'
+                  display: hoveredIndex === idx ? 'block' : 'none',
+                  marginBottom: '1rem'
                 }}>
                   {art.desc}
                 </p>
+                <div style={{
+                  display: hoveredIndex === idx ? 'flex' : 'none',
+                  justifyContent: 'flex-end',
+                  alignItems: 'center'
+                }}>
+                  <ShareButton 
+                    artwork={{
+                      id: idx + 1,
+                      title: art.title,
+                      artist: art.artist,
+                      image: art.img,
+                      description: art.desc,
+                      price: 'Contact for pricing'
+                    }} 
+                    size="small" 
+                    showText={false}
+                    className="featured-share-btn"
+                  />
+                </div>
               </div>
             </div>
           ))}

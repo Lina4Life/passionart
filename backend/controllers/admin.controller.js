@@ -11,18 +11,51 @@ const pool = new Pool({
 
 const getAdminStats = async (req, res) => {
   try {
-    // Try to get real statistics from PostgreSQL database
-    const userCountResult = await pool.query('SELECT COUNT(*) as count FROM users');
-    const artworkCountResult = await pool.query('SELECT COUNT(*) as count FROM artworks');
-    const articleCountResult = await pool.query('SELECT COUNT(*) as count FROM articles');
-    const orderCountResult = await pool.query('SELECT COUNT(*) as count FROM orders');
-
-    res.json({
-      totalUsers: parseInt(userCountResult.rows[0].count),
-      totalProducts: parseInt(artworkCountResult.rows[0].count),
-      totalArticles: parseInt(articleCountResult.rows[0].count),
-      totalOrders: parseInt(orderCountResult.rows[0].count)
+    const db = require('../config/database');
+    
+    // Get statistics from SQLite database
+    const queries = [
+      'SELECT COUNT(*) as count FROM users',
+      'SELECT COUNT(*) as count FROM artworks', 
+      'SELECT COUNT(*) as count FROM articles',
+      'SELECT COUNT(*) as count FROM orders'
+    ];
+    
+    let completed = 0;
+    const stats = {};
+    
+    // Get user count
+    db.get(queries[0], [], (err, row) => {
+      if (!err && row) stats.totalUsers = parseInt(row.count);
+      else stats.totalUsers = 0;
+      if (++completed === 4) sendResponse();
     });
+    
+    // Get artwork count  
+    db.get(queries[1], [], (err, row) => {
+      if (!err && row) stats.totalProducts = parseInt(row.count);
+      else stats.totalProducts = 0;
+      if (++completed === 4) sendResponse();
+    });
+    
+    // Get article count
+    db.get(queries[2], [], (err, row) => {
+      if (!err && row) stats.totalArticles = parseInt(row.count);
+      else stats.totalArticles = 0;
+      if (++completed === 4) sendResponse();
+    });
+    
+    // Get order count
+    db.get(queries[3], [], (err, row) => {
+      if (!err && row) stats.totalOrders = parseInt(row.count);
+      else stats.totalOrders = 0;
+      if (++completed === 4) sendResponse();
+    });
+    
+    function sendResponse() {
+      res.json(stats);
+    }
+    
   } catch (error) {
     console.error('Error fetching admin stats:', error);
     // Fallback to mock data if database is not available
@@ -154,20 +187,44 @@ const getAllArticles = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
   try {
-    // Try to get orders from PostgreSQL database
-    const result = await pool.query(`
-      SELECT o.id, o.total_amount, o.status, o.created_at,
-             u.email as customer_email,
-             a.title as product_title, a.price as product_price
+    const db = require('../config/database');
+    
+    // Get orders from SQLite database with proper joins
+    const query = `
+      SELECT o.id, o.total_amount, o.payment_status as status, o.created_at,
+             o.shipping_address,
+             u.email as customer_email, u.username, u.first_name, u.last_name,
+             a.title as product_title, a.price as product_price, a.image_url
       FROM orders o
       LEFT JOIN users u ON o.buyer_id = u.id
       LEFT JOIN artworks a ON o.artwork_id = a.id
       ORDER BY o.created_at DESC
-    `);
+    `;
     
-    res.json(result.rows);
+    db.all(query, [], (err, rows) => {
+      if (err) {
+        console.error('Error fetching orders:', err);
+        return res.status(500).json({ error: 'Failed to fetch orders' });
+      }
+      
+      // Format the orders data for the frontend
+      const formattedOrders = rows.map(order => ({
+        id: order.id,
+        total_amount: parseFloat(order.total_amount || 0).toFixed(2),
+        status: order.status || 'pending',
+        created_at: order.created_at,
+        customer_email: order.customer_email || 'Unknown',
+        customer_name: order.username || `${order.first_name || ''} ${order.last_name || ''}`.trim() || 'Unknown',
+        product_title: order.product_title || 'N/A',
+        product_price: parseFloat(order.product_price || 0).toFixed(2),
+        product_image: order.image_url,
+        shipping_address: order.shipping_address
+      }));
+      
+      res.json(formattedOrders);
+    });
   } catch (error) {
-    console.error('Error fetching orders:', error);
+    console.error('Error in getAllOrders:', error);
     // Fallback to mock data if database is not available
     const orders = [
       {
@@ -247,11 +304,50 @@ const createUser = async (req, res) => {
   }
 };
 
+const updateOrderStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    
+    if (!status || !['paid', 'pending', 'failed'].includes(status)) {
+      return res.status(400).json({ error: 'Invalid status. Must be: paid, pending, or failed' });
+    }
+    
+    const db = require('../config/database');
+    
+    // Update order status in SQLite database
+    const query = `UPDATE orders SET payment_status = ?, updated_at = datetime('now') WHERE id = ?`;
+    
+    db.run(query, [status, id], function(err) {
+      if (err) {
+        console.error('Error updating order status:', err);
+        return res.status(500).json({ error: 'Failed to update order status' });
+      }
+      
+      if (this.changes === 0) {
+        return res.status(404).json({ error: 'Order not found' });
+      }
+      
+      res.json({ 
+        message: 'Order status updated successfully',
+        orderId: id,
+        newStatus: status,
+        updatedAt: new Date().toISOString()
+      });
+    });
+    
+  } catch (error) {
+    console.error('Error in updateOrderStatus:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 module.exports = {
   getAdminStats,
   getAllUsers,
   getAllProducts,
   getAllArticles,
   getAllOrders,
-  createUser
+  createUser,
+  updateOrderStatus
 };
