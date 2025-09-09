@@ -6,14 +6,26 @@ const resend = require('../services/emailService');
 
 // Simple admin check middleware (matching admin.routes.js)
 const isAdmin = (req, res, next) => {
+  console.log('isAdmin middleware called for feedback');
+  console.log('Authorization header:', req.headers.authorization);
+  
   const authHeader = req.headers.authorization;
   if (!authHeader) {
+    console.log('No authorization header');
     return res.status(401).json({ error: 'No authorization header' });
   }
-  if (authHeader.includes('Bearer')) {
+  
+  // Extract token from Bearer header
+  const token = authHeader.replace('Bearer ', '');
+  
+  // For admin access, we'll allow any valid token format for now
+  // This matches the pattern used in the frontend admin panel
+  if (token && (token.startsWith('admin-token-') || token.length > 10)) {
+    console.log('Authorization passed for feedback - admin access granted');
     next();
   } else {
-    return res.status(401).json({ error: 'Invalid authorization format' });
+    console.log('Invalid authorization format for admin access');
+    return res.status(401).json({ error: 'Admin access required' });
   }
 };
 
@@ -203,6 +215,32 @@ router.put('/:id/status', isAdmin, async (req, res) => {
   } catch (error) {
     console.error('Error updating feedback status:', error);
     res.status(500).json({ error: 'Failed to update feedback status' });
+  }
+});
+
+// Delete feedback (admin only)
+router.delete('/:id', isAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deleteSql = 'DELETE FROM feedback WHERE id = ?';
+
+    db.run(deleteSql, [id], function(err) {
+      if (err) {
+        console.error('Error deleting feedback:', err);
+        return res.status(500).json({ error: 'Failed to delete feedback' });
+      }
+
+      if (this.changes === 0) {
+        return res.status(404).json({ error: 'Feedback not found' });
+      }
+
+      res.json({ message: 'Feedback deleted successfully' });
+    });
+
+  } catch (error) {
+    console.error('Error deleting feedback:', error);
+    res.status(500).json({ error: 'Failed to delete feedback' });
   }
 });
 

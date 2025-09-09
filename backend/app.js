@@ -135,43 +135,39 @@ app.use('/api/chat', chatRoutes);
 // app.use('/api/payment', paymentRoutes);
 app.use('/api/articles', articlesRoutes);
 // app.use('/api/email', emailRoutes);
-// app.use('/api/hubspot', require('./routes/hubspot.routes'));
+app.use('/api/hubspot', require('./routes/hubspot.routes'));
+app.use('/api/hybrid-email', require('./routes/hybrid-email.routes'));
 
 // Artists API endpoint
 app.get('/api/artists', async (req, res) => {
   try {
-    const db = require('./config/database');
+    const sqlite3 = require('sqlite3').verbose();
+    const path = require('path');
+    
+    // Use absolute path to database
+    const dbPath = path.join(__dirname, 'data', 'passionart.db');
+    const db = new sqlite3.Database(dbPath);
     
     const query = `
       SELECT id, username, first_name, last_name, email, bio, 
-             user_type, profile_picture, social_media, created_at
+             user_type, profile_picture, created_at
       FROM users 
-      WHERE id != ? 
+      WHERE user_type = 'artist'
       ORDER BY created_at DESC
     `;
     
-    // Get current user ID from token if available
-    let currentUserId = null;
-    const authHeader = req.headers.authorization;
-    if (authHeader && authHeader.startsWith('Bearer ')) {
-      try {
-        const token = authHeader.substring(7);
-        const jwt = require('jsonwebtoken');
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
-        currentUserId = decoded.userId;
-      } catch (err) {
-        // Token invalid, continue without current user
-      }
-    }
-    
-    db.all(query, [currentUserId || 0], (err, rows) => {
+    db.all(query, [], (err, rows) => {
       if (err) {
         console.error('Database error:', err);
+        db.close();
         return res.status(500).json({ 
           success: false, 
           message: 'Failed to fetch artists' 
         });
       }
+      
+      console.log(`Found ${rows.length} artists in database`);
+      db.close();
       
       res.json({ 
         success: true, 
@@ -317,11 +313,16 @@ app.get('/api/profile/following', async (req, res) => {
 app.get('/api/user/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const db = require('./config/database');
+    const sqlite3 = require('sqlite3').verbose();
+    const path = require('path');
+    
+    // Use absolute path to database
+    const dbPath = path.join(__dirname, 'data', 'passionart.db');
+    const db = new sqlite3.Database(dbPath);
     
     const query = `
       SELECT id, username, first_name, last_name, email, bio, 
-             user_type, profile_picture, social_media, created_at
+             user_type, profile_picture, created_at
       FROM users 
       WHERE id = ?
     `;
@@ -329,13 +330,16 @@ app.get('/api/user/:id', async (req, res) => {
     db.get(query, [id], (err, row) => {
       if (err) {
         console.error('Database error:', err);
+        db.close();
         return res.status(500).json({ success: false, message: 'Database error' });
       }
       
       if (!row) {
+        db.close();
         return res.status(404).json({ success: false, message: 'User not found' });
       }
       
+      db.close();
       res.json({ success: true, user: row });
     });
   } catch (error) {

@@ -44,7 +44,7 @@ const getProfile = async (req, res) => {
     const userId = req.user.id;
     
     db.get(
-      "SELECT id, email, username, first_name, last_name, user_type, phone, bio, profile_picture, website, social_media, created_at FROM users WHERE id = ?",
+      "SELECT id, email, username, first_name, last_name, user_type, phone, bio, profile_picture, website, created_at FROM users WHERE id = ?",
       [userId],
       (err, user) => {
         if (err) {

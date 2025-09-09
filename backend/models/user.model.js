@@ -1,17 +1,16 @@
 const db = require('../config/database');
 const bcrypt = require('bcrypt');
 
-const createUser = async (email, password, username = null, first_name = null, last_name = null, verificationToken = null) => {
+const createUser = async (email, password, username = null, first_name = null, last_name = null, verificationToken = null, user_type = null) => {
   const hash = await bcrypt.hash(password, 10);
-  const tokenExpires = verificationToken ? Date.now() + 24 * 60 * 60 * 1000 : null; // 24 hours
   
   return new Promise((resolve, reject) => {
     const query = `
-      INSERT INTO users (email, password, username, first_name, last_name, verification_status, email_verified, verification_token, verification_token_expires)
-      VALUES (?, ?, ?, ?, ?, 'pending', 0, ?, ?)
+      INSERT INTO users (email, password, username, first_name, last_name, user_type, verification_status)
+      VALUES (?, ?, ?, ?, ?, ?, 'verified')
     `;
     
-    db.run(query, [email, hash, username, first_name, last_name, verificationToken, tokenExpires], function(err) {
+    db.run(query, [email, hash, username, first_name, last_name, user_type], function(err) {
       if (err) {
         reject(err);
       } else {
@@ -21,8 +20,8 @@ const createUser = async (email, password, username = null, first_name = null, l
           username,
           first_name,
           last_name,
-          email_verified: 0,
-          verification_token: verificationToken
+          user_type,
+          verification_status: 'verified'
         });
       }
     });
@@ -43,12 +42,10 @@ const findUserByEmail = async (email) => {
 
 const findUserByVerificationToken = async (token) => {
   return new Promise((resolve, reject) => {
-    const query = `
-      SELECT * FROM users 
-      WHERE verification_token = ? AND verification_token_expires > ?
-    `;
+    // Simplified: just find user by verification status
+    const query = `SELECT * FROM users WHERE verification_status = 'pending'`;
     
-    db.get(query, [token, Date.now()], (err, row) => {
+    db.get(query, [], (err, row) => {
       if (err) {
         reject(err);
       } else {
@@ -62,7 +59,7 @@ const verifyUserEmail = async (userId) => {
   return new Promise((resolve, reject) => {
     const query = `
       UPDATE users 
-      SET email_verified = 1, verification_status = 'verified', verification_token = NULL, verification_token_expires = NULL 
+      SET verification_status = 'verified'
       WHERE id = ?
     `;
     

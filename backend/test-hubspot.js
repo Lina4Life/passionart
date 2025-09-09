@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 // HubSpot Integration Test Script
-const BASE_URL = 'http://localhost:5000'; // Change to your server URL
+const BASE_URL = 'http://localhost:3000'; // Updated to match current server port
 
 async function testHubSpotIntegration() {
     console.log('🧪 Testing HubSpot Integration...\n');

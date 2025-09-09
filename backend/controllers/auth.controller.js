@@ -1,13 +1,12 @@
 const { createUser, findUserByEmail, findUserByVerificationToken, verifyUserEmail } = require('../models/user.model');
 const { generateToken } = require('../utils/jwt');
-const { sendVerificationEmail } = require('./hubspot.controller');
-const { syncUserRegistration } = require('../services/hubspot.service');
+const axios = require('axios');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 
 const register = async (req, res) => {
   try {
-    const { email, password, username, first_name, last_name } = req.body;
+    const { email, password, username, first_name, last_name, user_type } = req.body;
     if (!email || !password) return res.status(400).json({ error: 'Email and password required' });
     
     const existing = await findUserByEmail(email);
@@ -16,33 +15,40 @@ const register = async (req, res) => {
     // Generate verification token
     const verificationToken = crypto.randomBytes(32).toString('hex');
     
-    const user = await createUser(email, password, username, first_name, last_name, verificationToken);
+    const user = await createUser(email, password, username, first_name, last_name, verificationToken, user_type);
     
-    // Send verification email
+    // Send verification email via hybrid system
     console.log(`Attempting to send verification email to: ${email}`);
-    const emailResult = await sendVerificationEmail(email, verificationToken);
-    console.log('Email send result:', emailResult);
-    
-    if (!emailResult.success) {
-      console.error('Failed to send verification email:', emailResult.error);
+    try {
+      const response = await axios.post(`http://localhost:${process.env.PORT || 3001}/api/hybrid-email/send-verification`, {
+        email,
+        verificationToken,
+        firstName: first_name
+      });
+      
+      if (response.data.success) {
+        console.log('✅ Verification email sent successfully!');
+      }
+    } catch (emailError) {
+      console.error('Failed to send verification email:', emailError.message);
       // Continue with registration even if email fails
-    } else {
-      console.log('✅ Verification email sent successfully!');
     }
     
     // Sync user to HubSpot CRM
     console.log(`📞 Syncing user to HubSpot: ${email}`);
-    const hubspotResult = await syncUserRegistration({
-      email,
-      first_name,
-      last_name,
-      username
-    });
-    
-    if (hubspotResult.success) {
-      console.log(`✅ User synced to HubSpot: ${hubspotResult.message}`);
-    } else {
-      console.error(`❌ HubSpot sync failed: ${hubspotResult.error}`);
+    try {
+      const hubspotResponse = await axios.post(`http://localhost:${process.env.PORT || 3001}/api/hybrid-email/sync-user`, {
+        email,
+        firstName: first_name,
+        lastName: last_name,
+        userType: user_type
+      });
+      
+      if (hubspotResponse.data.success) {
+        console.log(`✅ User synced to HubSpot: ${hubspotResponse.data.message}`);
+      }
+    } catch (hubspotError) {
+      console.error(`❌ HubSpot sync failed: ${hubspotError.message}`);
       // Continue with registration even if HubSpot sync fails
     }
     
@@ -51,6 +57,7 @@ const register = async (req, res) => {
         id: user.id,
         email: user.email,
         username: user.username,
+        user_type: user.user_type,
         email_verified: user.email_verified
       },
       message: 'Registration successful! Please check your email to verify your account.',
@@ -125,7 +132,7 @@ const login = async (req, res) => {
         id: user.id, 
         email: user.email, 
         username: user.username,
-        email_verified: user.email_verified
+        verification_status: user.verification_status
       }, 
       token 
     });
