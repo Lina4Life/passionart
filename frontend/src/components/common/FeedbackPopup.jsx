@@ -32,7 +32,18 @@ const FeedbackPopup = ({ isOpen, onClose, user }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/feedback', {
+      if (!token) {
+        setSubmitStatus({ type: 'error', message: 'Please log in to send feedback.' });
+        return;
+      }
+
+      // Ensure user object is valid
+      const userEmail = user?.email || 'unknown@example.com';
+      const userName = user?.name || user?.first_name || user?.username || userEmail.split('@')[0];
+
+      console.log('Sending feedback with:', { userEmail, userName });
+
+      const response = await fetch('http://localhost:3001/api/feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,12 +52,14 @@ const FeedbackPopup = ({ isOpen, onClose, user }) => {
         body: JSON.stringify({
           issue: formData.issue,
           feedback: formData.feedback,
-          userEmail: user.email,
-          userName: user.name || user.email.split('@')[0]
+          userEmail: userEmail,
+          userName: userName
         })
       });
 
       if (response.ok) {
+        const result = await response.json();
+        console.log('Feedback submitted successfully:', result);
         setSubmitStatus({ type: 'success', message: t('feedback.success') });
         setFormData({ issue: '', feedback: '' });
         setTimeout(() => {
@@ -54,11 +67,13 @@ const FeedbackPopup = ({ isOpen, onClose, user }) => {
           setSubmitStatus(null);
         }, 2000);
       } else {
-        throw new Error('Failed to send feedback');
+        const errorData = await response.json();
+        console.error('Feedback API error:', errorData);
+        throw new Error(errorData.error || 'Failed to send feedback');
       }
     } catch (error) {
       console.error('Error sending feedback:', error);
-      setSubmitStatus({ type: 'error', message: t('feedback.error') });
+      setSubmitStatus({ type: 'error', message: error.message || t('feedback.error') });
     } finally {
       setIsSubmitting(false);
     }

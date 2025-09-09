@@ -105,7 +105,7 @@ const Profile = () => {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch('http://localhost:3001/api/profile', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -198,7 +198,7 @@ const Profile = () => {
       const formData = new FormData();
       formData.append('profilePicture', file);
 
-      const response = await fetch('http://localhost:5000/api/profile/picture', {
+      const response = await fetch('http://localhost:3001/api/profile/picture', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -234,7 +234,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch('http://localhost:3001/api/profile', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -279,7 +279,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile/password', {
+      const response = await fetch('http://localhost:3001/api/profile/password', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -399,7 +399,7 @@ const Profile = () => {
 
   const getProfilePictureUrl = () => {
     if (user?.profile_picture) {
-      return `http://localhost:5000/uploads/profile-pictures/${user.profile_picture}`;
+      return `http://localhost:3001/uploads/profile-pictures/${user.profile_picture}`;  
     }
     return null;
   };

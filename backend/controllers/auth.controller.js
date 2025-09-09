@@ -61,8 +61,7 @@ const register = async (req, res) => {
         email_verified: user.email_verified
       },
       message: 'Registration successful! Please check your email to verify your account.',
-      requiresVerification: true,
-      hubspotSynced: hubspotResult.success
+      requiresVerification: true
     });
   } catch (e) {
     console.error(e);

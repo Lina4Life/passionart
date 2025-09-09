@@ -32,6 +32,8 @@
   font-weight: 600;
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+  aspect-ratio: 1;
 }
 
 .profile-info h1 {

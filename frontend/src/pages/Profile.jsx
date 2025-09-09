@@ -35,7 +35,7 @@ const Profile = () => {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch('http://localhost:3001/api/profile', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch('http://localhost:3001/api/profile', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -113,7 +113,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile/password', {
+      const response = await fetch('http://localhost:3001/api/profile/password', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -175,12 +175,17 @@ const Profile = () => {
       <div className="profile-header">
         <div className="profile-avatar">
           <div className="avatar-placeholder">
-            {user?.first_name?.[0]}{user?.last_name?.[0]}
+            {user?.first_name?.[0]?.toUpperCase() || user?.username?.[0]?.toUpperCase() || 'U'}
           </div>
         </div>
         <div className="profile-info">
-          <h1>{user?.first_name} {user?.last_name}</h1>
-          <p className="username">@{user?.username}</p>
+          <h1>
+            {user?.first_name || user?.last_name 
+              ? `${user.first_name || ''} ${user.last_name || ''}`.trim()
+              : user?.username || 'User'
+            }
+          </h1>
+          <p className="username">@{user?.username || 'username'}</p>
           <p className="email">{user?.email}</p>
           <span className={`user-type ${user?.user_type}`}>
             {user?.user_type?.charAt(0)?.toUpperCase() + user?.user_type?.slice(1)}

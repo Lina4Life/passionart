@@ -22,8 +22,8 @@ api.interceptors.request.use((config) => {
 export const login = (email, password) =>
   api.post('/auth/login', { email, password }).then(r => r.data);
 
-export const register = (email, password) =>
-  api.post('/auth/register', { email, password }).then(r => r.data);
+export const register = (registrationData) =>
+  api.post('/auth/register', registrationData).then(r => r.data);
 
 export const fetchArtworks = () =>
   api.get('/artworks').then(r => r.data);
@@ -70,7 +70,7 @@ export const getAllProducts = () =>
   api.get('/admin/products').then(r => r.data);
 
 export const getAllArticles = () =>
-  fetch('http://localhost:5000/api/articles?limit=100')
+  fetch('http://localhost:3001/api/articles?limit=100')
     .then(r => r.json())
     .then(data => {
       const articles = data.articles || [];
@@ -88,5 +88,21 @@ export const getAllArticles = () =>
 
 export const getAllOrders = () =>
   api.get('/admin/orders').then(r => r.data);
+
+// Database API functions
+export const getDatabaseInfo = () =>
+  api.get('/database/info').then(r => r.data);
+
+export const getTableDetails = (tableName) =>
+  api.get(`/database/tables/${tableName}`).then(r => r.data);
+
+export const executeQuery = (query, readOnly = true) =>
+  api.post('/database/query', { query, readOnly }).then(r => r.data);
+
+export const exportDatabase = () =>
+  api.get('/database/export').then(r => r.data);
+
+export const getDatabaseHealth = () =>
+  api.get('/database/health').then(r => r.data);
 
 export default api;

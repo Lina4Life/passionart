@@ -23,7 +23,12 @@ import {
   createUser, 
   createProduct,
   updateProductStatus,
-  deleteProduct
+  deleteProduct,
+  getDatabaseInfo,
+  getTableDetails,
+  executeQuery,
+  exportDatabase,
+  getDatabaseHealth
 } from '../services/api';
 import ThemeToggle from '../components/ThemeToggle';
 import './Admin.css';
@@ -128,6 +133,16 @@ function Admin() {
   const [updatingOrderStatus, setUpdatingOrderStatus] = useState(null);
   const [editingPrice, setEditingPrice] = useState(null);
   const [newPrice, setNewPrice] = useState('');
+
+  // Database state
+  const [databaseInfo, setDatabaseInfo] = useState(null);
+  const [selectedTable, setSelectedTable] = useState(null);
+  const [tableDetails, setTableDetails] = useState(null);
+  const [queryText, setQueryText] = useState('SELECT * FROM users LIMIT 10;');
+  const [queryResult, setQueryResult] = useState(null);
+  const [queryLoading, setQueryLoading] = useState(false);
+  const [databaseHealth, setDatabaseHealth] = useState(null);
+  const [databaseLoading, setDatabaseLoading] = useState(false);
   
   const navigate = useNavigate();
 
@@ -160,6 +175,10 @@ function Admin() {
     // Load feedback when feedback tab is active
     if (activeTab === 'feedback') {
       fetchFeedback();
+    }
+    // Load database info when database tab is active
+    if (activeTab === 'database') {
+      loadDatabaseInfo();
     }
   }, [activeTab, feedbackFilter, feedbackPagination.page]);
 
@@ -768,6 +787,64 @@ function Admin() {
     } catch (error) {
       console.error('Error deleting feedback:', error);
       alert(`Error deleting feedback: ${error.message}`);
+    }
+  };
+
+  // Database Management Functions
+  const loadDatabaseInfo = async () => {
+    try {
+      setDatabaseLoading(true);
+      const [dbInfo, health] = await Promise.all([
+        getDatabaseInfo(),
+        getDatabaseHealth()
+      ]);
+      setDatabaseInfo(dbInfo);
+      setDatabaseHealth(health);
+    } catch (error) {
+      console.error('Error loading database info:', error);
+    } finally {
+      setDatabaseLoading(false);
+    }
+  };
+
+  const handleTableSelect = async (tableName) => {
+    try {
+      setSelectedTable(tableName);
+      const details = await getTableDetails(tableName);
+      setTableDetails(details);
+    } catch (error) {
+      console.error('Error loading table details:', error);
+    }
+  };
+
+  const handleQueryExecute = async () => {
+    try {
+      setQueryLoading(true);
+      const result = await executeQuery(queryText, true);
+      setQueryResult(result);
+    } catch (error) {
+      console.error('Error executing query:', error);
+      setQueryResult({ error: error.message });
+    } finally {
+      setQueryLoading(false);
+    }
+  };
+
+  const handleDatabaseExport = async () => {
+    try {
+      const data = await exportDatabase();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `passionart_backup_${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error exporting database:', error);
+      alert('Failed to export database');
     }
   };
 
@@ -2225,6 +2302,277 @@ function Admin() {
     );
   };
 
+  const renderDatabase = () => {
+    if (databaseLoading) {
+      return (
+        <div className="admin-section">
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p>Loading database information...</p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="admin-section">
+        <div className="section-header">
+          <h2>🗄️ Database Management</h2>
+          <div className="database-actions">
+            <button 
+              className="admin-btn primary"
+              onClick={loadDatabaseInfo}
+              disabled={databaseLoading}
+            >
+              🔄 Refresh
+            </button>
+            <button 
+              className="admin-btn success"
+              onClick={handleDatabaseExport}
+            >
+              📥 Export Database
+            </button>
+          </div>
+        </div>
+
+        <div className="database-layout">
+          {/* Database Overview */}
+          <div className="database-panel">
+            <h3>📊 Database Overview</h3>
+            {databaseInfo && (
+              <div className="database-overview">
+                <div className="db-info-card">
+                  <h4>📁 Database File</h4>
+                  <p><strong>Path:</strong> {databaseInfo.database.path}</p>
+                  <p><strong>Size:</strong> {(databaseInfo.database.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <p><strong>Last Modified:</strong> {new Date(databaseInfo.database.lastModified).toLocaleString()}</p>
+                  <p><strong>Status:</strong> 
+                    <span className={`status-badge ${databaseInfo.database.exists ? 'status-connected' : 'status-error'}`}>
+                      {databaseInfo.database.exists ? '✅ Connected' : '❌ Not Found'}
+                    </span>
+                  </p>
+                </div>
+
+                <div className="db-info-card">
+                  <h4>🔗 Connection Info</h4>
+                  <p><strong>Type:</strong> {databaseInfo.connections.type}</p>
+                  <p><strong>Version:</strong> {databaseInfo.connections.version || 'Unknown'}</p>
+                  <p><strong>Status:</strong> 
+                    <span className="status-badge status-connected">
+                      {databaseInfo.connections.status}
+                    </span>
+                  </p>
+                </div>
+
+                <div className="db-info-card">
+                  <h4>📋 Tables ({databaseInfo.tables.length})</h4>
+                  <div className="table-list">
+                    {databaseInfo.tables.map(table => (
+                      <div 
+                        key={table.name} 
+                        className={`table-item ${selectedTable === table.name ? 'selected' : ''}`}
+                        onClick={() => handleTableSelect(table.name)}
+                      >
+                        <div className="table-name">🗂️ {table.name}</div>
+                        <div className="table-stats">
+                          <span>{table.rowCount} rows</span>
+                          <span>{table.columnCount} columns</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Table Details */}
+          {selectedTable && tableDetails && (
+            <div className="database-panel">
+              <h3>🗂️ Table: {selectedTable}</h3>
+              <div className="table-details">
+                <div className="table-schema">
+                  <h4>📋 Schema</h4>
+                  <div className="schema-table">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Column</th>
+                          <th>Type</th>
+                          <th>Constraints</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {tableDetails.columns.map(col => (
+                          <tr key={col.name}>
+                            <td>
+                              <strong>{col.name}</strong>
+                              {col.primaryKey && <span className="pk-badge">PK</span>}
+                            </td>
+                            <td><code>{col.type}</code></td>
+                            <td>
+                              {col.notNull && <span className="constraint-badge">NOT NULL</span>}
+                              {col.defaultValue && <span className="constraint-badge">DEFAULT: {col.defaultValue}</span>}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {tableDetails.sampleData && tableDetails.sampleData.length > 0 && (
+                  <div className="sample-data">
+                    <h4>📊 Sample Data (First 10 rows)</h4>
+                    <div className="data-table">
+                      <table>
+                        <thead>
+                          <tr>
+                            {tableDetails.columns.map(col => (
+                              <th key={col.name}>{col.name}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {tableDetails.sampleData.map((row, index) => (
+                            <tr key={index}>
+                              {tableDetails.columns.map(col => (
+                                <td key={col.name}>
+                                  {row[col.name] === null ? (
+                                    <span className="null-value">NULL</span>
+                                  ) : (
+                                    String(row[col.name])
+                                  )}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Query Executor */}
+          <div className="database-panel">
+            <h3>⚡ Query Executor</h3>
+            <div className="query-executor">
+              <div className="query-input">
+                <textarea
+                  value={queryText}
+                  onChange={(e) => setQueryText(e.target.value)}
+                  placeholder="Enter your SQL query here..."
+                  rows={4}
+                  className="query-textarea"
+                />
+                <div className="query-actions">
+                  <button 
+                    className="admin-btn primary"
+                    onClick={handleQueryExecute}
+                    disabled={queryLoading}
+                  >
+                    {queryLoading ? '⏳ Executing...' : '▶️ Execute Query'}
+                  </button>
+                  <button 
+                    className="admin-btn secondary"
+                    onClick={() => setQueryText('SELECT * FROM users LIMIT 10;')}
+                  >
+                    📝 Example Query
+                  </button>
+                </div>
+              </div>
+
+              {queryResult && (
+                <div className="query-result">
+                  {queryResult.error ? (
+                    <div className="error-result">
+                      <h4>❌ Query Error</h4>
+                      <pre>{queryResult.error}</pre>
+                    </div>
+                  ) : (
+                    <div className="success-result">
+                      <h4>✅ Query Result ({queryResult.rowCount || queryResult.data?.length || 0} rows)</h4>
+                      {queryResult.data && queryResult.data.length > 0 ? (
+                        <div className="result-table">
+                          <table>
+                            <thead>
+                              <tr>
+                                {Object.keys(queryResult.data[0]).map(key => (
+                                  <th key={key}>{key}</th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {queryResult.data.slice(0, 50).map((row, index) => (
+                                <tr key={index}>
+                                  {Object.keys(row).map(key => (
+                                    <td key={key}>
+                                      {row[key] === null ? (
+                                        <span className="null-value">NULL</span>
+                                      ) : (
+                                        String(row[key])
+                                      )}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                          {queryResult.data.length > 50 && (
+                            <p className="result-note">
+                              Showing first 50 rows of {queryResult.data.length} total results.
+                            </p>
+                          )}
+                        </div>
+                      ) : (
+                        <p>Query executed successfully. {queryResult.message || 'No data returned.'}</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Health Check */}
+          {databaseHealth && (
+            <div className="database-panel">
+              <h3>🏥 Database Health</h3>
+              <div className="health-check">
+                <div className={`health-status ${databaseHealth.status}`}>
+                  <h4>
+                    {databaseHealth.status === 'healthy' ? '✅' : databaseHealth.status === 'unhealthy' ? '❌' : '⚠️'} 
+                    Status: {databaseHealth.status.toUpperCase()}
+                  </h4>
+                  <p className="health-timestamp">
+                    Last checked: {new Date(databaseHealth.timestamp).toLocaleString()}
+                  </p>
+                </div>
+                
+                <div className="health-checks">
+                  {databaseHealth.checks.map((check, index) => (
+                    <div key={index} className={`health-check-item ${check.status}`}>
+                      <div className="check-status">
+                        {check.status === 'pass' ? '✅' : check.status === 'fail' ? '❌' : '⚠️'}
+                      </div>
+                      <div className="check-details">
+                        <strong>{check.name}</strong>
+                        <p>{check.message}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'dashboard':
@@ -2241,6 +2589,8 @@ function Admin() {
         return renderMail();
       case 'feedback':
         return renderFeedback();
+      case 'database':
+        return renderDatabase();
       default:
         return renderDashboard();
     }
@@ -2318,6 +2668,12 @@ function Admin() {
               onClick={() => setActiveTab('feedback')}
             >
               💬 Feedback
+            </button>
+            <button
+              className={`admin-nav-item ${activeTab === 'database' ? 'active' : ''}`}
+              onClick={() => setActiveTab('database')}
+            >
+              🗄️ Database
             </button>
           </nav>
         </div>

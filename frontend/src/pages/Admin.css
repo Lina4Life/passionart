@@ -3107,3 +3107,401 @@ select.form-input {
     justify-content: center;
   }
 }
+
+/* Database Management Styles */
+.database-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.database-panel {
+  background: var(--admin-bg-secondary);
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid var(--admin-border-color);
+}
+
+.database-panel h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--admin-text-primary);
+  font-size: 1.2em;
+}
+
+.database-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.db-info-card {
+  background: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border-color);
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.db-info-card h4 {
+  margin: 0 0 10px 0;
+  color: var(--admin-text-primary);
+  font-size: 1.1em;
+}
+
+.db-info-card p {
+  margin: 5px 0;
+  color: var(--admin-text-secondary);
+  font-size: 0.9em;
+}
+
+.status-badge {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.status-connected {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.table-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.table-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  background: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.table-item:hover {
+  background: var(--admin-accent-color);
+  color: white;
+  transform: translateX(2px);
+}
+
+.table-item.selected {
+  background: var(--admin-accent-color);
+  color: white;
+  border-color: var(--admin-accent-color);
+}
+
+.table-name {
+  font-weight: bold;
+}
+
+.table-stats {
+  display: flex;
+  gap: 10px;
+  font-size: 0.8em;
+}
+
+.table-stats span {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.table-item.selected .table-stats span {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.table-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.schema-table, .data-table, .result-table {
+  overflow-x: auto;
+  border: 1px solid var(--admin-border-color);
+  border-radius: 4px;
+}
+
+.schema-table table,
+.data-table table,
+.result-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.schema-table th,
+.data-table th,
+.result-table th,
+.schema-table td,
+.data-table td,
+.result-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--admin-border-color);
+}
+
+.schema-table th,
+.data-table th,
+.result-table th {
+  background: var(--admin-bg-primary);
+  font-weight: bold;
+  color: var(--admin-text-primary);
+}
+
+.pk-badge {
+  background: #007bff;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.7em;
+  margin-left: 5px;
+}
+
+.constraint-badge {
+  background: #6c757d;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.7em;
+  margin-right: 5px;
+}
+
+.null-value {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.query-executor {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.query-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.query-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid var(--admin-border-color);
+  border-radius: 4px;
+  background: var(--admin-bg-primary);
+  color: var(--admin-text-primary);
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  resize: vertical;
+}
+
+.query-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.query-result {
+  border: 1px solid var(--admin-border-color);
+  border-radius: 4px;
+  padding: 15px;
+  background: var(--admin-bg-primary);
+}
+
+.error-result h4 {
+  color: #dc3545;
+  margin: 0 0 10px 0;
+}
+
+.error-result pre {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.success-result h4 {
+  color: #28a745;
+  margin: 0 0 15px 0;
+}
+
+.result-note {
+  margin-top: 10px;
+  font-style: italic;
+  color: var(--admin-text-secondary);
+}
+
+.health-check {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.health-status {
+  padding: 15px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.health-status.healthy {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.health-status.unhealthy {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.health-status.warn {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.health-status h4 {
+  margin: 0 0 5px 0;
+}
+
+.health-timestamp {
+  margin: 0;
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+
+.health-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.health-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--admin-border-color);
+}
+
+.health-check-item.pass {
+  background: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.health-check-item.fail {
+  background: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.health-check-item.warn {
+  background: #fff3cd;
+  border-color: #ffeaa7;
+}
+
+.check-status {
+  font-size: 1.2em;
+  flex-shrink: 0;
+}
+
+.check-details strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.check-details p {
+  margin: 0;
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+.database-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Dark mode overrides for database */
+[data-theme="dark"] .status-connected {
+  background: #155724;
+  color: #d4edda;
+}
+
+[data-theme="dark"] .status-error {
+  background: #721c24;
+  color: #f8d7da;
+}
+
+[data-theme="dark"] .health-status.healthy {
+  background: #155724;
+  color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+[data-theme="dark"] .health-status.unhealthy {
+  background: #721c24;
+  color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+[data-theme="dark"] .health-check-item.pass {
+  background: #155724;
+  border-color: #c3e6cb;
+}
+
+[data-theme="dark"] .health-check-item.fail {
+  background: #721c24;
+  border-color: #f5c6cb;
+}
+
+[data-theme="dark"] .error-result pre {
+  background: #721c24;
+  color: #f8d7da;
+}
+
+/* Responsive design for database panel */
+@media (max-width: 1200px) {
+  .database-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .database-panel {
+    padding: 15px;
+  }
+  
+  .query-actions {
+    flex-direction: column;
+  }
+  
+  .query-actions button {
+    width: 100%;
+  }
+  
+  .database-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .database-actions button {
+    width: 100%;
+  }
+}

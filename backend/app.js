@@ -116,6 +116,7 @@ const communityRoutes = require('./routes/community.routes');
 const profileRoutes = require('./routes/profile.routes');
 const articlesRoutes = require('./routes/articles.routes');
 const feedbackRoutes = require('./routes/feedback.routes');
+const databaseRoutes = require('./routes/database.routes');
 // const aiChatRoutes = require('./routes/aiChat.routes');
 const chatRoutes = require('./routes/chat.routes'); // Updated to use enhanced chat routes
 // const paymentRoutes = require('./routes/payment.routes');
@@ -130,6 +131,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/community', communityRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/feedback', feedbackRoutes);
+app.use('/api/database', databaseRoutes);
 // app.use('/api/ai-chat', aiChatRoutes);
 app.use('/api/chat', chatRoutes);
 // app.use('/api/payment', paymentRoutes);
