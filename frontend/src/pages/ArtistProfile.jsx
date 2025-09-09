@@ -30,7 +30,7 @@ const ArtistProfile = () => {
 
   const fetchArtistProfile = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/user/${id}`);
+      const response = await fetch(`http://localhost:3001/api/user/${id}`);
       const data = await response.json();
       
       if (response.ok) {
@@ -45,7 +45,7 @@ const ArtistProfile = () => {
 
   const fetchArtistArtworks = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/artworks/artist/${id}`);
+      const response = await fetch(`http://localhost:3001/api/artworks/artist/${id}`);
       const data = await response.json();
       
       if (response.ok) {
@@ -61,7 +61,7 @@ const ArtistProfile = () => {
   const checkFollowStatus = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/profile/following', {
+      const response = await fetch('http://localhost:3001/api/profile/following', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -79,8 +79,8 @@ const ArtistProfile = () => {
   const fetchFollowCounts = async () => {
     try {
       const [followersRes, followingRes] = await Promise.all([
-        fetch(`http://localhost:5000/api/user/${id}/followers`),
-        fetch(`http://localhost:5000/api/user/${id}/following`)
+        fetch(`http://localhost:3001/api/user/${id}/followers`),
+        fetch(`http://localhost:3001/api/user/${id}/following`)
       ]);
 
       const followersData = await followersRes.json();
@@ -103,7 +103,7 @@ const ArtistProfile = () => {
       const token = localStorage.getItem('token');
       const endpoint = isFollowing ? 'unfollow' : 'follow';
       
-      const response = await fetch(`http://localhost:5000/api/profile/${endpoint}`, {
+      const response = await fetch(`http://localhost:3001/api/profile/${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ const ArtistProfile = () => {
 
   const getProfilePictureUrl = () => {
     if (artist?.profile_picture) {
-      return `http://localhost:5000/uploads/profile-pictures/${artist.profile_picture}`;
+      return `http://localhost:3001/uploads/profile-pictures/${artist.profile_picture}`;
     }
     return null;
   };
@@ -257,7 +257,7 @@ const ArtistProfile = () => {
                   <div className="artwork-image">
                     {artwork.image_url ? (
                       <img 
-                        src={`http://localhost:5000${artwork.image_url}`} 
+                        src={`http://localhost:3001${artwork.image_url}`} 
                         alt={artwork.title}
                       />
                     ) : (
@@ -282,7 +282,7 @@ const ArtistProfile = () => {
                           artist: artist?.first_name && artist?.last_name 
                             ? `${artist.first_name} ${artist.last_name}` 
                             : artist?.username || 'Unknown Artist',
-                          image: artwork.image_url ? `http://localhost:5000${artwork.image_url}` : null
+                          image: artwork.image_url ? `http://localhost:3001${artwork.image_url}` : null
                         }} 
                         size="small" 
                         showText={false}
