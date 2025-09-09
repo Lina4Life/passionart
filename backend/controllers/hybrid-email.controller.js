@@ -245,10 +245,56 @@ const getEmailStats = async (req, res) => {
   }
 };
 
+// Handle HubSpot webhooks
+const handleWebhook = async (req, res) => {
+  try {
+    const webhookData = req.body;
+    
+    console.log('📨 HubSpot Webhook received:', {
+      subscriptionType: webhookData.subscriptionType,
+      eventId: webhookData.eventId,
+      objectId: webhookData.objectId
+    });
+
+    // Handle different webhook events
+    for (const event of webhookData) {
+      switch (event.subscriptionType) {
+        case 'contact.creation':
+          console.log('👤 New contact created in HubSpot:', event.objectId);
+          // You can add custom logic here
+          break;
+          
+        case 'contact.propertyChange':
+          console.log('📝 Contact property changed:', event.objectId);
+          // You can add custom logic here
+          break;
+          
+        default:
+          console.log('🔔 Unhandled webhook event:', event.subscriptionType);
+      }
+    }
+
+    // Always respond with 200 to acknowledge receipt
+    res.status(200).json({
+      success: true,
+      message: 'Webhook processed successfully'
+    });
+
+  } catch (error) {
+    console.error('Error processing webhook:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to process webhook',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   sendVerificationEmail,
   sendPasswordResetEmail,
   testHubSpotConnection,
   syncUserToHubSpot,
-  getEmailStats
+  getEmailStats,
+  handleWebhook
 };

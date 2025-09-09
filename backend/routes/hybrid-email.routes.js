@@ -5,7 +5,8 @@ const {
   sendPasswordResetEmail,
   testHubSpotConnection,
   syncUserToHubSpot,
-  getEmailStats
+  getEmailStats,
+  handleWebhook
 } = require('../controllers/hybrid-email.controller');
 const { verifyToken } = require('../utils/jwt');
 
@@ -34,5 +35,8 @@ router.post('/sync-user', verifyToken, syncUserToHubSpot);
 
 // Get email statistics (admin only)
 router.get('/stats', verifyToken, requireAdmin, getEmailStats);
+
+// Handle HubSpot webhooks (public endpoint)
+router.post('/webhook', handleWebhook);
 
 module.exports = router;
