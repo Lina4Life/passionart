@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3001/api').replace(/\/$/, '');
+const API_URL = (import.meta.env.VITE_API_URL || 'http://217.154.119.33:3001/api').replace(/\/$/, '');
 
 export const API_ORIGIN = (() => {
   try {

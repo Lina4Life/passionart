@@ -12,7 +12,7 @@ const sendVerificationEmail = async (req, res) => {
   try {
     const { email, verificationToken, firstName } = req.body;
 
-    const verificationUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/verify-email?token=${verificationToken}`;
+    const verificationUrl = `${process.env.FRONTEND_URL || 'http://217.154.119.33'}/verify-email?token=${verificationToken}`;
 
     // Send email via Resend
     const emailData = await resend.emails.send({
@@ -88,7 +88,7 @@ const sendPasswordResetEmail = async (req, res) => {
   try {
     const { email, resetToken, firstName } = req.body;
 
-    const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/reset-password?token=${resetToken}`;
+    const resetUrl = `${process.env.FRONTEND_URL || 'http://217.154.119.33'}/reset-password?token=${resetToken}`;
 
     const emailData = await resend.emails.send({
       from: 'PassionArt <noreply@passionart.io>',
