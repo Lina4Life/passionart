@@ -687,7 +687,7 @@ function Admin() {
         limit: feedbackPagination.limit
       });
       
-      const response = await fetch(`/api/feedback/admin?${params}`, {
+      const response = await fetch(`http://localhost:3001/api/feedback/admin?${params}`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -696,6 +696,7 @@ function Admin() {
       
       if (response.ok) {
         const data = await response.json();
+        console.log('Feedback data received:', data);
         setFeedback(data.feedback);
         setFeedbackPagination(data.pagination);
       } else {
@@ -711,7 +712,7 @@ function Admin() {
   const updateFeedbackStatus = async (feedbackId, status, adminNotes = '') => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/api/feedback/${feedbackId}/status`, {
+      const response = await fetch(`http://localhost:3001/api/feedback/${feedbackId}/status`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -729,6 +730,44 @@ function Admin() {
       }
     } catch (error) {
       console.error('Error updating feedback status:', error);
+    }
+  };
+
+  const deleteFeedback = async (feedbackId) => {
+    if (!window.confirm('Are you sure you want to delete this feedback? This action cannot be undone.')) {
+      return;
+    }
+    
+    try {
+      const token = localStorage.getItem('token');
+      console.log('Attempting to delete feedback ID:', feedbackId);
+      console.log('Using token:', token);
+      
+      const response = await fetch(`http://localhost:3001/api/feedback/${feedbackId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      console.log('Delete response status:', response.status);
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Delete successful:', result.message);
+        // Refresh feedback list
+        fetchFeedback();
+        setShowFeedbackModal(false);
+        alert('Feedback deleted successfully!');
+      } else {
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        console.error('Delete failed with status:', response.status, 'Error:', errorData);
+        alert(`Failed to delete feedback: ${errorData.error || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error('Error deleting feedback:', error);
+      alert(`Error deleting feedback: ${error.message}`);
     }
   };
 
@@ -1936,7 +1975,7 @@ function Admin() {
     return (
       <div className="admin-section">
         <div className="section-header">
-          <h2>💬 User Feedback</h2>
+          <h2>💬 User Feedback Management</h2>
           <div className="feedback-controls">
             <select 
               value={feedbackFilter} 
@@ -1944,64 +1983,93 @@ function Admin() {
               className="filter-select"
             >
               <option value="all">All Feedback</option>
-              <option value="pending">Pending</option>
-              <option value="reviewing">Reviewing</option>
-              <option value="resolved">Resolved</option>
-              <option value="dismissed">Dismissed</option>
+              <option value="pending">⏳ Pending</option>
+              <option value="reviewing">👀 Reviewing</option>
+              <option value="resolved">✅ Resolved</option>
+              <option value="dismissed">❌ Dismissed</option>
             </select>
             <button 
               className="admin-btn primary"
               onClick={fetchFeedback}
               disabled={feedbackLoading}
             >
-              {feedbackLoading ? 'Loading...' : '🔄 Refresh'}
+              {feedbackLoading ? '⏳ Loading...' : '🔄 Refresh'}
             </button>
           </div>
         </div>
 
         {feedbackLoading ? (
-          <div className="loading">Loading feedback...</div>
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p>Loading feedback...</p>
+          </div>
         ) : (
           <>
-            <div className="feedback-list">
+            <div className="feedback-grid">
               {feedback.length === 0 ? (
-                <div className="no-feedback">
-                  <p>No feedback found for the selected filter.</p>
+                <div className="no-feedback-card">
+                  <div className="no-feedback-icon">📭</div>
+                  <h3>No feedback found</h3>
+                  <p>No feedback matches the selected filter.</p>
                 </div>
               ) : (
                 feedback.map((item) => (
-                  <div key={item.id} className="feedback-item">
-                    <div className="feedback-header">
-                      <div className="feedback-info">
-                        <h4>{item.issue}</h4>
-                        <div className="feedback-meta">
-                          <span className="user-info">
-                            👤 {item.user_name} ({item.user_email})
-                          </span>
-                          <span className="date">
-                            📅 {new Date(item.created_at).toLocaleDateString()}
-                          </span>
-                          <span className={`status status-${item.status}`}>
-                            {item.status.toUpperCase()}
-                          </span>
-                        </div>
+                  <div key={item.id} className={`feedback-card status-${item.status}`}>
+                    <div className="feedback-card-header">
+                      <div className="feedback-priority">
+                        <span className={`status-badge status-${item.status}`}>
+                          {item.status === 'pending' && '⏳'}
+                          {item.status === 'reviewing' && '👀'}
+                          {item.status === 'resolved' && '✅'}
+                          {item.status === 'dismissed' && '❌'}
+                          {item.status.toUpperCase()}
+                        </span>
+                        <span className="feedback-date">
+                          {new Date(item.created_at).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric'
+                          })}
+                        </span>
                       </div>
+                      
                       <div className="feedback-actions">
                         <button
-                          className="admin-btn secondary small"
+                          className="action-btn view-btn"
                           onClick={() => {
                             setSelectedFeedback(item);
                             setShowFeedbackModal(true);
                           }}
+                          title="View details"
                         >
-                          👁️ View
+                          👁️
+                        </button>
+                        <button
+                          className="action-btn delete-btn"
+                          onClick={() => deleteFeedback(item.id)}
+                          title="Delete feedback"
+                        >
+                          🗑️
                         </button>
                       </div>
                     </div>
-                    <div className="feedback-preview">
-                      {item.feedback.length > 100 
-                        ? `${item.feedback.substring(0, 100)}...` 
-                        : item.feedback}
+
+                    <div className="feedback-content">
+                      <h4 className="feedback-issue">
+                        📋 {item.issue}
+                      </h4>
+                      <div className="feedback-preview">
+                        {item.feedback.length > 120 
+                          ? `${item.feedback.substring(0, 120)}...` 
+                          : item.feedback}
+                      </div>
+                      <div className="feedback-user">
+                        <span className="user-avatar">👤</span>
+                        <div className="user-details">
+                          <span className="user-name">{item.user_name}</span>
+                          <span className="user-email">{item.user_email}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))
@@ -2012,33 +2080,44 @@ function Admin() {
             {feedbackPagination.pages > 1 && (
               <div className="pagination">
                 <button
-                  className="admin-btn secondary"
+                  className="pagination-btn"
                   disabled={feedbackPagination.page === 1}
                   onClick={() => setFeedbackPagination(prev => ({ ...prev, page: prev.page - 1 }))}
                 >
-                  Previous
+                  ⬅️ Previous
                 </button>
-                <span className="page-info">
-                  Page {feedbackPagination.page} of {feedbackPagination.pages}
-                </span>
+                <div className="page-info">
+                  <span className="page-current">{feedbackPagination.page}</span>
+                  <span className="page-separator">of</span>
+                  <span className="page-total">{feedbackPagination.pages}</span>
+                </div>
                 <button
-                  className="admin-btn secondary"
+                  className="pagination-btn"
                   disabled={feedbackPagination.page === feedbackPagination.pages}
                   onClick={() => setFeedbackPagination(prev => ({ ...prev, page: prev.page + 1 }))}
                 >
-                  Next
+                  Next ➡️
                 </button>
               </div>
             )}
           </>
         )}
 
-        {/* Feedback Modal */}
+        {/* Enhanced Feedback Modal */}
         {showFeedbackModal && selectedFeedback && (
           <div className="modal-overlay">
-            <div className="modal-content feedback-modal">
+            <div className="modal-content feedback-modal-enhanced">
               <div className="modal-header">
-                <h2>Feedback Details</h2>
+                <div className="modal-title">
+                  <h2>📋 Feedback Details</h2>
+                  <span className={`status-badge status-${selectedFeedback.status}`}>
+                    {selectedFeedback.status === 'pending' && '⏳'}
+                    {selectedFeedback.status === 'reviewing' && '👀'}
+                    {selectedFeedback.status === 'resolved' && '✅'}
+                    {selectedFeedback.status === 'dismissed' && '❌'}
+                    {selectedFeedback.status.toUpperCase()}
+                  </span>
+                </div>
                 <button 
                   className="modal-close"
                   onClick={() => setShowFeedbackModal(false)}
@@ -2047,52 +2126,96 @@ function Admin() {
                 </button>
               </div>
               
-              <div className="feedback-details">
-                <div className="detail-group">
-                  <h4>User Information</h4>
-                  <p><strong>Name:</strong> {selectedFeedback.user_name}</p>
-                  <p><strong>Email:</strong> {selectedFeedback.user_email}</p>
-                  <p><strong>Date:</strong> {new Date(selectedFeedback.created_at).toLocaleString()}</p>
-                </div>
-                
-                <div className="detail-group">
-                  <h4>Issue/Topic</h4>
-                  <p>{selectedFeedback.issue}</p>
-                </div>
-                
-                <div className="detail-group">
-                  <h4>Feedback</h4>
-                  <div className="feedback-content">
-                    {selectedFeedback.feedback}
+              <div className="feedback-details-enhanced">
+                <div className="detail-card">
+                  <div className="detail-header">
+                    <h4>👤 User Information</h4>
                   </div>
-                </div>
-                
-                <div className="detail-group">
-                  <h4>Status & Notes</h4>
-                  <div className="status-controls">
-                    <select 
-                      defaultValue={selectedFeedback.status}
-                      onChange={(e) => {
-                        const newStatus = e.target.value;
-                        const notes = prompt(`Update status to ${newStatus}. Add admin notes (optional):`);
-                        if (notes !== null) {
-                          updateFeedbackStatus(selectedFeedback.id, newStatus, notes);
-                        }
-                      }}
-                      className="status-select"
-                    >
-                      <option value="pending">Pending</option>
-                      <option value="reviewing">Reviewing</option>
-                      <option value="resolved">Resolved</option>
-                      <option value="dismissed">Dismissed</option>
-                    </select>
-                  </div>
-                  {selectedFeedback.admin_notes && (
-                    <div className="admin-notes">
-                      <strong>Admin Notes:</strong>
-                      <p>{selectedFeedback.admin_notes}</p>
+                  <div className="detail-content">
+                    <div className="detail-row">
+                      <span className="detail-label">Name:</span>
+                      <span className="detail-value">{selectedFeedback.user_name}</span>
                     </div>
-                  )}
+                    <div className="detail-row">
+                      <span className="detail-label">Email:</span>
+                      <span className="detail-value">{selectedFeedback.user_email}</span>
+                    </div>
+                    <div className="detail-row">
+                      <span className="detail-label">Date:</span>
+                      <span className="detail-value">{new Date(selectedFeedback.created_at).toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="detail-card">
+                  <div className="detail-header">
+                    <h4>📋 Issue/Topic</h4>
+                  </div>
+                  <div className="detail-content">
+                    <div className="issue-content">{selectedFeedback.issue}</div>
+                  </div>
+                </div>
+                
+                <div className="detail-card">
+                  <div className="detail-header">
+                    <h4>💬 Feedback Details</h4>
+                  </div>
+                  <div className="detail-content">
+                    <div className="feedback-full-content">
+                      {selectedFeedback.feedback}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="detail-card">
+                  <div className="detail-header">
+                    <h4>⚙️ Status Management</h4>
+                  </div>
+                  <div className="detail-content">
+                    <div className="status-management">
+                      <div className="status-controls">
+                        <label htmlFor="status-select">Change Status:</label>
+                        <select 
+                          id="status-select"
+                          defaultValue={selectedFeedback.status}
+                          onChange={(e) => {
+                            const newStatus = e.target.value;
+                            const notes = prompt(`Update status to ${newStatus}. Add admin notes (optional):`);
+                            if (notes !== null) {
+                              updateFeedbackStatus(selectedFeedback.id, newStatus, notes);
+                            }
+                          }}
+                          className="status-select-enhanced"
+                        >
+                          <option value="pending">⏳ Pending</option>
+                          <option value="reviewing">👀 Reviewing</option>
+                          <option value="resolved">✅ Resolved</option>
+                          <option value="dismissed">❌ Dismissed</option>
+                        </select>
+                      </div>
+                      {selectedFeedback.admin_notes && (
+                        <div className="admin-notes">
+                          <h5>📝 Admin Notes:</h5>
+                          <div className="admin-notes-content">{selectedFeedback.admin_notes}</div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="modal-actions">
+                  <button
+                    className="action-btn-large delete-btn-large"
+                    onClick={() => deleteFeedback(selectedFeedback.id)}
+                  >
+                    🗑️ Delete Feedback
+                  </button>
+                  <button
+                    className="action-btn-large cancel-btn"
+                    onClick={() => setShowFeedbackModal(false)}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
             </div>
