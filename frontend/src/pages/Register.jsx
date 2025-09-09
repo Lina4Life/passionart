@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { register as apiRegister } from '../services/api';
+import PasswordStrength from '../components/PasswordStrength';
 import './Auth.css';
 
 function Register() {
@@ -10,6 +11,7 @@ function Register() {
   const [userType, setUserType] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [passwordStrong, setPasswordStrong] = useState(false);
   const [formData, setFormData] = useState({
     // Basic info
     name: '',
@@ -50,6 +52,13 @@ function Register() {
 
   const handleNext = (e) => {
     e.preventDefault();
+    
+    // Check password strength before proceeding
+    if (!passwordStrong) {
+      setError('Please use a strong password (green) to continue.');
+      return;
+    }
+    
     console.log('Next button clicked!', { step, userType }); // Debug log
     console.log('Form data:', formData); // Debug log
     
@@ -58,13 +67,20 @@ function Register() {
     } else if (userType === 'gallery') {
       setStep(4); // Gallery details
     } else {
-      // For sponsor, go straight to submission
+      // For sponsor or collector, go straight to submission
       handleSubmit(e);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Final password strength check
+    if (!passwordStrong) {
+      setError('Please use a strong password (green) to register.');
+      return;
+    }
+    
     setLoading(true);
     setError('');
     
@@ -72,8 +88,18 @@ function Register() {
       console.log('Submit button clicked!'); // Debug log
       console.log('Registration submitted:', { userType, ...formData });
       
+      // Prepare registration data
+      const registrationData = {
+        email: formData.email,
+        password: formData.password,
+        username: formData.name,
+        first_name: formData.name,
+        last_name: formData.lastName,
+        user_type: userType
+      };
+      
       // Call the backend API
-      const response = await apiRegister(formData.email, formData.password);
+      const response = await apiRegister(registrationData);
       console.log('Registration successful:', response);
       
       // Show verification message instead of auto-login
@@ -95,6 +121,12 @@ function Register() {
   };
 
   const handleSkip = async () => {
+    // Final password strength check
+    if (!passwordStrong) {
+      setError('Please use a strong password (green) to register.');
+      return;
+    }
+    
     setLoading(true);
     setError('');
     
@@ -109,8 +141,18 @@ function Register() {
         artPiece: formData.artPiece
       });
       
+      // Prepare registration data
+      const registrationData = {
+        email: formData.email,
+        password: formData.password,
+        username: formData.name,
+        first_name: formData.name,
+        last_name: formData.lastName,
+        user_type: userType
+      };
+      
       // Call the backend API with just basic info
-      const response = await apiRegister(formData.email, formData.password);
+      const response = await apiRegister(registrationData);
       console.log('Registration successful:', response);
       
       // Show verification message instead of auto-login
@@ -166,10 +208,17 @@ function Register() {
                 </button>
                 <button
                   type="button"
-                  className={`user-type-btn ${userType === 'sponsor' ? 'selected' : ''}`}
-                  onClick={() => handleUserTypeSelect('sponsor')}
+                  className={`user-type-btn ${userType === 'collector' ? 'selected' : ''}`}
+                  onClick={() => handleUserTypeSelect('collector')}
                 >
-                  A SPONSOR
+                  A COLLECTOR
+                </button>
+                <button
+                  type="button"
+                  className={`user-type-btn ${userType === 'institution' ? 'selected' : ''}`}
+                  onClick={() => handleUserTypeSelect('institution')}
+                >
+                  AN INSTITUTION
                 </button>
               </div>
             </>
@@ -234,6 +283,24 @@ function Register() {
                     className="form-input"
                     required
                   />
+                  <PasswordStrength 
+                    password={formData.password} 
+                    onStrengthChange={setPasswordStrong}
+                  />
+                  {formData.password && !passwordStrong && (
+                    <div style={{
+                      marginTop: '8px',
+                      padding: '8px 12px',
+                      backgroundColor: 'rgba(255, 71, 87, 0.1)',
+                      border: '1px solid rgba(255, 71, 87, 0.3)',
+                      borderRadius: '6px',
+                      fontSize: '12px',
+                      color: '#ff4757',
+                      textAlign: 'center'
+                    }}>
+                      ⚠️ Please create a strong password to continue
+                    </div>
+                  )}
                 </div>
 
                 {userType === 'artist' && (
@@ -257,7 +324,15 @@ function Register() {
                   </div>
                 )}
 
-                <button type="submit" className="auth-submit-btn">
+                <button 
+                  type="submit" 
+                  className="auth-submit-btn"
+                  disabled={!passwordStrong}
+                  style={{
+                    opacity: passwordStrong ? 1 : 0.6,
+                    cursor: passwordStrong ? 'pointer' : 'not-allowed'
+                  }}
+                >
                   NEXT
                 </button>
               </form>
@@ -369,14 +444,22 @@ function Register() {
                     type="button" 
                     className="auth-skip-btn" 
                     onClick={handleSkip}
-                    disabled={loading}
+                    disabled={loading || !passwordStrong}
+                    style={{
+                      opacity: (loading || !passwordStrong) ? 0.6 : 1,
+                      cursor: (loading || !passwordStrong) ? 'not-allowed' : 'pointer'
+                    }}
                   >
                     {loading ? 'CREATING ACCOUNT...' : 'SKIP & CREATE ACCOUNT'}
                   </button>
                   <button 
                     type="submit" 
                     className="auth-submit-btn"
-                    disabled={loading}
+                    disabled={loading || !passwordStrong}
+                    style={{
+                      opacity: (loading || !passwordStrong) ? 0.6 : 1,
+                      cursor: (loading || !passwordStrong) ? 'not-allowed' : 'pointer'
+                    }}
                   >
                     {loading ? 'CREATING ACCOUNT...' : 'COMPLETE PROFILE'}
                   </button>
@@ -471,8 +554,16 @@ function Register() {
                   />
                 </div>
 
-                <button type="submit" className="auth-submit-btn">
-                  NEXT
+                <button 
+                  type="submit" 
+                  className="auth-submit-btn"
+                  disabled={loading || !passwordStrong}
+                  style={{
+                    opacity: (loading || !passwordStrong) ? 0.6 : 1,
+                    cursor: (loading || !passwordStrong) ? 'not-allowed' : 'pointer'
+                  }}
+                >
+                  {loading ? 'CREATING ACCOUNT...' : 'CREATE GALLERY ACCOUNT'}
                 </button>
               </form>
             </>
