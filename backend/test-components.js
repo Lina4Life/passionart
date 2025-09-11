@@ -1,3 +1,9 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
 // Simple server test without API calls
 console.log('🧪 Testing HubSpot Integration Components...\n');
 

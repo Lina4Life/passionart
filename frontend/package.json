@@ -1,8 +1,12 @@
 {
-  "name": "frontend",
+  "name": "clean-minimalistic-template-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Clean Minimalistic Template Frontend - React application for the art marketplace and community platform",
+  "author": "Youssef Mohamed Ali",
+  "license": "MIT",
+  "keywords": ["art", "marketplace", "community", "artwork", "gallery", "artists", "portfolio", "react", "frontend"],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

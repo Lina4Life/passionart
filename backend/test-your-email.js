@@ -1,3 +1,9 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
 // Manual Email Test with Your Gmail
 require('dotenv').config();
 const { Resend } = require('resend');

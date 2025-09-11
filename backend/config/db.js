@@ -1,3 +1,9 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 dotenv.config({ path: require('path').join(__dirname, '..', '..', '.env') });

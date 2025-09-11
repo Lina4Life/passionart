@@ -1,3 +1,9 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
 // Basic email service for PassionArt feedback system
 // This is a placeholder implementation that logs emails to console
 // In production, you would integrate with services like Resend, SendGrid, etc.

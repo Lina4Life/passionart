@@ -1,7 +1,14 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const sqlite3 = require('sqlite3').verbose();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_dummy_key_for_development');
 const { verifyToken } = require('../utils/jwt');
 const { saveArtwork, listArtworks } = require('../models/artworks.model');
@@ -53,8 +60,23 @@ const upload = multer({ storage });router.post('/upload', verifyToken, upload.si
 });
 router.get('/', async (_req, res) => {
   try {
-    const rows = await listArtworks();
-    res.json(rows);
+    // Get approved artworks from the artworks database
+    const artworksDbPath = path.join(__dirname, '..', 'config', 'database.db');
+    const artworksDb = new sqlite3.Database(artworksDbPath);
+    
+    artworksDb.all(
+      'SELECT * FROM artworks WHERE status = ? ORDER BY created_at DESC',
+      ['approved'],
+      (err, artworks) => {
+        if (err) {
+          console.error('Error fetching approved artworks:', err);
+          return res.status(500).json({ error: 'Failed to fetch artworks' });
+        }
+
+        artworksDb.close();
+        res.json(artworks);
+      }
+    );
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Fetch failed' });

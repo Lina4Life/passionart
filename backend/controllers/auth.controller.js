@@ -1,3 +1,9 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
 const { createUser, findUserByEmail, findUserByVerificationToken, verifyUserEmail } = require('../models/user.model');
 const { generateToken } = require('../utils/jwt');
 const axios = require('axios');

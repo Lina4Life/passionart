@@ -1,5 +1,5 @@
 {
-  "name": "passionart",
+  "name": "clean-minimalistic-template",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
@@ -12,10 +12,10 @@
     "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": ["art", "marketplace", "community", "artwork", "gallery", "artists", "portfolio"],
+  "author": "Youssef Mohamed Ali",
+  "license": "MIT",
+  "description": "Clean Minimalistic Template - A comprehensive art marketplace and community platform",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "express": "^5.1.0",

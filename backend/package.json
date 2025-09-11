@@ -1,8 +1,11 @@
 {
-  "name": "passionart-platform",
+  "name": "clean-minimalistic-template-backend",
   "version": "1.0.0",
-  "description": "Plateforme artistique IA + NFT",
+  "description": "Clean Minimalistic Template Backend - A comprehensive art marketplace and community platform API",
   "main": "app.js",
+  "author": "Youssef Mohamed Ali",
+  "license": "MIT",
+  "keywords": ["art", "marketplace", "community", "artwork", "gallery", "artists", "portfolio", "backend", "api"],
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"

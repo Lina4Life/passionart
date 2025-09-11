@@ -1,3 +1,9 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
 // Example: Direct Database Connection (Frontend-only approach)
 // Note: This would only work in Node.js, not in browsers due to security
 
