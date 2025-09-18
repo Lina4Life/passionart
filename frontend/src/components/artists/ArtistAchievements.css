@@ -1,0 +1,273 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+.artist-achievements {
+  padding: var(--space-lg);
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--space-lg);
+}
+
+.achievements-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.achievements-header h3 {
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm) 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+
+.achievements-header p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.no-achievements {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--text-secondary);
+}
+
+.no-achievements-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-lg);
+  opacity: 0.5;
+}
+
+.no-achievements h4 {
+  color: var(--text-primary);
+  margin: 0 0 var(--space-md) 0;
+  font-size: var(--font-size-lg);
+}
+
+.no-achievements p {
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.achievement-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.achievement-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--achievement-color, var(--accent-color));
+}
+
+.achievement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--achievement-color, var(--accent-color));
+}
+
+.achievement-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.achievement-info {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.achievement-name {
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm) 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.achievement-description {
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-md) 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+.achievement-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.achievement-category {
+  color: white;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.achievement-date {
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.achievement-badge {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 30px;
+  height: 30px;
+  background: var(--achievement-color, var(--accent-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.badge-checkmark {
+  font-size: 0.9rem;
+}
+
+.achievement-progress {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.achievement-progress h4 {
+  color: var(--text-primary);
+  margin: 0 0 var(--space-lg) 0;
+  font-size: var(--font-size-lg);
+  text-align: center;
+}
+
+.progress-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.progress-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.progress-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-width: 150px;
+}
+
+.progress-icon {
+  font-size: 1.2rem;
+}
+
+.progress-name {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-text {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Dark mode adjustments */
+.dark-mode .achievement-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .achievement-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .progress-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+  
+  .progress-info {
+    justify-content: center;
+    min-width: auto;
+  }
+  
+  .progress-text {
+    text-align: center;
+  }
+  
+  .achievement-meta {
+    justify-content: center;
+  }
+}

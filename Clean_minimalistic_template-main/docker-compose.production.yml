@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  passionart:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    container_name: passionart-app
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - HUBSPOT_ACCESS_TOKEN=${HUBSPOT_ACCESS_TOKEN}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+    volumes:
+      - ./backend/data:/app/data
+      - ./backend/uploads:/app/uploads
+      - ./logs:/app/logs
+    networks:
+      - passionart-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: passionart-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - passionart
+    networks:
+      - passionart-network
+
+networks:
+  passionart-network:
+    driver: bridge
+
+volumes:
+  passionart-data:
+  passionart-uploads:

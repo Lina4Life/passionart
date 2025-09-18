@@ -1,0 +1,70 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+/* Home page specific styles */
+
+/* Category tiles */
+.category-tile {
+  padding: var(--space-xl);
+  background-color: var(--bg-primary);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.category-tile:hover {
+  background-color: var(--accent-color) !important;
+  color: var(--bg-primary) !important;
+}
+
+.category-tile h3 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  transition: var(--transition);
+}
+
+.category-tile:hover h3 {
+  color: var(--bg-primary) !important;
+}
+
+/* Product cards */
+.product-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Subscribe button */
+.subscribe-button {
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.subscribe-button:hover {
+  background-color: var(--accent-color) !important;
+}

@@ -1,0 +1,75 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+.theme-toggle {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  margin-left: 12px;
+}
+
+.theme-toggle:hover {
+  background-color: var(--bg-hover);
+}
+
+.theme-toggle-track {
+  width: 48px;
+  height: 24px;
+  background-color: var(--toggle-bg);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.theme-toggle-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: var(--toggle-thumb);
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: var(--toggle-icon);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .theme-toggle-thumb {
+  transform: translateX(24px);
+}
+
+.theme-toggle-thumb svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Hover effects */
+.theme-toggle:hover .theme-toggle-track {
+  background-color: var(--toggle-bg-hover);
+}
+
+.theme-toggle:hover .theme-toggle-thumb {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Focus styles for accessibility */
+.theme-toggle:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}

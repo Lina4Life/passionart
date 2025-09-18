@@ -1,0 +1,114 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+.language-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.language-dropdown {
+  position: relative;
+}
+
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.language-toggle:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--accent-color);
+}
+
+.language-flag {
+  font-size: 1.2rem;
+}
+
+.language-name {
+  font-weight: 500;
+}
+
+.dropdown-arrow {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.language-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.language-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.25rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 150px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+}
+
+.language-dropdown:hover .language-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.language-option:hover {
+  background: var(--bg-secondary);
+}
+
+.language-option.active {
+  background: var(--accent-color);
+  color: white;
+}
+
+.language-option:first-child {
+  border-radius: 7px 7px 0 0;
+}
+
+.language-option:last-child {
+  border-radius: 0 0 7px 7px;
+}
+
+/* RTL Support */
+[dir="rtl"] .language-menu {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .language-toggle {
+  flex-direction: row-reverse;
+}

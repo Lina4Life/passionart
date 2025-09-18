@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "articles": "Articles",
+    "exhibitions": "Expositions",
+    "events": "Événements",
+    "learn": "Apprendre",
+    "store": "Boutique",
+    "community": "Communauté",
+    "ai_chat": "Chat IA",
+    "admin": "Admin",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Déconnexion"
+  },
+  "home": {
+    "title": "Bienvenue sur PassionArt",
+    "subtitle": "Découvrez, Créez et Connectez-vous avec l'Art",
+    "featured_artworks": "Œuvres en Vedette",
+    "latest_articles": "Derniers Articles",
+    "upcoming_events": "Événements à Venir"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirm_password": "Confirmer le mot de passe",
+    "login": "Se connecter",
+    "register": "S'inscrire",
+    "forgot_password": "Mot de passe oublié ?",
+    "remember_me": "Se souvenir de moi",
+    "or": "ou",
+    "already_have_account": "Vous avez déjà un compte ?",
+    "dont_have_account": "Vous n'avez pas de compte ?",
+    "password_requirements": "Le mot de passe doit contenir au moins 8 caractères"
+  },
+  "community": {
+    "title": "Communauté Artistique",
+    "join_conversation": "Rejoindre la Communauté",
+    "sign_in_required": "Connectez-vous avec d'autres artistes, partagez votre travail et obtenez des commentaires dans nos salles de chat communautaires.",
+    "general": "Général",
+    "digital_art": "Art Numérique",
+    "traditional_art": "Art Traditionnel",
+    "photography": "Photographie",
+    "critique": "Critique",
+    "commissions": "Commissions",
+    "no_messages": "Aucun message pour le moment",
+    "start_conversation": "Commencez la conversation !",
+    "send_message": "Envoyer",
+    "message_placeholder": "Envoyer un message à {channel}..."
+  },
+  "admin": {
+    "title": "Tableau de Bord Admin",
+    "users": "Utilisateurs",
+    "artworks": "Œuvres d'art",
+    "pending_approval": "En attente d'approbation",
+    "approved": "Approuvé",
+    "rejected": "Rejeté",
+    "approve": "Approuver",
+    "reject": "Rejeter",
+    "view": "Voir",
+    "delete": "Supprimer",
+    "email_verification": "Vérification Email",
+    "statistics": "Statistiques",
+    "total_users": "Total Utilisateurs",
+    "total_artworks": "Total Œuvres",
+    "pending_artworks": "Œuvres en Attente"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "language": "Langue",
+    "theme": "Thème",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "pricing": {
+    "ai_estimation": "Estimation IA du Prix",
+    "estimated_value": "Valeur Estimée",
+    "factors": "Facteurs de Prix",
+    "style": "Style Artistique",
+    "technique": "Technique",
+    "size": "Taille",
+    "condition": "État",
+    "rarity": "Rareté",
+    "market_demand": "Demande du Marché"
+  },
+  "user_types": {
+    "artist": "Artiste",
+    "collector": "Collectionneur",
+    "institution": "Institution",
+    "admin": "Administrateur"
+  },
+  "payment": {
+    "purchase_history": "Historique des Achats",
+    "total_spent": "Total Dépensé",
+    "transactions": "Transactions",
+    "pending_approval": "En attente d'approbation admin",
+    "approved": "Approuvé",
+    "transferred_to_artist": "Transféré à l'artiste",
+    "commission_fee": "Commission de la Plateforme",
+    "artist_earnings": "Gains de l'Artiste"
+  }
+}

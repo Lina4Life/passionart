@@ -1,0 +1,241 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+/* Share Button Component Styles */
+.share-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+}
+
+.share-button:hover,
+.share-button.active {
+  background: var(--accent-color);
+  color: var(--bg-primary);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+}
+
+.share-button svg {
+  transition: var(--transition);
+}
+
+.share-button:hover svg {
+  transform: scale(1.1);
+}
+
+/* Button Sizes */
+.share-button.small {
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-xs);
+}
+
+.share-button.large {
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-size-base);
+}
+
+/* Share Dropdown */
+.share-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: var(--space-xs);
+  z-index: 1000;
+}
+
+.share-dropdown-content {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: var(--space-sm);
+  min-width: 200px;
+  animation: shareDropdownIn 0.2s ease-out;
+}
+
+@keyframes shareDropdownIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.share-dropdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+/* Share Options */
+.share-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+}
+
+.share-option:last-child {
+  margin-bottom: 0;
+}
+
+.share-option:hover {
+  background: var(--bg-hover);
+  transform: translateX(4px);
+}
+
+/* Platform-specific colors */
+.share-option.copy-link {
+  color: var(--text-primary);
+}
+
+.share-option.copy-link:hover {
+  background: rgba(0, 212, 170, 0.1);
+  color: var(--accent-color);
+}
+
+.share-option.twitter {
+  color: #1DA1F2;
+}
+
+.share-option.twitter:hover {
+  background: rgba(29, 161, 242, 0.1);
+}
+
+.share-option.facebook {
+  color: #1877F2;
+}
+
+.share-option.facebook:hover {
+  background: rgba(24, 119, 242, 0.1);
+}
+
+.share-option.pinterest {
+  color: #E60023;
+}
+
+.share-option.pinterest:hover {
+  background: rgba(230, 0, 35, 0.1);
+}
+
+.share-option.whatsapp {
+  color: #25D366;
+}
+
+.share-option.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.1);
+}
+
+.share-option.telegram {
+  color: #0088CC;
+}
+
+.share-option.telegram:hover {
+  background: rgba(0, 136, 204, 0.1);
+}
+
+.share-option svg {
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.share-option:hover svg {
+  transform: scale(1.1);
+}
+
+/* Dark mode styles */
+[data-theme="dark"] .share-dropdown-content {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .share-option:hover {
+  background: var(--bg-hover);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .share-dropdown-content {
+    min-width: 180px;
+    margin-top: var(--space-sm);
+  }
+  
+  .share-option {
+    padding: var(--space-md) var(--space-sm);
+  }
+  
+  .share-button.large {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Accessibility */
+.share-button:focus {
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.share-option:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Featured artworks specific styling */
+.featured-share-btn .share-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.featured-share-btn .share-button:hover {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--bg-primary);
+}
+
+/* Animation for copy success */
+.share-option.copy-link.copied {
+  background: rgba(0, 212, 170, 0.2);
+  color: var(--accent-color);
+}
+
+.share-option.copy-link.copied svg {
+  transform: scale(1.2);
+}

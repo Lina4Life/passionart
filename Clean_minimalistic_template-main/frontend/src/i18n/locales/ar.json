@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "articles": "المقالات",
+    "exhibitions": "المعارض",
+    "events": "الأحداث",
+    "learn": "تعلم",
+    "store": "المتجر",
+    "community": "المجتمع",
+    "ai_chat": "دردشة الذكاء الاصطناعي",
+    "admin": "الإدارة",
+    "login": "تسجيل الدخول",
+    "register": "التسجيل",
+    "logout": "تسجيل الخروج"
+  },
+  "home": {
+    "title": "مرحباً بكم في PassionArt",
+    "subtitle": "اكتشف، أبدع، وتواصل مع الفن",
+    "featured_artworks": "الأعمال المميزة",
+    "latest_articles": "أحدث المقالات",
+    "upcoming_events": "الأحداث القادمة"
+  },
+  "auth": {
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirm_password": "تأكيد كلمة المرور",
+    "login": "تسجيل الدخول",
+    "register": "التسجيل",
+    "forgot_password": "نسيت كلمة المرور؟",
+    "remember_me": "تذكرني",
+    "or": "أو",
+    "already_have_account": "لديك حساب بالفعل؟",
+    "dont_have_account": "ليس لديك حساب؟",
+    "password_requirements": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل"
+  },
+  "community": {
+    "title": "مجتمع الفن",
+    "join_conversation": "انضم إلى المجتمع",
+    "sign_in_required": "تواصل مع الفنانين الآخرين، شارك أعمالك، واحصل على تعليقات في غرف الدردشة المجتمعية.",
+    "general": "عام",
+    "digital_art": "الفن الرقمي",
+    "traditional_art": "الفن التقليدي",
+    "photography": "التصوير",
+    "critique": "النقد",
+    "commissions": "العمولات",
+    "no_messages": "لا توجد رسائل بعد",
+    "start_conversation": "ابدأ المحادثة!",
+    "send_message": "إرسال",
+    "message_placeholder": "إرسال رسالة إلى {channel}..."
+  },
+  "admin": {
+    "title": "لوحة الإدارة",
+    "users": "المستخدمون",
+    "artworks": "الأعمال الفنية",
+    "pending_approval": "في انتظار الموافقة",
+    "approved": "مُوافق عليه",
+    "rejected": "مرفوض",
+    "approve": "موافقة",
+    "reject": "رفض",
+    "view": "عرض",
+    "delete": "حذف",
+    "email_verification": "التحقق من البريد الإلكتروني",
+    "statistics": "الإحصائيات",
+    "total_users": "إجمالي المستخدمين",
+    "total_artworks": "إجمالي الأعمال",
+    "pending_artworks": "الأعمال المعلقة"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "close": "إغلاق",
+    "search": "بحث",
+    "filter": "تصفية",
+    "sort": "ترتيب",
+    "language": "اللغة",
+    "theme": "السمة",
+    "light": "فاتح",
+    "dark": "داكن"
+  },
+  "pricing": {
+    "ai_estimation": "تقدير السعر بالذكاء الاصطناعي",
+    "estimated_value": "القيمة المقدرة",
+    "factors": "عوامل السعر",
+    "style": "الأسلوب الفني",
+    "technique": "التقنية",
+    "size": "الحجم",
+    "condition": "الحالة",
+    "rarity": "الندرة",
+    "market_demand": "طلب السوق"
+  },
+  "user_types": {
+    "artist": "فنان",
+    "collector": "جامع",
+    "institution": "مؤسسة",
+    "admin": "مدير"
+  },
+  "payment": {
+    "purchase_history": "تاريخ المشتريات",
+    "total_spent": "إجمالي المبلغ المنفق",
+    "transactions": "المعاملات",
+    "pending_approval": "في انتظار موافقة الإدارة",
+    "approved": "مُوافق عليه",
+    "transferred_to_artist": "محول إلى الفنان",
+    "commission_fee": "عمولة المنصة",
+    "artist_earnings": "أرباح الفنان"
+  }
+}

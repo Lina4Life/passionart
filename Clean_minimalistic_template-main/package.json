@@ -1,0 +1,24 @@
+{
+  "name": "clean-minimalistic-template",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js",
+    "build": "echo \"Root app build complete\"",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm install",
+    "build:all": "npm run build:backend && npm run build:frontend",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["art", "marketplace", "community", "artwork", "gallery", "artists", "portfolio"],
+  "author": "Youssef Mohamed Ali",
+  "license": "MIT",
+  "description": "Clean Minimalistic Template - A comprehensive art marketplace and community platform",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.1.0",
+    "resend": "^6.0.3"
+  }
+}

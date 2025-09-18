@@ -1,0 +1,174 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+/* Enhanced Artist Components CSS - Theme Consistent Updates */
+
+/* Global artist component improvements */
+.artist-reviews,
+.artist-achievements,
+.artist-analytics,
+.artist-events,
+.artist-recommendations {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+/* Modal overlays theme consistency */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .modal-overlay {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Button theme improvements */
+.primary-btn {
+  background: var(--accent-color);
+  color: var(--bg-primary);
+  border: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--border-radius);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.secondary-btn {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--border-radius);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: var(--bg-hover);
+  transform: translateY(-2px);
+}
+
+/* Card components theme consistency */
+.metric-card,
+.achievement-card,
+.review-card,
+.event-card,
+.recommendation-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-lg);
+  transition: var(--transition);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.metric-card:hover,
+.achievement-card:hover,
+.review-card:hover,
+.event-card:hover,
+.recommendation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--shadow-hover);
+}
+
+/* Text improvements */
+.component-title {
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+}
+
+.component-subtitle {
+  color: var(--text-secondary);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-md);
+}
+
+/* Icon improvements */
+.icon-accent {
+  color: var(--accent-color);
+}
+
+/* Form elements theme consistency */
+.form-input,
+.form-textarea,
+.form-select {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius);
+  font-family: var(--font-primary);
+  transition: var(--transition);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(0, 212, 170, 0.2);
+}
+
+/* Dark mode specific improvements */
+[data-theme="dark"] .artist-reviews,
+[data-theme="dark"] .artist-achievements,
+[data-theme="dark"] .artist-analytics,
+[data-theme="dark"] .artist-events,
+[data-theme="dark"] .artist-recommendations {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .metric-card,
+[data-theme="dark"] .achievement-card,
+[data-theme="dark"] .review-card,
+[data-theme="dark"] .event-card,
+[data-theme="dark"] .recommendation-card {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .artist-reviews,
+  .artist-achievements,
+  .artist-analytics,
+  .artist-events,
+  .artist-recommendations {
+    padding: var(--space-md);
+    margin: var(--space-md) 0;
+  }
+  
+  .component-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .metric-card,
+  .achievement-card,
+  .review-card,
+  .event-card,
+  .recommendation-card {
+    padding: var(--space-md);
+  }
+}

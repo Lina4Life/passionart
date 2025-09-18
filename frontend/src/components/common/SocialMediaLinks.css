@@ -1,0 +1,181 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+.social-media-links {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--social-color, #6366F1);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: white;
+  text-decoration: none;
+}
+
+.social-link:focus {
+  outline: none;
+  border-color: var(--social-color, #6366F1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.social-icon {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.social-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Size variations */
+.social-media-links.small {
+  gap: 0.5rem;
+}
+
+.social-media-links.small .social-link {
+  padding: 0.375rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.375rem;
+}
+
+.social-media-links.small .social-icon {
+  font-size: 1em;
+}
+
+.social-media-links.medium {
+  gap: 0.75rem;
+}
+
+.social-media-links.large {
+  gap: 1rem;
+}
+
+.social-media-links.large .social-link {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+}
+
+.social-media-links.large .social-icon {
+  font-size: 1.5em;
+}
+
+/* Icon-only mode for compact display */
+.social-media-links.icon-only .social-link {
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.social-media-links.icon-only .social-name {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .social-media-links {
+    gap: 0.5rem;
+  }
+  
+  .social-link {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.8rem;
+  }
+  
+  .social-media-links.large .social-link {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Stack social links vertically on very small screens */
+  @media (max-width: 480px) {
+    .social-media-links.large {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .social-media-links.large .social-link {
+      width: 100%;
+      max-width: 200px;
+      justify-content: center;
+    }
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .social-link {
+    background: color-mix(in srgb, var(--social-color, #6366F1) 90%, white 10%);
+  }
+  
+  .social-link:hover {
+    background: var(--social-color, #6366F1);
+  }
+}
+
+/* Platform-specific styling adjustments */
+.social-link[href*="instagram"] {
+  background: linear-gradient(45deg, #E4405F, #C13584, #833AB4);
+}
+
+.social-link[href*="twitter"] {
+  background: #1DA1F2;
+}
+
+.social-link[href*="facebook"] {
+  background: #1877F2;
+}
+
+.social-link[href*="linkedin"] {
+  background: #0A66C2;
+}
+
+.social-link[href*="tiktok"] {
+  background: linear-gradient(45deg, #000000, #FF0050);
+}
+
+.social-link[href*="youtube"] {
+  background: #FF0000;
+}
+
+.social-link[href*="behance"] {
+  background: #1769FF;
+}
+
+.social-link[href*="dribbble"] {
+  background: #EA4C89;
+}
+
+.social-link[href*="pinterest"] {
+  background: #E60023;
+}
+
+/* Website links get a special treatment */
+.social-link[title*="Website"] {
+  background: linear-gradient(45deg, #6366F1, #8B5CF6);
+}

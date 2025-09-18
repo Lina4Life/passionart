@@ -1,0 +1,524 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+.recommendations-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.recommendations-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--border-color);
+}
+
+.header-content {
+  margin-bottom: 20px;
+}
+
+.header-content h2 {
+  margin: 0 0 8px 0;
+  color: var(--text-primary);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.header-content p {
+  margin: 0;
+  color: #636e72;
+  font-size: 16px;
+}
+
+.recommendation-types {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.type-btn {
+  padding: 10px 16px;
+  border: 2px solid var(--border-color);
+  background: white;
+  color: #636e72;
+  border-radius:25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.type-btn:hover {
+  border-color: #a29bfe;
+  background: #f8f7ff;
+  color: #a29bfe;
+  transform: translateY(-2px);
+}
+
+.type-btn.active {
+  border-color: #a29bfe;
+  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(162, 155, 254, 0.3);
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.artist-recommendation-card {
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.artist-recommendation-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-color: #a29bfe;
+}
+
+.artist-card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.artist-avatar {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #a29bfe;
+  flex-shrink: 0;
+}
+
+.artist-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.online-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  background: #00b894;
+  border: 2px solid white;
+  border-radius: 50%;
+  animation: pulse-online 2s infinite;
+}
+
+@keyframes pulse-online {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.artist-basic-info h3 {
+  margin: 0 0 5px 0;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.verification-badge {
+  font-size: 16px;
+}
+
+.artist-specialty {
+  margin: 0 0 5px 0;
+  color: #a29bfe;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.artist-location {
+  margin: 0;
+  color: #636e72;
+  font-size: 13px;
+}
+
+.artist-preview {
+  margin-bottom: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-secondary);
+}
+
+.artwork-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  min-height: 120px;
+}
+
+.preview-artwork {
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.preview-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.preview-artwork:hover img {
+  transform: scale(1.1);
+}
+
+.no-artworks-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  color: #636e72;
+}
+
+.no-artworks-preview span {
+  font-size: 32px;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+.no-artworks-preview p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.artist-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+  padding: 15px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.stat-icon {
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #636e72;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.artist-bio {
+  margin-bottom: 15px;
+  padding: 15px;
+  background: rgba(162, 155, 254, 0.05);
+  border-radius: 10px;
+  border-left: 3px solid #a29bfe;
+}
+
+.artist-bio p {
+  margin: 0;
+  color: #636e72;
+  font-size: 14px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.artist-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.artist-tag {
+  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.artist-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.view-profile-btn,
+.follow-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.view-profile-btn {
+  background: var(--bg-secondary);
+  color: #636e72;
+  border: 1px solid var(--border-color);
+}
+
+.view-profile-btn:hover {
+  background: var(--border-color);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.follow-btn {
+  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(162, 155, 254, 0.3);
+}
+
+.follow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(162, 155, 254, 0.4);
+}
+
+.follow-btn.following {
+  background: #00b894;
+  box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+}
+
+.recent-activity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(253, 203, 110, 0.1);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.activity-indicator {
+  font-size: 14px;
+}
+
+.activity-text {
+  font-size: 12px;
+  color: #e17055;
+  font-weight: 500;
+}
+
+.recommendation-reason {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(162, 155, 254, 0.9);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.no-recommendations {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-secondary);
+  border-radius: 15px;
+  border: 2px dashed #ddd;
+  margin-bottom: 40px;
+}
+
+.no-recommendations-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.no-recommendations h3 {
+  margin: 0 0 10px 0;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.no-recommendations p {
+  margin: 0;
+  color: #636e72;
+  font-size: 16px;
+}
+
+.recommendations-footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 2px solid var(--border-color);
+}
+
+.load-more-btn {
+  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(162, 155, 254, 0.3);
+  margin-bottom: 15px;
+}
+
+.load-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(162, 155, 254, 0.4);
+}
+
+.footer-text {
+  margin: 0;
+  color: #636e72;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 50px;
+  color: #636e72;
+  font-size: 18px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .recommendations-container {
+    padding: 15px;
+  }
+
+  .header-content h2 {
+    font-size: 24px;
+  }
+
+  .recommendation-types {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .type-btn {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+
+  .recommendations-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .artist-recommendation-card {
+    padding: 20px;
+  }
+
+  .artist-card-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .artist-avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .artist-stats {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .stat {
+    justify-content: center;
+  }
+
+  .artist-actions {
+    flex-direction: column;
+  }
+
+  .recommendation-reason {
+    position: static;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .recommendation-types {
+    flex-direction: column;
+  }
+
+  .type-btn {
+    text-align: center;
+    width: 100%;
+  }
+
+  .artist-card-header {
+    margin-bottom: 15px;
+  }
+
+  .artwork-preview {
+    grid-template-columns: 1fr;
+    min-height: 100px;
+  }
+
+  .artist-tags {
+    justify-content: center;
+  }
+
+  .load-more-btn {
+    width: 100%;
+  }
+}

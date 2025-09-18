@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>PassionArt – Uploader</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 24px; max-width: 980px; }
+    h1 { margin-bottom: 0; }
+    .muted { color:#666; font-size: 12px; margin: 4px 0 16px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .card { border: 1px solid #eee; border-radius: 10px; padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,.06); }
+    label { display:block; font-size:13px; margin-top:8px; }
+    input, textarea, button { width: 100%; padding: 8px; margin-top: 6px; border: 1px solid #ddd; border-radius: 6px; }
+    button { cursor: pointer; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 16px; margin-top: 16px; }
+    .art { border:1px solid #eee; border-radius:10px; padding:10px; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+    .art img { width:100%; height:180px; object-fit:cover; border-radius:8px; }
+    .row-compact { display:flex; gap:8px; align-items:center; }
+    .ok { color: #157347; }
+    .err { color: #b02a37; }
+  </style>
+</head>
+<body>
+  <h1>PassionArt – Uploader</h1>
+  <p class="muted">1) Login or register. 2) Upload an artwork. 3) See it below.</p>
+
+  <div class="row">
+    <!-- AUTH -->
+    <div class="card">
+      <h3>Authentication</h3>
+      <div id="authStatus" class="muted">Not logged in.</div>
+
+      <h4>Login</h4>
+      <label>Email <input id="loginEmail" type="email" placeholder="you@example.com" /></label>
+      <label>Password <input id="loginPass" type="password" placeholder="your password" /></label>
+      <button id="btnLogin">Login</button>
+
+      <h4 style="margin-top:16px;">Or Register</h4>
+      <label>Email <input id="regEmail" type="email" placeholder="you@example.com" /></label>
+      <label>Password <input id="regPass" type="password" placeholder="choose a password" /></label>
+      <button id="btnRegister">Register</button>
+
+      <div class="row-compact" style="margin-top:12px;">
+        <button id="btnLogout" style="width:auto;">Logout</button>
+        <span id="authMsg" class="muted"></span>
+      </div>
+    </div>
+
+    <!-- UPLOAD -->
+    <div class="card">
+      <h3>Upload Artwork</h3>
+      <div class="muted">You must be logged in.</div>
+      <label>Title <input id="upTitle" type="text" placeholder="Untitled" /></label>
+      <label>Description <textarea id="upDesc" rows="3" placeholder="Description"></textarea></label>
+      <label>Keywords (comma separated) <input id="upKeys" type="text" placeholder="abstract,color" /></label>
+      <label>Image <input id="upFile" type="file" accept="image/*" /></label>
+      <button id="btnUpload" style="margin-top:12px;">Upload</button>
+      <div id="uploadMsg" class="muted" style="margin-top:8px;"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:24px;">
+    <div class="row-compact" style="justify-content:space-between;">
+      <h3 style="margin:0;">Artworks</h3>
+      <button id="btnRefresh" style="width:auto;">Refresh</button>
+    </div>
+    <div id="grid" class="grid"></div>
+  </div>
+
+  <script>
+    const API = '/api';
+    const authMsg = document.getElementById('authMsg');
+    const authStatus = document.getElementById('authStatus');
+    const uploadMsg = document.getElementById('uploadMsg');
+
+    const tokenKey = 'pa_token';
+    const getToken = () => localStorage.getItem(tokenKey);
+    const setToken = t => localStorage.setItem(tokenKey, t);
+    const clearToken = () => localStorage.removeItem(tokenKey);
+
+    function setStatus() {
+      const t = getToken();
+      authStatus.textContent = t ? 'Logged in.' : 'Not logged in.';
+    }
+
+    async function login(email, password) {
+      authMsg.textContent = '';
+      try {
+        const r = await fetch(`${API}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || 'Login failed');
+        setToken(data.token);
+        authMsg.textContent = 'Logged in!';
+        authMsg.className = 'ok';
+        setStatus();
+      } catch (e) {
+        authMsg.textContent = e.message;
+        authMsg.className = 'err';
+      }
+    }
+
+    async function register(email, password) {
+      authMsg.textContent = '';
+      try {
+        const r = await fetch(`${API}/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || 'Registration failed');
+        setToken(data.token);
+        authMsg.textContent = 'Registered and logged in!';
+        authMsg.className = 'ok';
+        setStatus();
+      } catch (e) {
+        authMsg.textContent = e.message;
+        authMsg.className = 'err';
+      }
+    }
+
+    async function upload() {
+      uploadMsg.textContent = '';
+      const t = getToken();
+      if (!t) {
+        uploadMsg.textContent = 'Please login first.';
+        uploadMsg.className = 'err';
+        return;
+      }
+      const fd = new FormData();
+      fd.append('title', document.getElementById('upTitle').value);
+      fd.append('description', document.getElementById('upDesc').value);
+      fd.append('keywords', document.getElementById('upKeys').value);
+      const file = document.getElementById('upFile').files[0];
+      if (!file) {
+        uploadMsg.textContent = 'Please choose an image.';
+        uploadMsg.className = 'err';
+        return;
+      }
+      try {
+        const r = await fetch(`${API}/artworks/upload`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${t}` },
+          body: fd
+        });
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error || 'Upload failed');
+        uploadMsg.textContent = 'Uploaded!';
+        uploadMsg.className = 'ok';
+        render(); // refresh gallery
+      } catch (e) {
+        uploadMsg.textContent = e.message;
+        uploadMsg.className = 'err';
+      }
+    }
+
+    async function render() {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = 'Loading...';
+      try {
+        const r = await fetch(`${API}/artworks`);
+        const items = await r.json();
+        grid.innerHTML = items.map(it => `
+          <div class="art">
+            <img src="${it.image_url}" alt="${it.title || 'Artwork'}" />
+            <div style="margin-top:6px;">
+              <strong>${it.title || 'Untitled'}</strong><br/>
+              <span class="muted">${new Date(it.created_at).toLocaleString()}</span>
+            </div>
+          </div>
+        `).join('');
+      } catch (e) {
+        grid.innerHTML = '<p class="err">Failed to load artworks.</p>';
+        console.error(e);
+      }
+    }
+
+    // wire up UI
+    document.getElementById('btnLogin').onclick = () =>
+      login(document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
+    document.getElementById('btnRegister').onclick = () =>
+      register(document.getElementById('regEmail').value, document.getElementById('regPass').value);
+    document.getElementById('btnLogout').onclick = () => { clearToken(); setStatus(); };
+    document.getElementById('btnUpload').onclick = upload;
+    document.getElementById('btnRefresh').onclick = render;
+
+    setStatus();
+    render();
+  </script>
+</body>
+</html>

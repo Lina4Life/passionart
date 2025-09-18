@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: passionart_db
+    environment:
+      POSTGRES_DB: passionart
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - passionart_network
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: passionart_backend
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=passionart
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    networks:
+      - passionart_network
+    volumes:
+      - ./uploads:/app/uploads
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: passionart_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - passionart_network
+
+  # Root Express App (if still needed)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: passionart_app
+    ports:
+      - "3000:3000"
+    networks:
+      - passionart_network
+
+volumes:
+  postgres_data:
+
+networks:
+  passionart_network:
+    driver: bridge

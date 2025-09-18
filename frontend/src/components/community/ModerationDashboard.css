@@ -1,0 +1,373 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+/* Moderation Dashboard Styles */
+.moderation-dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header h1 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 28px;
+}
+
+.dashboard-header p {
+  margin: 0 0 20px 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-item {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.moderation-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 30px;
+  height: calc(100vh - 200px);
+}
+
+/* Posts Queue */
+.posts-queue {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.posts-queue h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 20px;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.no-posts h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.posts-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-item {
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.post-item:hover {
+  border-color: #2196f3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.post-item.selected {
+  border-color: #2196f3;
+  background-color: #e3f2fd;
+}
+
+.post-preview {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.post-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.post-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-info h4 {
+  margin: 0 0 8px 0;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-meta {
+  margin: 0 0 8px 0;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.payment-badge {
+  background-color: #e8f5e8;
+  color: #2e7d32;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Post Details */
+.post-details {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.post-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 24px;
+  flex: 1;
+  margin-right: 20px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-approve, .btn-reject {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-approve {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-approve:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.btn-reject {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-reject:hover {
+  background-color: #da190b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+/* Content Sections */
+.post-content-details {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.content-section {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.content-section h3 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 18px;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 8px;
+}
+
+.artwork-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.artwork-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.artwork-image:hover {
+  transform: scale(1.05);
+}
+
+.post-description {
+  color: #333;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  padding: 16px;
+  border-radius: 6px;
+  border-left: 4px solid #2196f3;
+}
+
+.submission-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-row strong {
+  min-width: 120px;
+  color: #333;
+  margin-right: 12px;
+}
+
+/* Verification Checklist */
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.checklist-item:hover {
+  background-color: #f8f9fa;
+}
+
+.checklist-item input[type="checkbox"] {
+  margin-right: 12px;
+  transform: scale(1.2);
+}
+
+.checklist-item span {
+  color: #333;
+  font-size: 14px;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: #666;
+  font-size: 18px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .moderation-content {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .posts-queue {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .moderation-dashboard {
+    padding: 10px;
+  }
+  
+  .dashboard-header {
+    padding: 20px;
+  }
+  
+  .post-details {
+    padding: 20px;
+  }
+  
+  .post-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .post-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+  
+  .btn-approve, .btn-reject {
+    flex: 1;
+  }
+  
+  .artwork-gallery {
+    grid-template-columns: 1fr;
+  }
+}

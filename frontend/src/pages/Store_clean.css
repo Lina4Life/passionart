@@ -1,0 +1,150 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+/* Store page specific styles */
+
+/* Search and Filter Section */
+.store-search-input {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-size-base);
+  font-family: var(--font-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  color: var(--text-primary);
+  transition: var(--transition);
+  letter-spacing: 1px;
+}
+
+.store-search-input:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+.store-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.store-category-btn {
+  padding: var(--space-sm) var(--space-lg);
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.store-category-btn:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--bg-primary);
+}
+
+.store-category-btn.active {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--bg-primary);
+}
+
+/* Product cards */
+.store-product-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.store-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* View button */
+.view-button {
+  padding: var(--space-sm) var(--space-md);
+  background-color: transparent;
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.view-button:hover {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--bg-primary) !important;
+}
+
+/* Product Modal */
+.product-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: var(--space-lg);
+}
+
+.product-modal-content {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+  position: relative;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+  .product-modal {
+    padding: var(--space-md);
+  }
+  
+  .product-modal-content {
+    max-height: 95vh;
+  }
+  
+  .modal-grid {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-lg) !important;
+  }
+  
+  .modal-details-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-modal {
+    padding: var(--space-sm);
+  }
+  
+  .modal-image {
+    height: 250px !important;
+  }
+  
+  .modal-content-padding {
+    padding: var(--space-lg) !important;
+  }
+}

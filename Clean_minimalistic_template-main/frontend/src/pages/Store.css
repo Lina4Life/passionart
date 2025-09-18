@@ -1,0 +1,226 @@
+/*
+ * Clean Minimalistic Template
+ * Copyright (c) 2025 Youssef Mohamed Ali
+ * Licensed under the MIT License
+ * https://github.com/Lina4Life/clean-minimalistic-template
+ */
+/* Store page specific styles */
+
+/* Product cards */
+.store-product-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.store-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* View button */
+.view-button {
+  padding: var(--space-sm) var(--space-md);
+  background-color: transparent;
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.view-button:hover {
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--bg-primary) !important;
+}
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.store-header p {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.search-controls {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.search-controls input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.search-controls select {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+}
+
+.categories {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.categories button {
+  padding: 0.5rem 1.5rem;
+  border-radius:25px;
+  border: none;
+  background: rgba(215, 38, 61, 0.1);
+  color: #d7263d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.categories button.active {
+  background: #d7263d;
+  color: #fff;
+}
+
+.price-range {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.price-range label {
+  color: #666;
+}
+
+.price-range input {
+  flex: 1;
+  max-width: 200px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+}
+
+.product-image {
+  position: relative;
+  height: 280px;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: #d7263d;
+  color: #fff;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.product-info {
+  padding: 1.5rem;
+}
+
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.category {
+  color: #d7263d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.rating {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.product-info h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-info p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.current-price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #d7263d;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.add-to-cart {
+  padding: 0.5rem 1rem;
+  background: #d7263d;
+  color: #fff;
+  border: none;
+  border-radius:25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background: #b01e31;
+}
