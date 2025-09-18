@@ -1,11 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-
-import React from 'react';
+﻿import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from './LanguageSelector';
@@ -36,7 +29,7 @@ export default function Navbar() {
     <nav style={{ position: 'sticky', top: 0, zIndex: 10, background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', padding: '0.5rem 2rem', borderBottom: '1px solid #eee', marginBottom: '2rem' }}>
       <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none', margin: 0, padding: 0, alignItems: 'center' }}>
         <li><NavLink to="/" style={linkStyle}>{t('nav.home')}</NavLink></li>
-        <li><NavLink to="/community" style={linkStyle}>🎨 {t('nav.community')}</NavLink></li>
+        <li><NavLink to="/community" style={linkStyle}>ðŸŽ¨ {t('nav.community')}</NavLink></li>
         {token && <li><NavLink to="/upload" style={linkStyle}>{t('nav.upload')}</NavLink></li>}
         {token && <li><NavLink to="/profile" style={linkStyle}>{t('nav.profile')}</NavLink></li>}
         {isAdmin && (
@@ -54,7 +47,7 @@ export default function Navbar() {
                 transition: 'all 0.2s ease'
               })}
             >
-              ⚡ {t('nav.admin')}
+              âš¡ {t('nav.admin')}
             </NavLink>
           </li>
         )}
@@ -66,3 +59,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

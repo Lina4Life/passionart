@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import './VerificationRequestModal.css';
 
 const VerificationRequestModal = ({ isOpen, onClose }) => {
@@ -22,35 +16,35 @@ const VerificationRequestModal = ({ isOpen, onClose }) => {
     { 
       value: 'professional', 
       label: 'Professional Artist', 
-      icon: '🎨',
+      icon: 'ðŸŽ¨',
       description: 'Verified professional artist with established career',
       requirements: ['Portfolio of work', 'Professional credentials', 'Exhibition history']
     },
     { 
       value: 'emerging', 
       label: 'Emerging Artist', 
-      icon: '⭐',
+      icon: 'â­',
       description: 'Verified emerging artist with growing presence',
       requirements: ['Active portfolio', 'Recent works', 'Social media presence']
     },
     { 
       value: 'gallery', 
       label: 'Gallery Represented', 
-      icon: '🏛️',
+      icon: 'ðŸ›ï¸',
       description: 'Artist represented by galleries or institutions',
       requirements: ['Gallery representation proof', 'Exhibition records', 'Professional portfolio']
     },
     { 
       value: 'educator', 
       label: 'Art Educator', 
-      icon: '🎓',
+      icon: 'ðŸŽ“',
       description: 'Verified art educator or instructor',
       requirements: ['Teaching credentials', 'Educational institution proof', 'Student testimonials']
     },
     { 
       value: 'collector', 
       label: 'Art Collector', 
-      icon: '💎',
+      icon: 'ðŸ’Ž',
       description: 'Verified art collector and patron',
       requirements: ['Collection documentation', 'Purchase history', 'Community involvement']
     }
@@ -107,33 +101,33 @@ const VerificationRequestModal = ({ isOpen, onClose }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="verification-modal" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>✅ Artist Verification Request</h2>
+          <h2>âœ… Artist Verification Request</h2>
           <p>Get verified to build trust and unlock premium features</p>
-          <button className="close-btn" onClick={onClose}>×</button>
+          <button className="close-btn" onClick={onClose}>Ã—</button>
         </div>
 
         <form onSubmit={handleSubmit} className="verification-form">
           <div className="verification-benefits">
-            <h3>🌟 Verification Benefits</h3>
+            <h3>ðŸŒŸ Verification Benefits</h3>
             <div className="benefits-list">
               <div className="benefit-item">
-                <span className="benefit-icon">✅</span>
+                <span className="benefit-icon">âœ…</span>
                 <span>Verified badge on your profile</span>
               </div>
               <div className="benefit-item">
-                <span className="benefit-icon">🔝</span>
+                <span className="benefit-icon">ðŸ”</span>
                 <span>Higher ranking in search results</span>
               </div>
               <div className="benefit-item">
-                <span className="benefit-icon">💰</span>
+                <span className="benefit-icon">ðŸ’°</span>
                 <span>Access to premium commission features</span>
               </div>
               <div className="benefit-item">
-                <span className="benefit-icon">🤝</span>
+                <span className="benefit-icon">ðŸ¤</span>
                 <span>Increased trust from collectors</span>
               </div>
               <div className="benefit-item">
-                <span className="benefit-icon">📈</span>
+                <span className="benefit-icon">ðŸ“ˆ</span>
                 <span>Advanced analytics and insights</span>
               </div>
             </div>
@@ -229,7 +223,7 @@ const VerificationRequestModal = ({ isOpen, onClose }) => {
           )}
 
           <div className="verification-process">
-            <h3>📋 Verification Process</h3>
+            <h3>ðŸ“‹ Verification Process</h3>
             <div className="process-steps">
               <div className="step">
                 <span className="step-number">1</span>
@@ -275,7 +269,7 @@ const VerificationRequestModal = ({ isOpen, onClose }) => {
               className="submit-btn"
               disabled={submitting || !request.verification_type || !request.professional_statement || !request.portfolio_highlights}
             >
-              {submitting ? 'Submitting...' : '✅ Submit Verification Request'}
+              {submitting ? 'Submitting...' : 'âœ… Submit Verification Request'}
             </button>
           </div>
         </form>
@@ -285,3 +279,4 @@ const VerificationRequestModal = ({ isOpen, onClose }) => {
 };
 
 export default VerificationRequestModal;
+

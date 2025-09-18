@@ -1,11 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Home.css';
 
@@ -56,7 +49,7 @@ const Home = () => {
           letterSpacing: '3px',
           textTransform: 'uppercase'
         }}>
-          PASSION—ART
+          PASSIONâ€”ART
         </h1>
         <p style={{ 
           fontSize: 'var(--font-size-base)',
@@ -146,7 +139,7 @@ const Home = () => {
                 marginBottom: 'var(--space-md)',
                 opacity: 0.5 
               }}>
-                🎨
+                ðŸŽ¨
               </div>
               <h3 style={{ marginBottom: 'var(--space-sm)' }}>No Featured Artworks Yet</h3>
               <p>Check back soon for amazing featured artworks from our community!</p>
@@ -191,7 +184,7 @@ const Home = () => {
                   }}>
                     {!artwork.image_url && (
                       <div style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🎨</div>
+                        <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>ðŸŽ¨</div>
                         <div>No Image</div>
                       </div>
                     )}
@@ -306,3 +299,4 @@ const Home = () => {
 };
 
 export default Home;
+

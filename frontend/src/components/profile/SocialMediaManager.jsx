@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useToast } from '../../hooks/useToast';
 import SocialIcon from '../common/SocialIcon';
 import './SocialMediaManager.css';
@@ -249,7 +243,7 @@ const SocialMediaManager = ({ user, onUpdate }) => {
                       className="remove-button"
                       title="Remove this connection"
                     >
-                      ✕
+                      âœ•
                     </button>
                   )}
                 </div>
@@ -262,7 +256,7 @@ const SocialMediaManager = ({ user, onUpdate }) => {
                       rel="noopener noreferrer"
                       className="preview-url"
                     >
-                      🔗 {formatUrl(socialMedia[platform.key], platform.key)}
+                      ðŸ”— {formatUrl(socialMedia[platform.key], platform.key)}
                     </a>
                   </div>
                 )}
@@ -278,7 +272,7 @@ const SocialMediaManager = ({ user, onUpdate }) => {
           disabled={updating}
           className="save-social-button"
         >
-          {updating ? '💾 Saving...' : '💾 Save Social Media Links'}
+          {updating ? 'ðŸ’¾ Saving...' : 'ðŸ’¾ Save Social Media Links'}
         </button>
       </div>
     </div>
@@ -286,3 +280,4 @@ const SocialMediaManager = ({ user, onUpdate }) => {
 };
 
 export default SocialMediaManager;
+

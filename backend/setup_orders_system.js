@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -46,7 +40,7 @@ function checkAndPopulateOrders() {
           return;
         }
         
-        console.log(`\n📊 Current orders in table: ${result.count}`);
+        console.log(`\nðŸ“Š Current orders in table: ${result.count}`);
         
         if (result.count === 0) {
           addSampleOrders();
@@ -77,7 +71,7 @@ function createNewOrdersTable() {
       console.error('Error creating orders table:', err);
       return;
     }
-    console.log('✅ New orders table created');
+    console.log('âœ… New orders table created');
     addSampleOrders();
   });
 }
@@ -164,9 +158,9 @@ function addSampleOrders() {
       daysAgo
     ], function(err) {
       if (err) {
-        console.error(`❌ Error adding order for ${order.customer_name}:`, err);
+        console.error(`âŒ Error adding order for ${order.customer_name}:`, err);
       } else {
-        console.log(`✅ Added order: ${order.product_title}`);
+        console.log(`âœ… Added order: ${order.product_title}`);
         console.log(`   Customer: ${order.customer_name}`);
         console.log(`   Amount: $${order.total_amount}`);
         console.log(`   Status: ${order.status}`);
@@ -224,15 +218,15 @@ function showOrdersSummary() {
         totalRevenue += parseFloat(group.total_revenue || 0);
       });
       
-      console.log(`\n📊 Total Orders: ${totalOrders}`);
-      console.log(`💰 Total Revenue: $${totalRevenue.toFixed(2)}`);
+      console.log(`\nðŸ“Š Total Orders: ${totalOrders}`);
+      console.log(`ðŸ’° Total Revenue: $${totalRevenue.toFixed(2)}`);
     }
     
     db.close((err) => {
       if (err) {
         console.error('Error closing database:', err);
       } else {
-        console.log('\n🛍️ Orders data ready for admin dashboard!');
+        console.log('\nðŸ›ï¸ Orders data ready for admin dashboard!');
       }
     });
   });
@@ -240,3 +234,4 @@ function showOrdersSummary() {
 
 // Run the function
 checkAndPopulateOrders();
+

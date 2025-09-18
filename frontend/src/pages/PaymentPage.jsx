@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import {
   Elements,
@@ -178,7 +172,7 @@ const CheckoutForm = ({ uploadData, artworkData, paymentType, onPaymentSuccess }
         {isLoading ? 'Processing...' : 
           paymentType === 'artwork_purchase' ? 
             `Pay ${artworkData?.price} & Purchase Artwork` : 
-            'Pay €5.00 & Upload Artwork'
+            'Pay â‚¬5.00 & Upload Artwork'
         }
       </button>
     </form>
@@ -413,7 +407,7 @@ const PaymentPage = () => {
                 fontWeight: '600'
               }}>
                 <span style={{ color: 'var(--text-primary)' }}>Upload Fee:</span>
-                <span style={{ color: 'var(--accent-color)' }}>€5.00</span>
+                <span style={{ color: 'var(--accent-color)' }}>â‚¬5.00</span>
               </div>
             </div>
           </>
@@ -490,7 +484,7 @@ const PaymentPage = () => {
             e.target.style.color = 'var(--text-muted)';
           }}
         >
-          ← Back to {paymentType === 'artwork_purchase' ? 'Store' : 'Upload'}
+          â† Back to {paymentType === 'artwork_purchase' ? 'Store' : 'Upload'}
         </button>
       </div>
 
@@ -500,3 +494,4 @@ const PaymentPage = () => {
 };
 
 export default PaymentPage;
+

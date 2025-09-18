@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ArtistRecommendations.css';
 
@@ -14,11 +8,11 @@ const ArtistRecommendations = ({ currentArtistId }) => {
   const [recommendationType, setRecommendationType] = useState('similar');
 
   const recommendationTypes = [
-    { value: 'similar', label: '🎨 Similar Style', description: 'Artists with similar artistic styles' },
-    { value: 'trending', label: '🔥 Trending Now', description: 'Currently popular artists' },
-    { value: 'new', label: '⭐ New Artists', description: 'Recently joined talented artists' },
-    { value: 'local', label: '📍 Local Artists', description: 'Artists from your area' },
-    { value: 'followed', label: '👥 Community Picks', description: 'Artists followed by similar users' }
+    { value: 'similar', label: 'ðŸŽ¨ Similar Style', description: 'Artists with similar artistic styles' },
+    { value: 'trending', label: 'ðŸ”¥ Trending Now', description: 'Currently popular artists' },
+    { value: 'new', label: 'â­ New Artists', description: 'Recently joined talented artists' },
+    { value: 'local', label: 'ðŸ“ Local Artists', description: 'Artists from your area' },
+    { value: 'followed', label: 'ðŸ‘¥ Community Picks', description: 'Artists followed by similar users' }
   ];
 
   useEffect(() => {
@@ -76,7 +70,7 @@ const ArtistRecommendations = ({ currentArtistId }) => {
 
   const getVerificationBadge = (artist) => {
     if (artist.verification_status === 'verified') {
-      return <span className="verification-badge">✅</span>;
+      return <span className="verification-badge">âœ…</span>;
     }
     return null;
   };
@@ -91,7 +85,7 @@ const ArtistRecommendations = ({ currentArtistId }) => {
     return (
       <div className="recommendations-container">
         <div className="recommendations-header">
-          <h2>🌟 Discover Artists</h2>
+          <h2>ðŸŒŸ Discover Artists</h2>
           <div className="loading-spinner">Loading recommendations...</div>
         </div>
       </div>
@@ -102,7 +96,7 @@ const ArtistRecommendations = ({ currentArtistId }) => {
     <div className="recommendations-container">
       <div className="recommendations-header">
         <div className="header-content">
-          <h2>🌟 Discover Artists</h2>
+          <h2>ðŸŒŸ Discover Artists</h2>
           <p>Find amazing artists you might love</p>
         </div>
 
@@ -122,7 +116,7 @@ const ArtistRecommendations = ({ currentArtistId }) => {
 
       {recommendations.length === 0 ? (
         <div className="no-recommendations">
-          <div className="no-recommendations-icon">🎨</div>
+          <div className="no-recommendations-icon">ðŸŽ¨</div>
           <h3>No recommendations found</h3>
           <p>Try selecting a different recommendation type</p>
         </div>
@@ -151,7 +145,7 @@ const ArtistRecommendations = ({ currentArtistId }) => {
                   </h3>
                   <p className="artist-specialty">{artist.art_specialty || 'Digital Artist'}</p>
                   <p className="artist-location">
-                    {artist.location ? `📍 ${artist.location}` : '🌍 Global'}
+                    {artist.location ? `ðŸ“ ${artist.location}` : 'ðŸŒ Global'}
                   </p>
                 </div>
               </div>
@@ -173,7 +167,7 @@ const ArtistRecommendations = ({ currentArtistId }) => {
                   </div>
                 ) : (
                   <div className="no-artworks-preview">
-                    <span>🎨</span>
+                    <span>ðŸŽ¨</span>
                     <p>No artworks yet</p>
                   </div>
                 )}
@@ -181,21 +175,21 @@ const ArtistRecommendations = ({ currentArtistId }) => {
 
               <div className="artist-stats">
                 <div className="stat">
-                  <span className="stat-icon">🎨</span>
+                  <span className="stat-icon">ðŸŽ¨</span>
                   <div className="stat-content">
                     <span className="stat-value">{artist.artwork_count || 0}</span>
                     <span className="stat-label">Artworks</span>
                   </div>
                 </div>
                 <div className="stat">
-                  <span className="stat-icon">👥</span>
+                  <span className="stat-icon">ðŸ‘¥</span>
                   <div className="stat-content">
                     <span className="stat-value">{formatFollowerCount(artist.follower_count || 0)}</span>
                     <span className="stat-label">Followers</span>
                   </div>
                 </div>
                 <div className="stat">
-                  <span className="stat-icon">⭐</span>
+                  <span className="stat-icon">â­</span>
                   <div className="stat-content">
                     <span className="stat-value">{artist.average_rating || 'N/A'}</span>
                     <span className="stat-label">Rating</span>
@@ -222,30 +216,30 @@ const ArtistRecommendations = ({ currentArtistId }) => {
                   to={`/artist/${artist.id}`}
                   className="view-profile-btn"
                 >
-                  👁️ View Profile
+                  ðŸ‘ï¸ View Profile
                 </Link>
                 <button
                   className={`follow-btn ${artist.is_following ? 'following' : ''}`}
                   onClick={() => handleFollowArtist(artist.id)}
                 >
-                  {artist.is_following ? '✅ Following' : '➕ Follow'}
+                  {artist.is_following ? 'âœ… Following' : 'âž• Follow'}
                 </button>
               </div>
 
               {artist.recent_activity && (
                 <div className="recent-activity">
-                  <span className="activity-indicator">🔥</span>
+                  <span className="activity-indicator">ðŸ”¥</span>
                   <span className="activity-text">{artist.recent_activity}</span>
                 </div>
               )}
 
               {/* Recommendation reason */}
               <div className="recommendation-reason">
-                {recommendationType === 'similar' && '🎨 Similar artistic style'}
-                {recommendationType === 'trending' && '🔥 Trending in community'}
-                {recommendationType === 'new' && '⭐ New talent to discover'}
-                {recommendationType === 'local' && '📍 From your area'}
-                {recommendationType === 'followed' && '👥 Loved by similar users'}
+                {recommendationType === 'similar' && 'ðŸŽ¨ Similar artistic style'}
+                {recommendationType === 'trending' && 'ðŸ”¥ Trending in community'}
+                {recommendationType === 'new' && 'â­ New talent to discover'}
+                {recommendationType === 'local' && 'ðŸ“ From your area'}
+                {recommendationType === 'followed' && 'ðŸ‘¥ Loved by similar users'}
               </div>
             </div>
           ))}
@@ -257,7 +251,7 @@ const ArtistRecommendations = ({ currentArtistId }) => {
           className="load-more-btn"
           onClick={fetchRecommendations}
         >
-          🔄 Refresh Recommendations
+          ðŸ”„ Refresh Recommendations
         </button>
         <p className="footer-text">
           Recommendations are personalized based on your interests and activity
@@ -268,3 +262,4 @@ const ArtistRecommendations = ({ currentArtistId }) => {
 };
 
 export default ArtistRecommendations;
+

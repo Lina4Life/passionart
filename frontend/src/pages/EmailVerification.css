@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-.email-verification-container {
+﻿.email-verification-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -199,3 +193,4 @@
     max-width: 250px;
   }
 }
+

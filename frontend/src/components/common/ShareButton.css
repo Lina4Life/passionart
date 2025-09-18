@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-/* Share Button Component Styles */
+﻿/* Share Button Component Styles */
 .share-button-container {
   position: relative;
   display: inline-block;
@@ -239,3 +233,4 @@
 .share-option.copy-link.copied svg {
   transform: scale(1.2);
 }
+

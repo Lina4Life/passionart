@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 
 // Simple JSON file-based storage for development
@@ -87,3 +81,4 @@ class SimpleStorage {
 }
 
 module.exports = new SimpleStorage();
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-// Create feedback table if it doesn't exist
+﻿// Create feedback table if it doesn't exist
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
@@ -27,7 +21,7 @@ db.all("SELECT name FROM sqlite_master WHERE type='table' AND name='feedback'", 
   }
   
   if (tables.length === 0) {
-    console.log('❌ Feedback table does not exist, creating...');
+    console.log('âŒ Feedback table does not exist, creating...');
     
     const createFeedbackTable = `
       CREATE TABLE feedback (
@@ -48,12 +42,12 @@ db.all("SELECT name FROM sqlite_master WHERE type='table' AND name='feedback'", 
       if (err) {
         console.error('Error creating feedback table:', err);
       } else {
-        console.log('✅ Feedback table created successfully');
+        console.log('âœ… Feedback table created successfully');
       }
       db.close();
     });
   } else {
-    console.log('✅ Feedback table already exists');
+    console.log('âœ… Feedback table already exists');
     
     // Check table structure
     db.all("PRAGMA table_info(feedback)", (err, columns) => {
@@ -69,3 +63,4 @@ db.all("SELECT name FROM sqlite_master WHERE type='table' AND name='feedback'", 
     });
   }
 });
+

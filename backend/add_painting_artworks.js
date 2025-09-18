@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -184,12 +178,12 @@ function addPaintingArtworks() {
     }
     
     if (result.count === 0) {
-      console.log('❌ No users found in database. Please add users first.');
+      console.log('âŒ No users found in database. Please add users first.');
       db.close();
       return;
     }
     
-    console.log(`✅ Found ${result.count} users in database`);
+    console.log(`âœ… Found ${result.count} users in database`);
     
     // Insert each painting artwork
     let completed = 0;
@@ -219,9 +213,9 @@ function addPaintingArtworks() {
         artwork.featured
       ], function(err) {
         if (err) {
-          console.error(`❌ Error adding "${artwork.title}":`, err);
+          console.error(`âŒ Error adding "${artwork.title}":`, err);
         } else {
-          console.log(`✅ Added: "${artwork.title}" (ID: ${this.lastID})`);
+          console.log(`âœ… Added: "${artwork.title}" (ID: ${this.lastID})`);
           console.log(`   Medium: ${artwork.medium}`);
           console.log(`   Price: $${artwork.price}`);
           console.log(`   Featured: ${artwork.featured ? 'Yes' : 'No'}`);
@@ -285,7 +279,7 @@ function addPaintingArtworks() {
                     if (err) {
                       console.error('Error closing database:', err);
                     } else {
-                      console.log('\n🎨 Painting artworks added successfully!');
+                      console.log('\nðŸŽ¨ Painting artworks added successfully!');
                       console.log('Diverse painting collection now includes:');
                       console.log('- Abstract paintings');
                       console.log('- Landscape paintings'); 
@@ -306,3 +300,4 @@ function addPaintingArtworks() {
 
 // Run the function
 addPaintingArtworks();
+

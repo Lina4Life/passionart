@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const dbPath = path.join(__dirname, 'config/database.db');
@@ -58,7 +52,7 @@ async function createTables() {
         else resolve();
       });
     });
-    console.log('✅ Artworks table created successfully');
+    console.log('âœ… Artworks table created successfully');
 
     await new Promise((resolve, reject) => {
       db.run(createFeaturedTable, (err) => {
@@ -66,13 +60,14 @@ async function createTables() {
         else resolve();
       });
     });
-    console.log('✅ Featured artworks table created successfully');
+    console.log('âœ… Featured artworks table created successfully');
 
   } catch (error) {
-    console.error('❌ Error creating tables:', error);
+    console.error('âŒ Error creating tables:', error);
   } finally {
     db.close();
   }
 }
 
 createTables();
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-// Modified HubSpot controller to work with OAuth credentials
+﻿// Modified HubSpot controller to work with OAuth credentials
 const axios = require('axios');
 
 class HubSpotOAuthService {
@@ -42,3 +36,4 @@ class HubSpotOAuthService {
 }
 
 module.exports = new HubSpotOAuthService();
+

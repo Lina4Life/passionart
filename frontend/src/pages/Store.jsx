@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useMemo, useEffect } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllProducts } from '../services/api';
 import ShareButton from '../components/common/ShareButton';
@@ -213,7 +207,7 @@ const Store = () => {
                 color: 'var(--text-muted)',
                 pointerEvents: 'none'
               }}>
-                🔍
+                ðŸ”
               </div>
             </div>
           </div>
@@ -495,7 +489,7 @@ const Store = () => {
               onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
               onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}
             >
-              ×
+              Ã—
             </button>
 
             {/* Product Image */}
@@ -736,7 +730,7 @@ const Store = () => {
                     margin: 0,
                     lineHeight: '1.4'
                   }}>
-                    Secure payment • Instant digital delivery • Certificate of authenticity included
+                    Secure payment â€¢ Instant digital delivery â€¢ Certificate of authenticity included
                   </p>
                 </div>
               </div>
@@ -749,3 +743,4 @@ const Store = () => {
 };
 
 export default Store;
+

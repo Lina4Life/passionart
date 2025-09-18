@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const { register } = require('./controllers/auth.controller');
+﻿const { register } = require('./controllers/auth.controller');
 
 // Mock request and response objects for testing
 const mockReq = {
@@ -19,13 +13,13 @@ const mockReq = {
 
 const mockRes = {
   json: (data) => {
-    console.log('✅ Registration response:', data);
+    console.log('âœ… Registration response:', data);
   },
   status: (code) => {
     console.log('Status code:', code);
     return {
       json: (data) => {
-        console.log('❌ Error response:', data);
+        console.log('âŒ Error response:', data);
       }
     };
   }
@@ -33,3 +27,4 @@ const mockRes = {
 
 console.log('Testing user registration with email verification...');
 register(mockReq, mockRes);
+

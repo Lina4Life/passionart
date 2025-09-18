@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('../config/database');
+﻿const db = require('../config/database');
 const bcrypt = require('bcrypt');
 
 const createUser = async (email, password, username = null, first_name = null, last_name = null, verificationToken = null, user_type = null) => {
@@ -80,3 +74,4 @@ const verifyUserEmail = async (userId) => {
 };
 
 module.exports = { createUser, findUserByEmail, findUserByVerificationToken, verifyUserEmail };
+

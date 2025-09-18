@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('../config/database');
+﻿const db = require('../config/database');
 
 // Get all articles with pagination
 const getAllArticles = async (req, res) => {
@@ -466,3 +460,4 @@ module.exports = {
   searchArticles,
   incrementViews
 };
+

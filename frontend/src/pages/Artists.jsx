@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect, useContext } from 'react';
+﻿import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -244,7 +238,7 @@ const Artists = () => {
     return (
       <div className={`artists-container ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
         <div className="error-state">
-          <div className="error-icon">⚠️</div>
+          <div className="error-icon">âš ï¸</div>
           <h3>Unable to Load Artists</h3>
           <p>Error: {error}</p>
           <button onClick={fetchArtists} className="retry-btn">
@@ -284,7 +278,7 @@ const Artists = () => {
         <div className="controls-row">
           <div className="search-section">
             <div className="search-bar">
-              <div className="search-icon">🔍</div>
+              <div className="search-icon">ðŸ”</div>
               <input
                 type="text"
                 placeholder="Search by name, username, or bio..."
@@ -298,7 +292,7 @@ const Artists = () => {
                   onClick={() => setSearchTerm('')}
                   aria-label="Clear search"
                 >
-                  ✕
+                  âœ•
                 </button>
               )}
             </div>
@@ -310,14 +304,14 @@ const Artists = () => {
               onClick={() => setViewMode('grid')}
               title="Grid View"
             >
-              ⊞
+              âŠž
             </button>
             <button
               className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
               onClick={() => setViewMode('list')}
               title="List View"
             >
-              ☰
+              â˜°
             </button>
           </div>
         </div>
@@ -328,7 +322,7 @@ const Artists = () => {
               className={`filter-tab ${filterBy === 'all' ? 'active' : ''}`}
               onClick={() => setFilterBy('all')}
             >
-              <span className="tab-icon">👥</span>
+              <span className="tab-icon">ðŸ‘¥</span>
               All Artists
               <span className="tab-count">{artists.length}</span>
             </button>
@@ -337,7 +331,7 @@ const Artists = () => {
                 className={`filter-tab ${filterBy === 'following' ? 'active' : ''}`}
                 onClick={() => setFilterBy('following')}
               >
-                <span className="tab-icon">❤️</span>
+                <span className="tab-icon">â¤ï¸</span>
                 Following
                 <span className="tab-count">{followingUsers.size}</span>
               </button>
@@ -376,7 +370,7 @@ const Artists = () => {
       <div className={`artists-display ${viewMode}-view`}>
         {filteredArtists.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-icon">🎨</div>
+            <div className="empty-icon">ðŸŽ¨</div>
             <h3>No artists found</h3>
             <p>
               {searchTerm 
@@ -464,7 +458,7 @@ const Artists = () => {
                   >
                     {followingUsers.has(artist.id) ? (
                       <>
-                        <span className="btn-icon">✓</span>
+                        <span className="btn-icon">âœ“</span>
                         Following
                       </>
                     ) : (
@@ -494,3 +488,4 @@ const Artists = () => {
 };
 
 export default Artists;
+

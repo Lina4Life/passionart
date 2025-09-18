@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 import './ArtistAchievements.css';
 
 const ArtistAchievements = ({ achievements }) => {
@@ -35,13 +29,13 @@ const ArtistAchievements = ({ achievements }) => {
   return (
     <div className="artist-achievements">
       <div className="achievements-header">
-        <h3>🏆 Achievements</h3>
+        <h3>ðŸ† Achievements</h3>
         <p>Recognition earned through artistic excellence and community engagement</p>
       </div>
 
       {achievements.length === 0 ? (
         <div className="no-achievements">
-          <div className="no-achievements-icon">🎯</div>
+          <div className="no-achievements-icon">ðŸŽ¯</div>
           <h4>No achievements yet</h4>
           <p>Keep creating and engaging with the community to earn achievements!</p>
         </div>
@@ -86,7 +80,7 @@ const ArtistAchievements = ({ achievements }) => {
                 </div>
                 
                 <div className="achievement-badge">
-                  <span className="badge-checkmark">✓</span>
+                  <span className="badge-checkmark">âœ“</span>
                 </div>
               </div>
             );
@@ -96,11 +90,11 @@ const ArtistAchievements = ({ achievements }) => {
 
       {/* Achievement Progress Section */}
       <div className="achievement-progress">
-        <h4>🎯 Progress Towards Next Achievements</h4>
+        <h4>ðŸŽ¯ Progress Towards Next Achievements</h4>
         <div className="progress-items">
           <div className="progress-item">
             <div className="progress-info">
-              <span className="progress-icon">👥</span>
+              <span className="progress-icon">ðŸ‘¥</span>
               <span className="progress-name">100 Followers</span>
             </div>
             <div className="progress-bar">
@@ -111,7 +105,7 @@ const ArtistAchievements = ({ achievements }) => {
           
           <div className="progress-item">
             <div className="progress-info">
-              <span className="progress-icon">🎨</span>
+              <span className="progress-icon">ðŸŽ¨</span>
               <span className="progress-name">10 Artworks</span>
             </div>
             <div className="progress-bar">
@@ -122,7 +116,7 @@ const ArtistAchievements = ({ achievements }) => {
           
           <div className="progress-item">
             <div className="progress-info">
-              <span className="progress-icon">⭐</span>
+              <span className="progress-icon">â­</span>
               <span className="progress-name">5.0 Rating</span>
             </div>
             <div className="progress-bar">
@@ -137,3 +131,4 @@ const ArtistAchievements = ({ achievements }) => {
 };
 
 export default ArtistAchievements;
+

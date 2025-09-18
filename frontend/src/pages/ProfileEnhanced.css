@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-/* Profile Enhanced Styles with Dark/Light Mode */
+﻿/* Profile Enhanced Styles with Dark/Light Mode */
 :root {
   --theme-primary: #667eea;
   --theme-secondary: #764ba2;
@@ -1626,3 +1620,4 @@ input:checked + .toggle-slider:before {
     height: 100px;
   }
 }
+

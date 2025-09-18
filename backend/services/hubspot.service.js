@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const hubspot = require('@hubspot/api-client');
+﻿const hubspot = require('@hubspot/api-client');
 
 // Initialize HubSpot client for CRM operations
 const hubspotClient = new hubspot.Client({
@@ -36,7 +30,7 @@ const createOrUpdateContact = async (userData) => {
     let contact;
     try {
       contact = await hubspotClient.crm.contacts.basicApi.getById(email, ['email']);
-      console.log(`📞 Updating existing HubSpot contact: ${email}`);
+      console.log(`ðŸ“ž Updating existing HubSpot contact: ${email}`);
       
       // Update existing contact
       const updatedContact = await hubspotClient.crm.contacts.basicApi.update(
@@ -53,7 +47,7 @@ const createOrUpdateContact = async (userData) => {
       
     } catch (getError) {
       // Contact doesn't exist, create new one
-      console.log(`📞 Creating new HubSpot contact: ${email}`);
+      console.log(`ðŸ“ž Creating new HubSpot contact: ${email}`);
       
       const newContact = await hubspotClient.crm.contacts.basicApi.create(contactData);
       
@@ -66,7 +60,7 @@ const createOrUpdateContact = async (userData) => {
     }
     
   } catch (error) {
-    console.error('❌ HubSpot contact error:', error.message);
+    console.error('âŒ HubSpot contact error:', error.message);
     return {
       success: false,
       error: error.message,
@@ -91,11 +85,11 @@ const trackEvent = async (email, eventName, eventProperties = {}) => {
     // Send custom event to HubSpot
     await hubspotClient.events.eventsApi.create(eventData);
     
-    console.log(`📊 HubSpot event tracked: ${eventName} for ${email}`);
+    console.log(`ðŸ“Š HubSpot event tracked: ${eventName} for ${email}`);
     return { success: true };
     
   } catch (error) {
-    console.error('❌ HubSpot event tracking error:', error.message);
+    console.error('âŒ HubSpot event tracking error:', error.message);
     return { success: false, error: error.message };
   }
 };
@@ -122,7 +116,7 @@ const getContactActivity = async (email) => {
     };
     
   } catch (error) {
-    console.error('❌ HubSpot contact activity error:', error.message);
+    console.error('âŒ HubSpot contact activity error:', error.message);
     return { success: false, error: error.message };
   }
 };
@@ -141,13 +135,13 @@ const syncUserRegistration = async (userData) => {
         username: userData.username
       });
       
-      console.log(`✅ User synced to HubSpot: ${userData.email}`);
+      console.log(`âœ… User synced to HubSpot: ${userData.email}`);
     }
     
     return contactResult;
     
   } catch (error) {
-    console.error('❌ HubSpot user sync error:', error.message);
+    console.error('âŒ HubSpot user sync error:', error.message);
     return { success: false, error: error.message };
   }
 };
@@ -158,3 +152,4 @@ module.exports = {
   getContactActivity,
   syncUserRegistration
 };
+

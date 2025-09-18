@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-.analytics-container {
+﻿.analytics-container {
   padding: var(--space-lg);
   max-width: 1200px;
   margin: 0 auto;
@@ -486,3 +480,4 @@
     height: 60px;
   }
 }
+

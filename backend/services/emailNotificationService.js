@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const { Resend } = require('resend');
+﻿const { Resend } = require('resend');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
@@ -124,7 +118,7 @@ class EmailNotificationService {
             ${content}
             
             <div style="margin: 30px 0; padding: 20px; background: white; border-radius: 8px; border-left: 4px solid #667eea;">
-                <h3>🎨 Featured This Week</h3>
+                <h3>ðŸŽ¨ Featured This Week</h3>
                 <p>Discover amazing artworks from our community of talented artists. From digital masterpieces to traditional paintings, there's something for every art lover.</p>
                 <a href="https://passionart.com/featured" class="cta-button">Explore Featured Art</a>
             </div>
@@ -132,9 +126,9 @@ class EmailNotificationService {
         <div class="footer">
             <p>Thank you for being part of the PassionArt community!</p>
             <div class="social-links">
-                <a href="#" style="text-decoration: none;">📧 Email</a>
-                <a href="#" style="text-decoration: none;">📱 Instagram</a>
-                <a href="#" style="text-decoration: none;">🐦 Twitter</a>
+                <a href="#" style="text-decoration: none;">ðŸ“§ Email</a>
+                <a href="#" style="text-decoration: none;">ðŸ“± Instagram</a>
+                <a href="#" style="text-decoration: none;">ðŸ¦ Twitter</a>
             </div>
             <p style="font-size: 12px; color: #6c757d;">
                 You received this email because you're a member of PassionArt.<br>
@@ -149,10 +143,10 @@ class EmailNotificationService {
   }
 
   async sendEventNotification(eventTitle, eventDate, eventDescription, eventLink) {
-    const subject = `🎨 New Event: ${eventTitle}`;
+    const subject = `ðŸŽ¨ New Event: ${eventTitle}`;
     const content = `
       <div style="margin: 20px 0; padding: 20px; background: white; border-radius: 8px; border-left: 4px solid #dc3545;">
-        <h3>📅 ${eventTitle}</h3>
+        <h3>ðŸ“… ${eventTitle}</h3>
         <p><strong>Date:</strong> ${new Date(eventDate).toLocaleDateString('en-US', { 
           weekday: 'long', 
           year: 'numeric', 
@@ -172,19 +166,19 @@ class EmailNotificationService {
 
   async sendArtworkApprovalNotification(artistEmail, artworkTitle, approved = true) {
     const subject = approved ? 
-      `✅ Your artwork "${artworkTitle}" has been approved!` : 
-      `❌ Your artwork "${artworkTitle}" needs revision`;
+      `âœ… Your artwork "${artworkTitle}" has been approved!` : 
+      `âŒ Your artwork "${artworkTitle}" needs revision`;
     
     const content = approved ? `
       <div style="margin: 20px 0; padding: 20px; background: #d4edda; border-radius: 8px; border-left: 4px solid #28a745;">
-        <h3>🎉 Congratulations!</h3>
+        <h3>ðŸŽ‰ Congratulations!</h3>
         <p>Your artwork "<strong>${artworkTitle}</strong>" has been approved and is now live on PassionArt!</p>
         <p>Art enthusiasts can now discover and purchase your work. We'll notify you of any sales.</p>
         <a href="https://passionart.com/my-artworks" class="cta-button">View My Artworks</a>
       </div>
     ` : `
       <div style="margin: 20px 0; padding: 20px; background: #f8d7da; border-radius: 8px; border-left: 4px solid #dc3545;">
-        <h3>📝 Revision Needed</h3>
+        <h3>ðŸ“ Revision Needed</h3>
         <p>Your artwork "<strong>${artworkTitle}</strong>" needs some revisions before it can be published.</p>
         <p>Please check the feedback from our review team and resubmit when ready.</p>
         <a href="https://passionart.com/my-artworks" class="cta-button" style="background: #dc3545;">Review Feedback</a>
@@ -267,3 +261,4 @@ class EmailNotificationService {
 }
 
 module.exports = EmailNotificationService;
+

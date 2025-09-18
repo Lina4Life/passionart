@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import './EmailVerification.css';
 
@@ -80,7 +74,7 @@ const EmailVerification = () => {
 
           {status === 'success' && (
             <>
-              <div className="success-icon">✓</div>
+              <div className="success-icon">âœ“</div>
               <h3>Verification Successful!</h3>
               <p>{message}</p>
               <p className="redirect-message">Redirecting to login page in 3 seconds...</p>
@@ -97,7 +91,7 @@ const EmailVerification = () => {
 
           {status === 'error' && (
             <>
-              <div className="error-icon">✗</div>
+              <div className="error-icon">âœ—</div>
               <h3>Verification Failed</h3>
               <p>{message}</p>
               <div className="button-group">
@@ -117,3 +111,4 @@ const EmailVerification = () => {
 };
 
 export default EmailVerification;
+

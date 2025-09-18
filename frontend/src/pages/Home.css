@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-/* Home page specific styles */
+﻿/* Home page specific styles */
 
 /* Category tiles */
 .category-tile {
@@ -68,3 +62,4 @@
 .subscribe-button:hover {
   background-color: var(--accent-color) !important;
 }
+

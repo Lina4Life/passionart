@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect, useContext } from 'react';
+﻿import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './MyArtworks.css';
@@ -101,7 +95,7 @@ const MyArtworks = () => {
         <h1>My Artworks</h1>
         <p>Manage and track your art collection</p>
         <button className="upload-btn" onClick={() => navigate('/upload')}>
-          <span>📤</span>
+          <span>ðŸ“¤</span>
           Upload New Artwork
         </button>
       </div>
@@ -169,14 +163,14 @@ const MyArtworks = () => {
                     onClick={() => navigate(`/edit-artwork/${artwork.id}`)}
                     title="Edit Artwork"
                   >
-                    ✏️
+                    âœï¸
                   </button>
                   <button 
                     className="action-btn delete"
                     onClick={() => handleDeleteArtwork(artwork.id)}
                     title="Delete Artwork"
                   >
-                    🗑️
+                    ðŸ—‘ï¸
                   </button>
                 </div>
               </div>
@@ -202,11 +196,11 @@ const MyArtworks = () => {
                 
                 <div className="artwork-stats">
                   <div className="stat-item">
-                    <span className="icon">👁️</span>
+                    <span className="icon">ðŸ‘ï¸</span>
                     <span>{artwork.views || 0} views</span>
                   </div>
                   <div className="stat-item">
-                    <span className="icon">❤️</span>
+                    <span className="icon">â¤ï¸</span>
                     <span>{artwork.likes || 0} likes</span>
                   </div>
                 </div>
@@ -239,7 +233,7 @@ const MyArtworks = () => {
         </div>
       ) : (
         <div className="empty-state">
-          <div className="empty-icon">🎨</div>
+          <div className="empty-icon">ðŸŽ¨</div>
           <h3>No artworks found</h3>
           <p>
             {filter === 'all' 
@@ -248,7 +242,7 @@ const MyArtworks = () => {
             }
           </p>
           <button className="upload-btn" onClick={() => navigate('/upload')}>
-            <span>📤</span>
+            <span>ðŸ“¤</span>
             Upload Your First Artwork
           </button>
         </div>
@@ -258,3 +252,4 @@ const MyArtworks = () => {
 };
 
 export default MyArtworks;
+

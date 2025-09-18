@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 
 const courses = [
   {
@@ -201,7 +195,7 @@ const Learn = () => {
                     color: "#666",
                     fontSize: "0.9rem"
                   }}>
-                    ⭐ {course.rating}
+                    â­ {course.rating}
                   </div>
                 </div>
 
@@ -240,7 +234,7 @@ const Learn = () => {
                       color: "#666",
                       fontSize: "0.9rem"
                     }}>
-                      <span style={{ marginRight: "0.5rem" }}>👨‍🏫</span>
+                      <span style={{ marginRight: "0.5rem" }}>ðŸ‘¨â€ðŸ«</span>
                       {course.instructor}
                     </div>
                     <div style={{ color: "#666", fontSize: "0.9rem" }}>
@@ -290,3 +284,4 @@ const Learn = () => {
 };
 
 export default Learn;
+

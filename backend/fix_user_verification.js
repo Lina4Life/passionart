@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const Database = require('better-sqlite3');
+﻿const Database = require('better-sqlite3');
 const path = require('path');
 
 // Connect to database
@@ -24,13 +18,13 @@ try {
   const result = db.prepare('UPDATE users SET email_verified = 1 WHERE email = ?').run(email);
   
   if (result.changes > 0) {
-    console.log(`✅ Successfully verified ${email}`);
+    console.log(`âœ… Successfully verified ${email}`);
     
     // Show updated user
     const updatedUser = db.prepare('SELECT id, email, username, email_verified FROM users WHERE email = ?').get(email);
     console.log('Updated user:', updatedUser);
   } else {
-    console.log(`❌ No user found with email ${email}`);
+    console.log(`âŒ No user found with email ${email}`);
   }
 
 } catch (error) {
@@ -39,3 +33,4 @@ try {
   db.close();
   console.log('\nDatabase connection closed.');
 }
+

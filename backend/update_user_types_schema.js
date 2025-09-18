@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -52,7 +46,7 @@ function updateUserTypeConstraints() {
       return;
     }
     
-    console.log('✅ Created new users table with updated constraints');
+    console.log('âœ… Created new users table with updated constraints');
     
     // Step 2: Copy data from old table to new table, updating 'sponsor' to 'institution'
     const copyData = `
@@ -78,7 +72,7 @@ function updateUserTypeConstraints() {
         return;
       }
       
-      console.log('✅ Copied data to new table (sponsor → institution)');
+      console.log('âœ… Copied data to new table (sponsor â†’ institution)');
       
       // Step 3: Drop old table and rename new table
       db.run('DROP TABLE users', (err) => {
@@ -87,7 +81,7 @@ function updateUserTypeConstraints() {
           return;
         }
         
-        console.log('✅ Dropped old users table');
+        console.log('âœ… Dropped old users table');
         
         db.run('ALTER TABLE users_new RENAME TO users', (err) => {
           if (err) {
@@ -95,7 +89,7 @@ function updateUserTypeConstraints() {
             return;
           }
           
-          console.log('✅ Renamed new table to users');
+          console.log('âœ… Renamed new table to users');
           
           // Show updated user types
           db.all("SELECT DISTINCT user_type FROM users WHERE user_type IS NOT NULL ORDER BY user_type", (err, rows) => {
@@ -105,8 +99,8 @@ function updateUserTypeConstraints() {
               console.log('\n=== UPDATED USER TYPES ALLOWED ===');
               console.log('- artist');
               console.log('- gallery');  
-              console.log('- collector 🆕');
-              console.log('- institution 🆕 (was sponsor)');
+              console.log('- collector ðŸ†•');
+              console.log('- institution ðŸ†• (was sponsor)');
               console.log('- admin');
               
               console.log('\n=== CURRENT USER TYPES IN DATABASE ===');
@@ -119,7 +113,7 @@ function updateUserTypeConstraints() {
               if (err) {
                 console.error('Error closing database:', err);
               } else {
-                console.log('\n🎉 Database schema updated successfully!');
+                console.log('\nðŸŽ‰ Database schema updated successfully!');
                 console.log('You can now add collector and institution users.');
               }
             });
@@ -132,3 +126,4 @@ function updateUserTypeConstraints() {
 
 // Run the function
 updateUserTypeConstraints();
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 import './PasswordMeter.css';
 
 const PasswordMeter = ({ password, showCriteria = true }) => {
@@ -107,27 +101,27 @@ const PasswordMeter = ({ password, showCriteria = true }) => {
         <div className="password-criteria">
           <div className="criteria-grid">
             <div className={`criterion ${strength.criteria.length ? 'met' : 'unmet'}`}>
-              <span className="criterion-icon">{strength.criteria.length ? '✓' : '✗'}</span>
+              <span className="criterion-icon">{strength.criteria.length ? 'âœ“' : 'âœ—'}</span>
               <span>At least 8 characters</span>
             </div>
             <div className={`criterion ${strength.criteria.lowercase ? 'met' : 'unmet'}`}>
-              <span className="criterion-icon">{strength.criteria.lowercase ? '✓' : '✗'}</span>
+              <span className="criterion-icon">{strength.criteria.lowercase ? 'âœ“' : 'âœ—'}</span>
               <span>Lowercase letter</span>
             </div>
             <div className={`criterion ${strength.criteria.uppercase ? 'met' : 'unmet'}`}>
-              <span className="criterion-icon">{strength.criteria.uppercase ? '✓' : '✗'}</span>
+              <span className="criterion-icon">{strength.criteria.uppercase ? 'âœ“' : 'âœ—'}</span>
               <span>Uppercase letter</span>
             </div>
             <div className={`criterion ${strength.criteria.numbers ? 'met' : 'unmet'}`}>
-              <span className="criterion-icon">{strength.criteria.numbers ? '✓' : '✗'}</span>
+              <span className="criterion-icon">{strength.criteria.numbers ? 'âœ“' : 'âœ—'}</span>
               <span>Number</span>
             </div>
             <div className={`criterion ${strength.criteria.special ? 'met' : 'unmet'}`}>
-              <span className="criterion-icon">{strength.criteria.special ? '✓' : '✗'}</span>
+              <span className="criterion-icon">{strength.criteria.special ? 'âœ“' : 'âœ—'}</span>
               <span>Special character</span>
             </div>
             <div className={`criterion ${strength.criteria.noRepeating ? 'met' : 'unmet'}`}>
-              <span className="criterion-icon">{strength.criteria.noRepeating ? '✓' : '✗'}</span>
+              <span className="criterion-icon">{strength.criteria.noRepeating ? 'âœ“' : 'âœ—'}</span>
               <span>No repeating characters</span>
             </div>
           </div>
@@ -149,3 +143,4 @@ const PasswordMeter = ({ password, showCriteria = true }) => {
 };
 
 export default PasswordMeter;
+

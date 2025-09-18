@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 const path = require('path');
 
@@ -222,18 +216,18 @@ async function addSampleArtists() {
             if (err) {
               reject(err);
             } else {
-              console.log(`✅ Added artist: ${artist.username} (ID: ${this.lastID})`);
+              console.log(`âœ… Added artist: ${artist.username} (ID: ${this.lastID})`);
               resolve(this.lastID);
             }
           });
         });
         
       } catch (error) {
-        console.error(`❌ Error adding artist ${artist.username}:`, error.message);
+        console.error(`âŒ Error adding artist ${artist.username}:`, error.message);
       }
     }
     
-    console.log('\n🎨 Sample artists added successfully!');
+    console.log('\nðŸŽ¨ Sample artists added successfully!');
     console.log('You can now view them on the Artists page.');
     
     // Show total count
@@ -257,3 +251,4 @@ async function addSampleArtists() {
 }
 
 addSampleArtists();
+

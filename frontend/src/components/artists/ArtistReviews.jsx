@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useContext } from 'react';
+﻿import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import './ArtistReviews.css';
 
@@ -26,7 +20,7 @@ const ArtistReviews = ({ reviews, artistId, onReviewAdded }) => {
             className={`star ${star <= rating ? 'filled' : ''} ${readonly ? 'readonly' : ''}`}
             onClick={!readonly ? () => onChange(star) : undefined}
           >
-            ⭐
+            â­
           </span>
         ))}
       </div>
@@ -101,7 +95,7 @@ const ArtistReviews = ({ reviews, artistId, onReviewAdded }) => {
             className="add-review-btn"
             onClick={() => setShowReviewForm(!showReviewForm)}
           >
-            ✍️ Write a Review
+            âœï¸ Write a Review
           </button>
         </div>
       )}
@@ -192,7 +186,7 @@ const ArtistReviews = ({ reviews, artistId, onReviewAdded }) => {
               <div className="review-content">
                 <p>{review.comment}</p>
                 {review.is_verified_purchase && (
-                  <span className="verified-purchase">✓ Verified Commission</span>
+                  <span className="verified-purchase">âœ“ Verified Commission</span>
                 )}
               </div>
             </div>
@@ -204,3 +198,4 @@ const ArtistReviews = ({ reviews, artistId, onReviewAdded }) => {
 };
 
 export default ArtistReviews;
+

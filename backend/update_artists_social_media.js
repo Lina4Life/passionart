@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const dbPath = path.join(__dirname, '..', 'passionart', 'passionart.db');
@@ -15,7 +9,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
     return;
   }
   
-  console.log('✅ Connected to SQLite database');
+  console.log('âœ… Connected to SQLite database');
   
   // Sample social media data for different artists
   const sampleSocialMediaData = [
@@ -59,7 +53,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
       return;
     }
     
-    console.log(`\n👥 Found ${artists.length} artists`);
+    console.log(`\nðŸ‘¥ Found ${artists.length} artists`);
     
     let updateCount = 0;
     
@@ -79,19 +73,19 @@ const db = new sqlite3.Database(dbPath, (err) => {
             console.error(`Error updating artist ${artist.id}:`, err);
           } else {
             updateCount++;
-            console.log(`✅ Updated social media for ${artist.first_name} ${artist.last_name}`);
+            console.log(`âœ… Updated social media for ${artist.first_name} ${artist.last_name}`);
           }
           
           // Close database when all updates are done
           if (updateCount + (artists.length - updateCount) === artists.length) {
-            console.log(`\n🎉 Successfully updated ${updateCount} artists with social media data`);
+            console.log(`\nðŸŽ‰ Successfully updated ${updateCount} artists with social media data`);
             
             // Verify the updates
             db.all("SELECT id, first_name, last_name, social_media FROM users WHERE user_type = 'artist' AND social_media IS NOT NULL LIMIT 3", (err, results) => {
               if (err) {
                 console.error('Error verifying updates:', err);
               } else {
-                console.log('\n📋 Sample updated artists:');
+                console.log('\nðŸ“‹ Sample updated artists:');
                 results.forEach(result => {
                   const socialMedia = JSON.parse(result.social_media);
                   const platforms = Object.keys(socialMedia).join(', ');
@@ -112,3 +106,4 @@ const db = new sqlite3.Database(dbPath, (err) => {
     }
   });
 });
+

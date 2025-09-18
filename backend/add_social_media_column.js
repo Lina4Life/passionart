@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const dbPath = path.join(__dirname, '..', 'passionart', 'passionart.db');
@@ -15,18 +9,18 @@ const db = new sqlite3.Database(dbPath, (err) => {
     return;
   }
   
-  console.log('✅ Connected to SQLite database');
+  console.log('âœ… Connected to SQLite database');
   
   // Add social_media column
   db.run('ALTER TABLE users ADD COLUMN social_media TEXT', (err) => {
     if (err) {
       if (err.message.includes('duplicate column name')) {
-        console.log('ℹ️ social_media column already exists');
+        console.log('â„¹ï¸ social_media column already exists');
       } else {
         console.error('Error adding social_media column:', err);
       }
     } else {
-      console.log('✅ Successfully added social_media column');
+      console.log('âœ… Successfully added social_media column');
     }
     
     // Add bio and profile_picture columns if they don't exist
@@ -34,7 +28,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
       if (err && !err.message.includes('duplicate column name')) {
         console.error('Error adding bio column:', err);
       } else if (!err) {
-        console.log('✅ Successfully added bio column');
+        console.log('âœ… Successfully added bio column');
       }
     });
     
@@ -42,7 +36,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
       if (err && !err.message.includes('duplicate column name')) {
         console.error('Error adding profile_picture column:', err);
       } else if (!err) {
-        console.log('✅ Successfully added profile_picture column');
+        console.log('âœ… Successfully added profile_picture column');
       }
       
       // Update some artists with sample social media data
@@ -60,7 +54,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
           if (err) {
             console.error('Error updating sample social media:', err);
           } else {
-            console.log('✅ Added sample social media data to first artist');
+            console.log('âœ… Added sample social media data to first artist');
           }
           
           // Verify the changes
@@ -68,10 +62,10 @@ const db = new sqlite3.Database(dbPath, (err) => {
             if (err) {
               console.error('Error getting updated table info:', err);
             } else {
-              console.log('\n📋 Updated Users table schema:');
+              console.log('\nðŸ“‹ Updated Users table schema:');
               rows.forEach(row => {
                 if (['social_media', 'bio', 'profile_picture'].includes(row.name)) {
-                  console.log(`✅ ${row.name} (${row.type})`);
+                  console.log(`âœ… ${row.name} (${row.type})`);
                 }
               });
             }
@@ -83,3 +77,4 @@ const db = new sqlite3.Database(dbPath, (err) => {
     });
   });
 });
+

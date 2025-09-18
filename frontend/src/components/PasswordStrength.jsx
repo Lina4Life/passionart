@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 
 const PasswordStrength = ({ password, onStrengthChange }) => {
   // Password strength validation function
@@ -140,7 +134,7 @@ const PasswordStrength = ({ password, onStrengthChange }) => {
               width: '12px',
               textAlign: 'center'
             }}>
-              {requirement.check ? '✓' : '✗'}
+              {requirement.check ? 'âœ“' : 'âœ—'}
             </span>
             <span style={{ fontSize: '11px' }}>{requirement.text}</span>
           </div>
@@ -162,7 +156,7 @@ const PasswordStrength = ({ password, onStrengthChange }) => {
           textTransform: 'uppercase',
           letterSpacing: '0.5px'
         }}>
-          ✓ Password meets all requirements
+          âœ“ Password meets all requirements
         </div>
       )}
     </div>
@@ -170,3 +164,4 @@ const PasswordStrength = ({ password, onStrengthChange }) => {
 };
 
 export default PasswordStrength;
+

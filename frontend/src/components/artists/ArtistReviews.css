@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-.artist-reviews {
+﻿.artist-reviews {
   padding: var(--space-lg);
   background: var(--bg-secondary);
   border-radius: var(--border-radius);
@@ -298,3 +292,4 @@
     align-self: center;
   }
 }
+

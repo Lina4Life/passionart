@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 
 const events = [
   {
@@ -193,7 +187,7 @@ const Events = () => (
                   marginBottom: '1.5rem'
                 }}>
                   <div style={{ color: '#666', fontSize: '0.9rem' }}>
-                    <span style={{ marginRight: '0.5rem' }}>📍</span>
+                    <span style={{ marginRight: '0.5rem' }}>ðŸ“</span>
                     {ev.location}
                   </div>
                   <div style={{
@@ -240,3 +234,4 @@ const Events = () => (
 );
 
 export default Events;
+

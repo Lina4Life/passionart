@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect, useContext } from 'react';
+﻿import React, { useState, useEffect, useContext } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../../context/AuthContext';
@@ -106,7 +100,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
         <NavLink to="/" className="nav-logo">
-          PASSION—ART
+          PASSIONâ€”ART
         </NavLink>
         
         <ul className="nav-menu">
@@ -248,7 +242,7 @@ const Navbar = () => {
                     className="dropdown-item"
                     onClick={() => setIsProfileDropdownOpen(false)}
                   >
-                    <span className="dropdown-icon">👤</span>
+                    <span className="dropdown-icon">ðŸ‘¤</span>
                     Profile
                   </NavLink>
                   {canUpload && (
@@ -257,7 +251,7 @@ const Navbar = () => {
                       className="dropdown-item"
                       onClick={() => setIsProfileDropdownOpen(false)}
                     >
-                      <span className="dropdown-icon">📤</span>
+                      <span className="dropdown-icon">ðŸ“¤</span>
                       Upload
                     </NavLink>
                   )}
@@ -271,7 +265,7 @@ const Navbar = () => {
                         className="dropdown-item"
                         onClick={() => setIsProfileDropdownOpen(false)}
                       >
-                        <span className="dropdown-icon">🏛️</span>
+                        <span className="dropdown-icon">ðŸ›ï¸</span>
                         My Exhibitions
                       </NavLink>
                       <NavLink 
@@ -279,7 +273,7 @@ const Navbar = () => {
                         className="dropdown-item"
                         onClick={() => setIsProfileDropdownOpen(false)}
                       >
-                        <span className="dropdown-icon">👥</span>
+                        <span className="dropdown-icon">ðŸ‘¥</span>
                         Manage Artists
                       </NavLink>
                     </>
@@ -293,7 +287,7 @@ const Navbar = () => {
                         className="dropdown-item"
                         onClick={() => setIsProfileDropdownOpen(false)}
                       >
-                        <span className="dropdown-icon">🖼️</span>
+                        <span className="dropdown-icon">ðŸ–¼ï¸</span>
                         My Collection
                       </NavLink>
                       <NavLink 
@@ -301,7 +295,7 @@ const Navbar = () => {
                         className="dropdown-item"
                         onClick={() => setIsProfileDropdownOpen(false)}
                       >
-                        <span className="dropdown-icon">❤️</span>
+                        <span className="dropdown-icon">â¤ï¸</span>
                         Wishlist
                       </NavLink>
                     </>
@@ -315,7 +309,7 @@ const Navbar = () => {
                         className="dropdown-item"
                         onClick={() => setIsProfileDropdownOpen(false)}
                       >
-                        <span className="dropdown-icon">🏛️</span>
+                        <span className="dropdown-icon">ðŸ›ï¸</span>
                         Institutional Collection
                       </NavLink>
                       <NavLink 
@@ -323,7 +317,7 @@ const Navbar = () => {
                         className="dropdown-item"
                         onClick={() => setIsProfileDropdownOpen(false)}
                       >
-                        <span className="dropdown-icon">🎓</span>
+                        <span className="dropdown-icon">ðŸŽ“</span>
                         Educational Programs
                       </NavLink>
                     </>
@@ -335,7 +329,7 @@ const Navbar = () => {
                       setIsFeedbackOpen(true);
                     }}
                   >
-                    <span className="dropdown-icon">💬</span>
+                    <span className="dropdown-icon">ðŸ’¬</span>
                     Send Feedback
                   </button>
                   {isAdmin && (
@@ -351,7 +345,7 @@ const Navbar = () => {
                         borderRadius: '6px'
                       }}
                     >
-                      <span className="dropdown-icon">🏛️</span>
+                      <span className="dropdown-icon">ðŸ›ï¸</span>
                       Admin Panel
                     </NavLink>
                   )}
@@ -360,7 +354,7 @@ const Navbar = () => {
                     className="dropdown-item logout-btn"
                     onClick={handleLogout}
                   >
-                    <span className="dropdown-icon">🚪</span>
+                    <span className="dropdown-icon">ðŸšª</span>
                     Logout
                   </button>
                 </div>
@@ -385,7 +379,7 @@ const Navbar = () => {
         </div>
 
         <button className="mobile-menu-btn" onClick={toggleMenu}>
-          ☰
+          â˜°
         </button>
       </div>
 
@@ -523,3 +517,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => (
@@ -21,3 +15,4 @@ const Navbar = () => (
 );
 
 export default Navbar;
+

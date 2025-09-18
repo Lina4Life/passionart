@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 
 const db = new sqlite3.Database('./data/passionart.db');
@@ -96,3 +90,4 @@ db.serialize(() => {
     }
   });
 });
+

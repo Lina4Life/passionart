@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useToast } from '../hooks/useToast';
 import { useTheme } from '../context/ThemeContext';
 import { profileAPI } from '../services/profile';
@@ -76,18 +70,18 @@ const Profile = () => {
   ];
 
   const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-    { code: 'pt', name: 'Português', flag: '🇵🇹' },
-    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-    { code: 'ja', name: '日本語', flag: '🇯🇵' },
-    { code: 'ko', name: '한국어', flag: '🇰🇷' },
-    { code: 'zh', name: '中文', flag: '🇨🇳' },
-    { code: 'ar', name: 'العربية', flag: '🇸🇦' },
-    { code: 'hi', name: 'हिंदी', flag: '🇮🇳' }
+    { code: 'en', name: 'English', flag: 'ðŸ‡ºðŸ‡¸' },
+    { code: 'es', name: 'EspaÃ±ol', flag: 'ðŸ‡ªðŸ‡¸' },
+    { code: 'fr', name: 'FranÃ§ais', flag: 'ðŸ‡«ðŸ‡·' },
+    { code: 'de', name: 'Deutsch', flag: 'ðŸ‡©ðŸ‡ª' },
+    { code: 'it', name: 'Italiano', flag: 'ðŸ‡®ðŸ‡¹' },
+    { code: 'pt', name: 'PortuguÃªs', flag: 'ðŸ‡µðŸ‡¹' },
+    { code: 'ru', name: 'Ð ÑƒÑÑÐºÐ¸Ð¹', flag: 'ðŸ‡·ðŸ‡º' },
+    { code: 'ja', name: 'æ—¥æœ¬èªž', flag: 'ðŸ‡¯ðŸ‡µ' },
+    { code: 'ko', name: 'í•œêµ­ì–´', flag: 'ðŸ‡°ðŸ‡·' },
+    { code: 'zh', name: 'ä¸­æ–‡', flag: 'ðŸ‡¨ðŸ‡³' },
+    { code: 'ar', name: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', flag: 'ðŸ‡¸ðŸ‡¦' },
+    { code: 'hi', name: 'à¤¹à¤¿à¤‚à¤¦à¥€', flag: 'ðŸ‡®ðŸ‡³' }
   ];
 
   useEffect(() => {
@@ -484,35 +478,35 @@ const Profile = () => {
           className={`tab-button ${activeTab === 'profile' ? 'active' : ''}`}
           onClick={() => setActiveTab('profile')}
         >
-          <span className="tab-icon">👤</span>
+          <span className="tab-icon">ðŸ‘¤</span>
           Profile
         </button>
         <button 
           className={`tab-button ${activeTab === 'preferences' ? 'active' : ''}`}
           onClick={() => setActiveTab('preferences')}
         >
-          <span className="tab-icon">🎨</span>
+          <span className="tab-icon">ðŸŽ¨</span>
           Preferences
         </button>
         <button 
           className={`tab-button ${activeTab === 'interests' ? 'active' : ''}`}
           onClick={() => setActiveTab('interests')}
         >
-          <span className="tab-icon">❤️</span>
+          <span className="tab-icon">â¤ï¸</span>
           Interests
         </button>
         <button 
           className={`tab-button ${activeTab === 'social' ? 'active' : ''}`}
           onClick={() => setActiveTab('social')}
         >
-          <span className="tab-icon">🔗</span>
+          <span className="tab-icon">ðŸ”—</span>
           Social Media
         </button>
         <button 
           className={`tab-button ${activeTab === 'security' ? 'active' : ''}`}
           onClick={() => setActiveTab('security')}
         >
-          <span className="tab-icon">🔒</span>
+          <span className="tab-icon">ðŸ”’</span>
           Security
         </button>
       </div>
@@ -521,13 +515,13 @@ const Profile = () => {
         {activeTab === 'profile' && (
           <div className="tab-content">
             <div className="section-header">
-              <h2>📝 Profile Information</h2>
+              <h2>ðŸ“ Profile Information</h2>
               <p>Update your personal information and profile details</p>
             </div>
             
             {/* Profile Picture Upload Section */}
             <div className="profile-picture-section">
-              <h3>📸 Profile Picture</h3>
+              <h3>ðŸ“¸ Profile Picture</h3>
               <div className="picture-upload-area">
                 <div className="current-picture">
                   {getProfilePictureUrl() ? (
@@ -550,9 +544,9 @@ const Profile = () => {
                     disabled={uploadingPicture}
                   >
                     {uploadingPicture ? (
-                      <>⏳ Uploading...</>
+                      <>â³ Uploading...</>
                     ) : (
-                      <>📷 Change Picture</>
+                      <>ðŸ“· Change Picture</>
                     )}
                   </button>
                   <input
@@ -649,7 +643,7 @@ const Profile = () => {
                 className="submit-button"
                 disabled={updating}
               >
-                {updating ? '⏳ Updating...' : '✨ Update Profile'}
+                {updating ? 'â³ Updating...' : 'âœ¨ Update Profile'}
               </button>
             </form>
           </div>
@@ -658,17 +652,17 @@ const Profile = () => {
         {activeTab === 'preferences' && (
           <div className="tab-content">
             <div className="section-header">
-              <h2>🎨 Preferences</h2>
+              <h2>ðŸŽ¨ Preferences</h2>
               <p>Customize your experience with themes, languages, and notifications</p>
             </div>
 
             <div className="preferences-section">
-              <h3>🎯 Website Theme</h3>
+              <h3>ðŸŽ¯ Website Theme</h3>
               <p>This controls the overall appearance of the website for you</p>
               <div className="website-theme-control">
                 <div className="theme-toggle-container">
                   <span className="theme-label">
-                    Current: {isDarkMode ? '🌙 Dark Mode' : '☀️ Light Mode'}
+                    Current: {isDarkMode ? 'ðŸŒ™ Dark Mode' : 'â˜€ï¸ Light Mode'}
                   </span>
                   <button 
                     className="theme-toggle-btn"
@@ -681,7 +675,7 @@ const Profile = () => {
             </div>
 
             <div className="preferences-section">
-              <h3>�🎨 Personal Color Theme</h3>
+              <h3>ï¿½ðŸŽ¨ Personal Color Theme</h3>
               <p>Choose your personal color scheme for custom features</p>
               <div className="theme-grid">
                 {colorThemes.map((theme) => (
@@ -703,7 +697,7 @@ const Profile = () => {
             </div>
 
             <div className="preferences-section">
-              <h3>🌐 Language</h3>
+              <h3>ðŸŒ Language</h3>
               <div className="language-grid">
                 {languages.map((lang) => (
                   <div
@@ -719,7 +713,7 @@ const Profile = () => {
             </div>
 
             <div className="preferences-section">
-              <h3>🔔 Notifications</h3>
+              <h3>ðŸ”” Notifications</h3>
               <div className="notification-settings">
                 {Object.entries(preferences.notifications).map(([type, enabled]) => (
                   <div key={type} className="notification-item">
@@ -752,7 +746,7 @@ const Profile = () => {
         {activeTab === 'interests' && (
           <div className="tab-content">
             <div className="section-header">
-              <h2>❤️ Art Interests</h2>
+              <h2>â¤ï¸ Art Interests</h2>
               <p>Select your favorite art styles and mediums to personalize your experience</p>
             </div>
 
@@ -765,7 +759,7 @@ const Profile = () => {
                 >
                   <span className="interest-name">{interest}</span>
                   {selectedInterests.includes(interest) && (
-                    <span className="interest-check">✓</span>
+                    <span className="interest-check">âœ“</span>
                   )}
                 </div>
               ))}
@@ -777,7 +771,7 @@ const Profile = () => {
                 {selectedInterests.map((interest) => (
                   <span key={interest} className="selected-tag">
                     {interest}
-                    <button onClick={() => toggleInterest(interest)}>×</button>
+                    <button onClick={() => toggleInterest(interest)}>Ã—</button>
                   </span>
                 ))}
               </div>
@@ -797,7 +791,7 @@ const Profile = () => {
         {activeTab === 'security' && (
           <div className="tab-content">
             <div className="section-header">
-              <h2>🔒 Security Settings</h2>
+              <h2>ðŸ”’ Security Settings</h2>
               <p>Manage your account security and password</p>
             </div>
 
@@ -845,12 +839,12 @@ const Profile = () => {
                 className="submit-button"
                 disabled={updating}
               >
-                {updating ? '⏳ Updating...' : '🔐 Update Password'}
+                {updating ? 'â³ Updating...' : 'ðŸ” Update Password'}
               </button>
             </form>
 
             <div className="account-info">
-              <h3>📊 Account Information</h3>
+              <h3>ðŸ“Š Account Information</h3>
               <div className="info-grid">
                 <div className="info-item">
                   <span className="label">Account Created:</span>
@@ -859,7 +853,7 @@ const Profile = () => {
                 <div className="info-item">
                   <span className="label">Account Status:</span>
                   <span className={`value status ${user?.is_active ? 'active' : 'inactive'}`}>
-                    {user?.is_active ? '✅ Active' : '❌ Inactive'}
+                    {user?.is_active ? 'âœ… Active' : 'âŒ Inactive'}
                   </span>
                 </div>
                 <div className="info-item">
@@ -880,3 +874,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

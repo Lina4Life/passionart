@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -107,14 +101,14 @@ function checkArtworks() {
           });
         }
         
-        console.log(`\n📊 Total artworks: ${rows.length}`);
-        console.log(`🌟 Featured artworks: ${featuredRows.length}`);
+        console.log(`\nðŸ“Š Total artworks: ${rows.length}`);
+        console.log(`ðŸŒŸ Featured artworks: ${featuredRows.length}`);
         
         db.close((err) => {
           if (err) {
             console.error('Error closing database:', err);
           } else {
-            console.log('\n✅ Database check completed!');
+            console.log('\nâœ… Database check completed!');
           }
         });
       });
@@ -124,3 +118,4 @@ function checkArtworks() {
 
 // Run the function
 checkArtworks();
+

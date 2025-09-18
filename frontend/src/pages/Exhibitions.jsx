@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 
 const exhibitions = [
   { title: 'Screens Series: Kate Cooper', date: 'On view through April 5', desc: 'A vibrant digital exhibition exploring identity and technology.' },
@@ -51,3 +45,4 @@ const Exhibitions = () => (
 );
 
 export default Exhibitions;
+

@@ -1,39 +1,33 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
 const dbPath = path.join(__dirname, 'data', 'passionart.db');
 
-console.log('🔍 Checking for recent user registrations...');
+console.log('ðŸ” Checking for recent user registrations...');
 console.log('=' .repeat(60));
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
-    console.error('❌ Error opening database:', err.message);
+    console.error('âŒ Error opening database:', err.message);
     return;
   }
   
-  console.log('✅ Connected to SQLite database');
+  console.log('âœ… Connected to SQLite database');
   console.log('=' .repeat(60));
   
   // Get all users ordered by creation date
   db.all("SELECT * FROM users ORDER BY created_at DESC", [], (err, users) => {
     if (err) {
-      console.error('❌ Error fetching users:', err.message);
+      console.error('âŒ Error fetching users:', err.message);
       return;
     }
     
-    console.log(`📋 Total users in database: ${users.length}`);
+    console.log(`ðŸ“‹ Total users in database: ${users.length}`);
     console.log('=' .repeat(60));
     
     users.forEach((user, index) => {
-      console.log(`\n👤 User ${index + 1}:`);
+      console.log(`\nðŸ‘¤ User ${index + 1}:`);
       console.log(`   ID: ${user.id}`);
       console.log(`   Email: ${user.email}`);
       console.log(`   Username: ${user.username || 'N/A'}`);
@@ -45,9 +39,9 @@ const db = new sqlite3.Database(dbPath, (err) => {
       
       // Check if password is hashed or plain text
       if (user.password.startsWith('$2b$') || user.password.startsWith('$2a$')) {
-        console.log(`   Password: ✅ Properly hashed`);
+        console.log(`   Password: âœ… Properly hashed`);
       } else {
-        console.log(`   Password: ⚠️ Plain text (${user.password.substring(0, 10)}...)`);
+        console.log(`   Password: âš ï¸ Plain text (${user.password.substring(0, 10)}...)`);
       }
     });
     
@@ -56,7 +50,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
     const todayUsers = users.filter(user => user.created_at.startsWith(today));
     
     console.log('\n' + '=' .repeat(60));
-    console.log(`📅 Users created today (${today}): ${todayUsers.length}`);
+    console.log(`ðŸ“… Users created today (${today}): ${todayUsers.length}`);
     
     if (todayUsers.length > 0) {
       todayUsers.forEach(user => {
@@ -68,7 +62,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
     const recentUsers = users.filter(user => user.created_at > oneHourAgo);
     
-    console.log(`\n⏰ Users created in the last hour: ${recentUsers.length}`);
+    console.log(`\nâ° Users created in the last hour: ${recentUsers.length}`);
     
     if (recentUsers.length > 0) {
       recentUsers.forEach(user => {
@@ -79,7 +73,8 @@ const db = new sqlite3.Database(dbPath, (err) => {
     }
     
     console.log('\n' + '=' .repeat(60));
-    console.log('✅ User check complete!');
+    console.log('âœ… User check complete!');
     db.close();
   });
 });
+

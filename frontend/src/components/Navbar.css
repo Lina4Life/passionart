@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-/* Clean Black & White Navbar - Sci-fi minimalist */
+﻿/* Clean Black & White Navbar - Sci-fi minimalist */
 .navbar {
   position: fixed;
   top: 0;
@@ -368,3 +362,4 @@
 .logout-btn-mobile:hover {
   color: #e74c3c;
 }
+

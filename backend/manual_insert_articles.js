@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('./config/database');
+﻿const db = require('./config/database');
 
 const articles = [
   {
@@ -105,10 +99,10 @@ function insertArticles() {
           console.error(`Error inserting article ${index + 1}:`, err);
         } else {
           insertedCount++;
-          console.log(`✓ Inserted: ${article.title} (ID: ${this.lastID})`);
+          console.log(`âœ“ Inserted: ${article.title} (ID: ${this.lastID})`);
           
           if (insertedCount === totalArticles) {
-            console.log(`\n🎉 Successfully inserted all ${totalArticles} articles!`);
+            console.log(`\nðŸŽ‰ Successfully inserted all ${totalArticles} articles!`);
             db.close((closeErr) => {
               if (closeErr) {
                 console.error('Error closing database:', closeErr);
@@ -126,3 +120,4 @@ function insertArticles() {
 
 // Start the insertion process
 insertArticles();
+

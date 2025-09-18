@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const path = require('path');
+﻿const path = require('path');
 require('dotenv').config();
 
 // Add error handling for uncaught exceptions
@@ -514,3 +508,4 @@ server.on('error', (err) => {
   console.error('Failed to start server:', err);
   process.exit(1);
 });
+

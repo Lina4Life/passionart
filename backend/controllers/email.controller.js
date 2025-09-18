@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const nodemailer = require('nodemailer');
+﻿const nodemailer = require('nodemailer');
 const db = require('../config/database');
 
 // Email configuration (you'll need to set up environment variables)
@@ -199,3 +193,4 @@ module.exports = {
   sendVerificationEmail,
   testEmailConfig
 };
+

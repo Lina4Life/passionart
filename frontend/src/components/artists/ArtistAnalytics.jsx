@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import './ArtistAnalytics.css';
 
 const ArtistAnalytics = ({ artistId }) => {
@@ -58,7 +52,7 @@ const ArtistAnalytics = ({ artistId }) => {
     return (
       <div className="analytics-container">
         <div className="analytics-header">
-          <h2>📊 Artist Analytics</h2>
+          <h2>ðŸ“Š Artist Analytics</h2>
           <div className="loading-placeholder">Loading analytics...</div>
         </div>
       </div>
@@ -69,7 +63,7 @@ const ArtistAnalytics = ({ artistId }) => {
     return (
       <div className="analytics-container">
         <div className="analytics-header">
-          <h2>📊 Artist Analytics</h2>
+          <h2>ðŸ“Š Artist Analytics</h2>
           <p>No analytics data available</p>
         </div>
       </div>
@@ -79,7 +73,7 @@ const ArtistAnalytics = ({ artistId }) => {
   return (
     <div className="analytics-container">
       <div className="analytics-header">
-        <h2>📊 Artist Analytics</h2>
+        <h2>ðŸ“Š Artist Analytics</h2>
         <div className="time-range-selector">
           {timeRangeOptions.map(option => (
             <button
@@ -97,48 +91,48 @@ const ArtistAnalytics = ({ artistId }) => {
         {/* Key Metrics */}
         <div className="metrics-row">
           <div className="metric-card">
-            <div className="metric-icon">👁️</div>
+            <div className="metric-icon">ðŸ‘ï¸</div>
             <div className="metric-content">
               <h3>Profile Views</h3>
               <div className="metric-value">{formatNumber(analytics.profile_views?.current || 0)}</div>
               <div className={`metric-growth ${analytics.profile_views?.growth >= 0 ? 'positive' : 'negative'}`}>
-                {analytics.profile_views?.growth >= 0 ? '↗️' : '↘️'} 
+                {analytics.profile_views?.growth >= 0 ? 'â†—ï¸' : 'â†˜ï¸'} 
                 {Math.abs(analytics.profile_views?.growth || 0)}%
               </div>
             </div>
           </div>
 
           <div className="metric-card">
-            <div className="metric-icon">🎨</div>
+            <div className="metric-icon">ðŸŽ¨</div>
             <div className="metric-content">
               <h3>Artwork Views</h3>
               <div className="metric-value">{formatNumber(analytics.artwork_views?.current || 0)}</div>
               <div className={`metric-growth ${analytics.artwork_views?.growth >= 0 ? 'positive' : 'negative'}`}>
-                {analytics.artwork_views?.growth >= 0 ? '↗️' : '↘️'} 
+                {analytics.artwork_views?.growth >= 0 ? 'â†—ï¸' : 'â†˜ï¸'} 
                 {Math.abs(analytics.artwork_views?.growth || 0)}%
               </div>
             </div>
           </div>
 
           <div className="metric-card">
-            <div className="metric-icon">❤️</div>
+            <div className="metric-icon">â¤ï¸</div>
             <div className="metric-content">
               <h3>Total Likes</h3>
               <div className="metric-value">{formatNumber(analytics.total_likes?.current || 0)}</div>
               <div className={`metric-growth ${analytics.total_likes?.growth >= 0 ? 'positive' : 'negative'}`}>
-                {analytics.total_likes?.growth >= 0 ? '↗️' : '↘️'} 
+                {analytics.total_likes?.growth >= 0 ? 'â†—ï¸' : 'â†˜ï¸'} 
                 {Math.abs(analytics.total_likes?.growth || 0)}%
               </div>
             </div>
           </div>
 
           <div className="metric-card">
-            <div className="metric-icon">👥</div>
+            <div className="metric-icon">ðŸ‘¥</div>
             <div className="metric-content">
               <h3>New Followers</h3>
               <div className="metric-value">{formatNumber(analytics.new_followers?.current || 0)}</div>
               <div className={`metric-growth ${analytics.new_followers?.growth >= 0 ? 'positive' : 'negative'}`}>
-                {analytics.new_followers?.growth >= 0 ? '↗️' : '↘️'} 
+                {analytics.new_followers?.growth >= 0 ? 'â†—ï¸' : 'â†˜ï¸'} 
                 {Math.abs(analytics.new_followers?.growth || 0)}%
               </div>
             </div>
@@ -147,7 +141,7 @@ const ArtistAnalytics = ({ artistId }) => {
 
         {/* Top Performing Artworks */}
         <div className="analytics-section">
-          <h3>🏆 Top Performing Artworks</h3>
+          <h3>ðŸ† Top Performing Artworks</h3>
           <div className="top-artworks">
             {analytics.top_artworks?.map((artwork, index) => (
               <div key={artwork.id} className="artwork-performance">
@@ -158,9 +152,9 @@ const ArtistAnalytics = ({ artistId }) => {
                 <div className="artwork-stats">
                   <h4>{artwork.title}</h4>
                   <div className="artwork-metrics">
-                    <span>👁️ {formatNumber(artwork.views)}</span>
-                    <span>❤️ {formatNumber(artwork.likes)}</span>
-                    <span>💬 {formatNumber(artwork.comments)}</span>
+                    <span>ðŸ‘ï¸ {formatNumber(artwork.views)}</span>
+                    <span>â¤ï¸ {formatNumber(artwork.likes)}</span>
+                    <span>ðŸ’¬ {formatNumber(artwork.comments)}</span>
                   </div>
                 </div>
               </div>
@@ -170,7 +164,7 @@ const ArtistAnalytics = ({ artistId }) => {
 
         {/* Engagement Insights */}
         <div className="analytics-section">
-          <h3>📈 Engagement Insights</h3>
+          <h3>ðŸ“ˆ Engagement Insights</h3>
           <div className="engagement-grid">
             <div className="engagement-card">
               <h4>Average Engagement Rate</h4>
@@ -192,7 +186,7 @@ const ArtistAnalytics = ({ artistId }) => {
 
         {/* Audience Demographics */}
         <div className="analytics-section">
-          <h3>🌍 Audience Demographics</h3>
+          <h3>ðŸŒ Audience Demographics</h3>
           <div className="demographics-grid">
             <div className="demo-card">
               <h4>Top Countries</h4>
@@ -221,13 +215,13 @@ const ArtistAnalytics = ({ artistId }) => {
 
         {/* Revenue Analytics */}
         <div className="analytics-section">
-          <h3>💰 Revenue Insights</h3>
+          <h3>ðŸ’° Revenue Insights</h3>
           <div className="revenue-grid">
             <div className="revenue-card">
               <h4>Total Revenue</h4>
               <div className="revenue-value">${analytics.total_revenue || '0.00'}</div>
               <div className={`revenue-growth ${analytics.revenue_growth >= 0 ? 'positive' : 'negative'}`}>
-                {analytics.revenue_growth >= 0 ? '↗️' : '↘️'} 
+                {analytics.revenue_growth >= 0 ? 'â†—ï¸' : 'â†˜ï¸'} 
                 {Math.abs(analytics.revenue_growth || 0)}% from last period
               </div>
             </div>
@@ -246,7 +240,7 @@ const ArtistAnalytics = ({ artistId }) => {
 
         {/* Goal Progress */}
         <div className="analytics-section">
-          <h3>🎯 Goal Progress</h3>
+          <h3>ðŸŽ¯ Goal Progress</h3>
           <div className="goals-container">
             <div className="goal-item">
               <div className="goal-header">
@@ -280,3 +274,4 @@ const ArtistAnalytics = ({ artistId }) => {
 };
 
 export default ArtistAnalytics;
+

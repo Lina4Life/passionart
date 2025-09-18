@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
 
 // Simple in-memory storage for testing
@@ -76,3 +70,4 @@ router.get('/activity', (req, res) => {
 });
 
 module.exports = router;
+

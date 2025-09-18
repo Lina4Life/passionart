@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
@@ -89,3 +83,4 @@ router.post('/:id/feature', featureArtwork);
 router.delete('/:id/feature', unfeatureArtwork);
 
 module.exports = router;
+

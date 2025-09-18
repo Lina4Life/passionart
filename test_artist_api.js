@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-// Test artist profile API
+﻿// Test artist profile API
 const fetchArtist = async (id) => {
   try {
     console.log(`Testing API: http://localhost:3001/api/user/${id}`);
@@ -44,3 +38,4 @@ fetchArtworks(2);
 // Test artist ID 3  
 fetchArtist(3);
 fetchArtworks(3);
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Create database path
@@ -23,7 +17,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
     console.error('Error opening database:', err);
   } else {
     console.log('Connected to SQLite database');
-    console.log('🚀 Database connection ready');
+    console.log('ðŸš€ Database connection ready');
   }
 });
 
@@ -65,7 +59,7 @@ function insertSampleData() {
           console.error('Error inserting admin user:', err);
           console.error('Error details:', err.message);
         } else {
-          console.log('✅ Admin user inserted successfully with ID:', this.lastID);
+          console.log('âœ… Admin user inserted successfully with ID:', this.lastID);
           
           // Insert a default chat group after user is created
           db.run(`INSERT INTO chat_groups (name, description, is_private, created_by) 
@@ -75,7 +69,7 @@ function insertSampleData() {
             if (err) {
               console.error('Error inserting chat group:', err);
             } else {
-              console.log('✅ Default chat group created with ID:', this.lastID);
+              console.log('âœ… Default chat group created with ID:', this.lastID);
             }
           });
         }
@@ -87,3 +81,4 @@ function insertSampleData() {
 }
 
 module.exports = db;
+

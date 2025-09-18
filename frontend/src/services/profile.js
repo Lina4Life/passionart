@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const API_URL = 'http://localhost:3001/api';
+﻿const API_URL = 'http://localhost:3001/api';
 
 // Profile API service
 export const profileAPI = {
@@ -128,3 +122,4 @@ export const profileAPI = {
     return response.json();
   }
 };
+

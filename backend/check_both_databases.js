@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 console.log('=== CHECKING BOTH DATABASE FILES ===\n');
@@ -16,7 +10,7 @@ const configDb = new sqlite3.Database('./config/database.db', (err) => {
     console.log('   Error: Could not open config/database.db:', err.message);
     checkDataDb();
   } else {
-    console.log('   ✅ Connected to config/database.db');
+    console.log('   âœ… Connected to config/database.db');
     
     configDb.all("SELECT name FROM sqlite_master WHERE type='table'", (err, tables) => {
       if (err) {
@@ -50,7 +44,7 @@ function checkDataDb() {
       console.log('   Error: Could not open data/passionart.db:', err.message);
       checkWhichDbControllerUses();
     } else {
-      console.log('   ✅ Connected to data/passionart.db');
+      console.log('   âœ… Connected to data/passionart.db');
       
       dataDb.all("SELECT name FROM sqlite_master WHERE type='table'", (err, tables) => {
         if (err) {
@@ -108,3 +102,4 @@ function checkWhichDbControllerUses() {
   console.log('The controller and sample data script may be using different database files!');
   console.log('This could explain why the featured artworks are not showing up correctly.');
 }
+

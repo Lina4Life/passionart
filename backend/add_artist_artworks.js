@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database paths
@@ -151,7 +145,7 @@ function addArtworks() {
       console.error('Error opening users database:', err.message);
       return;
     }
-    console.log('✅ Connected to users database');
+    console.log('âœ… Connected to users database');
   });
 
   usersDb.all('SELECT id, email, username, first_name, last_name FROM users WHERE id IN (34, 26, 3, 4, 5)', (err, artists) => {
@@ -161,7 +155,7 @@ function addArtworks() {
       return;
     }
 
-    console.log('📋 Found artists:');
+    console.log('ðŸ“‹ Found artists:');
     artists.forEach(artist => {
       const fullName = `${artist.first_name || ''} ${artist.last_name || ''}`.trim();
       console.log(`   ID: ${artist.id}, Name: ${fullName}, Username: ${artist.username}, Email: ${artist.email}`);
@@ -175,7 +169,7 @@ function addArtworks() {
         console.error('Error opening artworks database:', err.message);
         return;
       }
-      console.log('✅ Connected to artworks database');
+      console.log('âœ… Connected to artworks database');
     });
 
     // Insert sample artworks with artist information
@@ -208,7 +202,7 @@ function addArtworks() {
           console.error('Error inserting artwork:', err.message);
         } else {
           insertedCount++;
-          console.log(`✅ Added: "${artwork.title}" by ${artistName} (ID: ${artwork.artist_id})`);
+          console.log(`âœ… Added: "${artwork.title}" by ${artistName} (ID: ${artwork.artist_id})`);
         }
 
         if (insertedCount === sampleArtworks.length) {
@@ -222,24 +216,24 @@ function addArtworks() {
             if (err) {
               console.error('Error fetching artworks:', err.message);
             } else {
-              console.log('\n🎨 ARTWORKS SUMMARY:');
+              console.log('\nðŸŽ¨ ARTWORKS SUMMARY:');
               console.log('='.repeat(80));
               rows.forEach(artwork => {
-                console.log(`📋 "${artwork.title}" - $${artwork.price}`);
-                console.log(`   👤 Artist: ${artwork.artist_name} (${artwork.artist_username})`);
-                console.log(`   🎭 Medium: ${artwork.medium} | Dimensions: ${artwork.dimensions}`);
-                console.log(`   ✅ Status: ${artwork.status} | Tags: ${artwork.tags}`);
-                console.log(`   📸 Image: ${artwork.image_url}`);
+                console.log(`ðŸ“‹ "${artwork.title}" - $${artwork.price}`);
+                console.log(`   ðŸ‘¤ Artist: ${artwork.artist_name} (${artwork.artist_username})`);
+                console.log(`   ðŸŽ­ Medium: ${artwork.medium} | Dimensions: ${artwork.dimensions}`);
+                console.log(`   âœ… Status: ${artwork.status} | Tags: ${artwork.tags}`);
+                console.log(`   ðŸ“¸ Image: ${artwork.image_url}`);
                 console.log('-'.repeat(80));
               });
-              console.log(`\n✨ Total artworks in database: ${rows.length}`);
+              console.log(`\nâœ¨ Total artworks in database: ${rows.length}`);
             }
             
             artworksDb.close((err) => {
               if (err) {
                 console.error('Error closing database:', err.message);
               } else {
-                console.log('✅ Artworks database connection closed');
+                console.log('âœ… Artworks database connection closed');
               }
             });
           });
@@ -251,8 +245,9 @@ function addArtworks() {
 
 // Run the script
 if (require.main === module) {
-  console.log('🎨 Adding sample artworks to database...');
+  console.log('ðŸŽ¨ Adding sample artworks to database...');
   addArtworks();
 }
 
 module.exports = { addArtworks, sampleArtworks };
+

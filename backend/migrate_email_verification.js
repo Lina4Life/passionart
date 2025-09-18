@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('./config/database');
+﻿const db = require('./config/database');
 
 // Migration to add email verification fields to users table
 function addEmailVerificationFields() {
@@ -22,7 +16,7 @@ function addEmailVerificationFields() {
       if (err && !err.message.includes('duplicate column name')) {
         console.error('Error adding email_verified column:', err);
       } else {
-        console.log('✓ Added email_verified column');
+        console.log('âœ“ Added email_verified column');
       }
     });
 
@@ -31,7 +25,7 @@ function addEmailVerificationFields() {
       if (err && !err.message.includes('duplicate column name')) {
         console.error('Error adding verification_token column:', err);
       } else {
-        console.log('✓ Added verification_token column');
+        console.log('âœ“ Added verification_token column');
       }
     });
 
@@ -40,7 +34,7 @@ function addEmailVerificationFields() {
       if (err && !err.message.includes('duplicate column name')) {
         console.error('Error adding verification_token_expires column:', err);
       } else {
-        console.log('✓ Added verification_token_expires column');
+        console.log('âœ“ Added verification_token_expires column');
       }
     });
 
@@ -49,14 +43,15 @@ function addEmailVerificationFields() {
       if (err) {
         console.error('Error updating existing users:', err);
       } else {
-        console.log('✓ Updated existing users to have verified emails');
+        console.log('âœ“ Updated existing users to have verified emails');
       }
     });
 
-    console.log('✅ Email verification migration completed!');
+    console.log('âœ… Email verification migration completed!');
     process.exit(0);
   });
 }
 
 // Run migration
 addEmailVerificationFields();
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-/* Moderation Dashboard Styles */
+﻿/* Moderation Dashboard Styles */
 .moderation-dashboard {
   max-width: 1400px;
   margin: 0 auto;
@@ -371,3 +365,4 @@
     grid-template-columns: 1fr;
   }
 }
+

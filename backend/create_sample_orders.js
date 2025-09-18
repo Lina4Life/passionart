@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -56,7 +50,7 @@ function createAndPopulateOrders() {
       console.error('Error creating orders table:', err);
       return;
     }
-    console.log('✅ Orders table created/verified');
+    console.log('âœ… Orders table created/verified');
     
     // Sample orders data
     const sampleOrders = [
@@ -201,9 +195,9 @@ function createAndPopulateOrders() {
         order.delivered_at
       ], function(err) {
         if (err) {
-          console.error(`❌ Error adding order ${order.order_number}:`, err);
+          console.error(`âŒ Error adding order ${order.order_number}:`, err);
         } else {
-          console.log(`✅ Added order: ${order.order_number}`);
+          console.log(`âœ… Added order: ${order.order_number}`);
           console.log(`   Customer: ${order.customer_name}`);
           console.log(`   Artwork: ${order.artwork_title}`);
           console.log(`   Amount: $${order.total_amount}`);
@@ -230,20 +224,20 @@ function createAndPopulateOrders() {
               console.error('Error getting summary:', err);
             } else {
               const stats = summary[0];
-              console.log(`📊 Total Orders: ${stats.total_orders}`);
-              console.log(`⏳ Pending: ${stats.pending}`);
-              console.log(`⚙️ Processing: ${stats.processing}`);
-              console.log(`🚚 Shipped: ${stats.shipped}`);
-              console.log(`✅ Delivered: ${stats.delivered}`);
-              console.log(`❌ Cancelled: ${stats.cancelled}`);
-              console.log(`💰 Total Revenue: $${stats.total_revenue}`);
+              console.log(`ðŸ“Š Total Orders: ${stats.total_orders}`);
+              console.log(`â³ Pending: ${stats.pending}`);
+              console.log(`âš™ï¸ Processing: ${stats.processing}`);
+              console.log(`ðŸšš Shipped: ${stats.shipped}`);
+              console.log(`âœ… Delivered: ${stats.delivered}`);
+              console.log(`âŒ Cancelled: ${stats.cancelled}`);
+              console.log(`ðŸ’° Total Revenue: $${stats.total_revenue}`);
             }
             
             db.close((err) => {
               if (err) {
                 console.error('Error closing database:', err);
               } else {
-                console.log('\n🛍️ Orders system created successfully!');
+                console.log('\nðŸ›ï¸ Orders system created successfully!');
                 console.log('Admin can now manage orders through the dashboard.');
               }
             });
@@ -256,3 +250,4 @@ function createAndPopulateOrders() {
 
 // Run the function
 createAndPopulateOrders();
+

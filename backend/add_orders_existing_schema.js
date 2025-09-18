@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -124,9 +118,9 @@ function addSampleOrdersToExistingTable() {
         daysAgo
       ], function(err) {
         if (err) {
-          console.error(`❌ Error adding order ${index + 1}:`, err);
+          console.error(`âŒ Error adding order ${index + 1}:`, err);
         } else {
-          console.log(`✅ Added order #${this.lastID}`);
+          console.log(`âœ… Added order #${this.lastID}`);
           console.log(`   Buyer ID: ${order.buyer_id}`);
           console.log(`   Artwork ID: ${order.artwork_id}`);
           console.log(`   Amount: $${order.total_amount}`);
@@ -191,8 +185,8 @@ function showOrdersWithDetails() {
       }, { total: 0 });
       
       console.log('=== SUMMARY ===');
-      console.log(`📊 Total Orders: ${orders.length}`);
-      console.log(`💰 Total Revenue: $${summary.total.toFixed(2)}`);
+      console.log(`ðŸ“Š Total Orders: ${orders.length}`);
+      console.log(`ðŸ’° Total Revenue: $${summary.total.toFixed(2)}`);
       console.log('Payment Status Breakdown:');
       Object.keys(summary).forEach(key => {
         if (key !== 'total') {
@@ -205,7 +199,7 @@ function showOrdersWithDetails() {
       if (err) {
         console.error('Error closing database:', err);
       } else {
-        console.log('\n🛍️ Orders system ready for admin dashboard!');
+        console.log('\nðŸ›ï¸ Orders system ready for admin dashboard!');
         console.log('The admin can now view and manage orders through the interface.');
       }
     });
@@ -214,3 +208,4 @@ function showOrdersWithDetails() {
 
 // Run the function
 addSampleOrdersToExistingTable();
+

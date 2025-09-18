@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const OpenAI = require('openai');
+﻿const OpenAI = require('openai');
 
 class AIPricingService {
   constructor() {
@@ -216,3 +210,4 @@ Format as JSON:
 }
 
 module.exports = AIPricingService;
+

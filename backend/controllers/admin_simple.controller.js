@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const storage = require('../config/storage');
+﻿const storage = require('../config/storage');
 
 const getAdminStats = async (req, res) => {
   try {
@@ -120,3 +114,4 @@ module.exports = {
   getAllUsers,
   getAllProducts
 };
+

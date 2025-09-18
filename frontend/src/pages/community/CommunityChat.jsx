@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect, useRef, useContext } from 'react';
+﻿import React, { useState, useEffect, useRef, useContext } from 'react';
 import { io } from 'socket.io-client';
 import { AuthContext } from '../../context/AuthContext';
 import './CommunityChat.css';
@@ -50,7 +44,7 @@ const CommunityChat = () => {
             marginBottom: 'var(--space-lg)',
             opacity: 0.7
           }}>
-            💬
+            ðŸ’¬
           </div>
           <h2 style={{
             fontFamily: 'var(--font-display)',
@@ -526,7 +520,7 @@ const CommunityChat = () => {
                   marginBottom: 'var(--space-md)',
                   opacity: 0.5
                 }}>
-                  💬
+                  ðŸ’¬
                 </div>
                 <p style={{ fontSize: 'var(--font-size-lg)', marginBottom: 'var(--space-sm)' }}>
                   No messages yet
@@ -626,3 +620,4 @@ const CommunityChat = () => {
 };
 
 export default CommunityChat;
+

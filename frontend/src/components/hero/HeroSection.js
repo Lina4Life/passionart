@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 
 const HeroSection = () => (
   <section style={{ background: 'linear-gradient(90deg, #d7263d 0%, #f46036 100%)', color: '#fff', padding: '4rem 2rem', textAlign: 'center' }}>
@@ -19,3 +13,4 @@ const HeroSection = () => (
 );
 
 export default HeroSection;
+

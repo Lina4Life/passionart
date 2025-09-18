@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-.theme-toggle {
+﻿.theme-toggle {
   position: relative;
   background: none;
   border: none;
@@ -73,3 +67,4 @@
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
 }
+

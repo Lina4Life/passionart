@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => (
@@ -155,9 +149,10 @@ const HeroSection = () => (
       color: 'rgba(255, 255, 255, 0.3)',
       fontSize: '1.5rem'
     }}>
-      ↓
+      â†“
     </div>
   </section>
 );
 
 export default HeroSection;
+

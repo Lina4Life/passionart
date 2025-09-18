@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -105,9 +99,9 @@ function addNewUserTypes() {
       user.is_active
     ], function(err) {
       if (err) {
-        console.error(`❌ Error adding ${user.user_type} "${user.username}":`, err);
+        console.error(`âŒ Error adding ${user.user_type} "${user.username}":`, err);
       } else {
-        console.log(`✅ Added ${user.user_type}: "${user.first_name} ${user.last_name}" (ID: ${this.lastID})`);
+        console.log(`âœ… Added ${user.user_type}: "${user.first_name} ${user.last_name}" (ID: ${this.lastID})`);
         console.log(`   Username: ${user.username}`);
         console.log(`   Email: ${user.email}`);
         console.log(`   Bio: ${user.bio.substring(0, 50)}...`);
@@ -142,11 +136,11 @@ function addNewUserTypes() {
               if (err) {
                 console.error('Error closing database:', err);
               } else {
-                console.log('\n🎉 New user types added successfully!');
+                console.log('\nðŸŽ‰ New user types added successfully!');
                 console.log('Account types now available:');
                 console.log('- Artist (creates and sells art)');
-                console.log('- Collector (buys and collects art) 🆕');
-                console.log('- Institution (museums, cultural centers) 🆕');
+                console.log('- Collector (buys and collects art) ðŸ†•');
+                console.log('- Institution (museums, cultural centers) ðŸ†•');
                 console.log('- Admin (platform administration)');
               }
             });
@@ -159,3 +153,4 @@ function addNewUserTypes() {
 
 // Run the function
 addNewUserTypes();
+

@@ -1,11 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { register as apiRegister } from '../services/api';
 import PasswordStrength from '../components/PasswordStrength';
@@ -304,7 +297,7 @@ function Register() {
                       color: '#ff4757',
                       textAlign: 'center'
                     }}>
-                      ⚠️ Please create a strong password to continue
+                      âš ï¸ Please create a strong password to continue
                     </div>
                   )}
                 </div>
@@ -593,3 +586,4 @@ function Register() {
 }
 
 export default Register;
+

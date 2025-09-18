@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const { Resend } = require('resend');
+﻿const { Resend } = require('resend');
 const hubspot = require('@hubspot/api-client');
 
 // Initialize clients
@@ -48,7 +42,7 @@ const sendVerificationEmail = async (req, res) => {
                 <p style="word-break: break-all; color: #667eea;">${verificationUrl}</p>
               </div>
               <div style="background-color: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e9ecef;">
-                <p style="margin: 0; color: #6c757d; font-size: 14px;">© 2025 PassionArt. All rights reserved.</p>
+                <p style="margin: 0; color: #6c757d; font-size: 14px;">Â© 2025 PassionArt. All rights reserved.</p>
               </div>
             </div>
           </body>
@@ -123,7 +117,7 @@ const sendPasswordResetEmail = async (req, res) => {
                 <p style="margin: 20px 0; color: #666;">If you didn't request this reset, please ignore this email.</p>
               </div>
               <div style="background-color: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e9ecef;">
-                <p style="margin: 0; color: #6c757d; font-size: 14px;">© 2025 PassionArt. All rights reserved.</p>
+                <p style="margin: 0; color: #6c757d; font-size: 14px;">Â© 2025 PassionArt. All rights reserved.</p>
               </div>
             </div>
           </body>
@@ -256,7 +250,7 @@ const handleWebhook = async (req, res) => {
   try {
     const webhookData = req.body;
     
-    console.log('📨 HubSpot Webhook received:', {
+    console.log('ðŸ“¨ HubSpot Webhook received:', {
       subscriptionType: webhookData.subscriptionType,
       eventId: webhookData.eventId,
       objectId: webhookData.objectId
@@ -266,17 +260,17 @@ const handleWebhook = async (req, res) => {
     for (const event of webhookData) {
       switch (event.subscriptionType) {
         case 'contact.creation':
-          console.log('👤 New contact created in HubSpot:', event.objectId);
+          console.log('ðŸ‘¤ New contact created in HubSpot:', event.objectId);
           // You can add custom logic here
           break;
           
         case 'contact.propertyChange':
-          console.log('📝 Contact property changed:', event.objectId);
+          console.log('ðŸ“ Contact property changed:', event.objectId);
           // You can add custom logic here
           break;
           
         default:
-          console.log('🔔 Unhandled webhook event:', event.subscriptionType);
+          console.log('ðŸ”” Unhandled webhook event:', event.subscriptionType);
       }
     }
 
@@ -304,3 +298,4 @@ module.exports = {
   getEmailStats,
   handleWebhook
 };
+

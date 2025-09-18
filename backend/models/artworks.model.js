@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('../config/database');
+﻿const db = require('../config/database');
 
 const saveArtwork = async (userId, title, description, keywords, imagePath, category, paymentIntentId) => {
   return new Promise((resolve, reject) => {
@@ -49,3 +43,4 @@ const listArtworks = async () => {
 };
 
 module.exports = { saveArtwork, listArtworks };
+

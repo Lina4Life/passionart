@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 import { useTheme } from '../context/ThemeContext';
 import './ThemeToggle.css';
 
@@ -37,3 +31,4 @@ const ThemeToggle = () => {
 };
 
 export default ThemeToggle;
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Toast from '../components/Toast';
 import { useToast } from '../hooks/useToast';
@@ -409,7 +403,7 @@ const Upload = () => {
 							marginBottom: 'var(--space-lg)',
 							color: dragActive ? 'var(--accent-color)' : 'var(--text-muted)'
 						}}>
-							{dragActive ? '↓' : '↑'}
+							{dragActive ? 'â†“' : 'â†‘'}
 						</div>
 						<h4 style={{ 
 							marginBottom: 'var(--space-sm)', 
@@ -429,7 +423,7 @@ const Upload = () => {
 						</p>
 						<div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-muted)' }}>
 							<p>Supported formats: JPEG, PNG, GIF, WebP</p>
-							<p>Max file size: 10MB • Max files: {MAX_FILES}</p>
+							<p>Max file size: 10MB â€¢ Max files: {MAX_FILES}</p>
 						</div>
 					</div>
 
@@ -499,7 +493,7 @@ const Upload = () => {
 												fontWeight: 'bold'
 											}}
 										>
-											×
+											Ã—
 										</button>
 										<div style={{
 											position: 'absolute',
@@ -532,7 +526,7 @@ const Upload = () => {
 						fontSize: 'var(--font-size-xl)',
 						fontWeight: '600'
 					}}>
-						💰 Artwork Pricing Calculator
+						ðŸ’° Artwork Pricing Calculator
 					</h3>
 					
 					<div style={{
@@ -553,7 +547,7 @@ const Upload = () => {
 								alignItems: 'center',
 								gap: 'var(--space-sm)'
 							}}>
-								🔹 Step 1: Artwork Dimensions
+								ðŸ”¹ Step 1: Artwork Dimensions
 							</h4>
 							<div style={{ 
 								display: 'grid', 
@@ -668,7 +662,7 @@ const Upload = () => {
 									color: 'var(--text-muted)',
 									margin: 'var(--space-xs) 0 0 0'
 								}}>
-									Formula: (Width + Height + Depth) ÷ 100
+									Formula: (Width + Height + Depth) Ã· 100
 								</p>
 							</div>
 						</div>
@@ -684,7 +678,7 @@ const Upload = () => {
 								alignItems: 'center',
 								gap: 'var(--space-sm)'
 							}}>
-								🔹 Step 2: Artist Experience Level
+								ðŸ”¹ Step 2: Artist Experience Level
 							</h4>
 							<div style={{ marginBottom: 'var(--space-md)' }}>
 								<label style={{ 
@@ -752,7 +746,7 @@ const Upload = () => {
 								alignItems: 'center',
 								gap: 'var(--space-sm)'
 							}}>
-								🔹 Step 3: Technique Complexity
+								ðŸ”¹ Step 3: Technique Complexity
 							</h4>
 							<div style={{ marginBottom: 'var(--space-md)' }}>
 								<label style={{ 
@@ -821,7 +815,7 @@ const Upload = () => {
 								alignItems: 'center',
 								gap: 'var(--space-sm)'
 							}}>
-								🔹 Step 4: Support Material
+								ðŸ”¹ Step 4: Support Material
 							</h4>
 							<div style={{ marginBottom: 'var(--space-md)' }}>
 								<label style={{ 
@@ -897,7 +891,7 @@ const Upload = () => {
 								justifyContent: 'center',
 								gap: 'var(--space-sm)'
 							}}>
-								🔹 Step 5: Final Price Calculation
+								ðŸ”¹ Step 5: Final Price Calculation
 							</h4>
 							
 							<div style={{ 
@@ -906,10 +900,10 @@ const Upload = () => {
 								opacity: 0.9
 							}}>
 								<p style={{ margin: '0 0 var(--space-xs) 0' }}>
-									Formula: Linear Meters × Artist Coefficient × Technique Weight × Material Weight
+									Formula: Linear Meters Ã— Artist Coefficient Ã— Technique Weight Ã— Material Weight
 								</p>
 								<p style={{ margin: 0 }}>
-									{linearMeters.toFixed(2)} × {artistCoefficient} × {techniqueWeight} × {materialWeight}
+									{linearMeters.toFixed(2)} Ã— {artistCoefficient} Ã— {techniqueWeight} Ã— {materialWeight}
 								</p>
 							</div>
 							
@@ -919,7 +913,7 @@ const Upload = () => {
 								marginBottom: 'var(--space-md)',
 								textShadow: '0 2px 4px rgba(0,0,0,0.3)'
 							}}>
-								€{calculatedPrice.toFixed(2)}
+								â‚¬{calculatedPrice.toFixed(2)}
 							</div>
 							
 							<p style={{ 
@@ -972,7 +966,7 @@ const Upload = () => {
 					{images.length === 0 
 						? 'Select images to upload'
 						: calculatedPrice > 0 
-							? `Proceed to Payment - Suggested Price: €${calculatedPrice.toFixed(2)}`
+							? `Proceed to Payment - Suggested Price: â‚¬${calculatedPrice.toFixed(2)}`
 							: 'Proceed to Payment (Complete pricing calculator for estimate)'
 					}
 				</button>
@@ -984,3 +978,4 @@ const Upload = () => {
 };
 
 export default Upload;
+

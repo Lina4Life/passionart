@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const { Resend } = require('resend');
+﻿const { Resend } = require('resend');
 
 // Initialize Resend client
 const resend = new Resend(process.env.RESEND_API_KEY || 're_AS2hfFer_2sWWNn7ySNdB6uo1XxszmjVR');
@@ -64,7 +58,7 @@ const sendBulkEmail = async (req, res) => {
             </div>
             <div class="footer">
               <p>Best regards,<br>The PassionArt Team</p>
-              <p style="margin-top: 20px;">© 2025 PassionArt. All rights reserved.</p>
+              <p style="margin-top: 20px;">Â© 2025 PassionArt. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -163,7 +157,7 @@ const sendWelcomeEmail = async (req, res) => {
               <h1>PassionArt</h1>
             </div>
             <div class="content">
-              <h2>Welcome to PassionArt, ${firstName || 'Art Lover'}! 🎨</h2>
+              <h2>Welcome to PassionArt, ${firstName || 'Art Lover'}! ðŸŽ¨</h2>
               <p>We're thrilled to have you join our passionate community of artists and art enthusiasts!</p>
               <p>At PassionArt, you can:</p>
               <ul>
@@ -177,7 +171,7 @@ const sendWelcomeEmail = async (req, res) => {
             </div>
             <div class="footer">
               <p>Best regards,<br>The PassionArt Team</p>
-              <p style="margin-top: 20px;">© 2025 PassionArt. All rights reserved.</p>
+              <p style="margin-top: 20px;">Â© 2025 PassionArt. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -187,7 +181,7 @@ const sendWelcomeEmail = async (req, res) => {
     await resend.emails.send({
       from: 'PassionArt <onboarding@resend.dev>',
       to: [email],
-      subject: 'Welcome to PassionArt! 🎨',
+      subject: 'Welcome to PassionArt! ðŸŽ¨',
       html: htmlContent,
       text: `Welcome to PassionArt, ${firstName || 'Art Lover'}!\n\nWe're thrilled to have you join our passionate community of artists and art enthusiasts!\n\nExplore our platform and connect with the community at http://localhost:5174\n\nBest regards,\nThe PassionArt Team`
     });
@@ -214,7 +208,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
     const adminEmail = 'youssefelgharib03@gmail.com'; // Your admin email
     const verificationUrl = `http://localhost:5174/verify-email?token=${verificationToken}`;
     
-    console.log(`📧 Sending verification email to both ${originalEmail} and admin ${adminEmail}`);
+    console.log(`ðŸ“§ Sending verification email to both ${originalEmail} and admin ${adminEmail}`);
     
     // Create HTML content for the original user
     const userHtmlContent = `
@@ -253,7 +247,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
             </div>
             <div class="footer">
               <p>Best regards,<br>The PassionArt Team</p>
-              <p style="margin-top: 20px;">© 2025 PassionArt. All rights reserved.</p>
+              <p style="margin-top: 20px;">Â© 2025 PassionArt. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -288,7 +282,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
               <h1>PassionArt - Admin Notification</h1>
             </div>
             <div class="content">
-              <h2>🎨 New User Registration</h2>
+              <h2>ðŸŽ¨ New User Registration</h2>
               <div class="info-box">
                 <p><strong>New User Email:</strong> ${originalEmail}</p>
                 <p><strong>Registration Time:</strong> ${new Date().toLocaleString()}</p>
@@ -300,7 +294,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
             </div>
             <div class="footer">
               <p>PassionArt Admin Panel</p>
-              <p style="margin-top: 20px;">© 2025 PassionArt. All rights reserved.</p>
+              <p style="margin-top: 20px;">Â© 2025 PassionArt. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -316,10 +310,10 @@ const sendVerificationEmail = async (email, verificationToken) => {
         html: userHtmlContent,
         text: `Welcome to PassionArt! Please verify your email address by clicking this link: ${verificationUrl}`
       });
-      console.log(`✅ Verification email sent to user: ${originalEmail}`);
+      console.log(`âœ… Verification email sent to user: ${originalEmail}`);
     } catch (userEmailError) {
-      console.error(`❌ Failed to send email to user ${originalEmail}:`, userEmailError.message);
-      console.log(`📧 User email failed, but continuing with admin notification...`);
+      console.error(`âŒ Failed to send email to user ${originalEmail}:`, userEmailError.message);
+      console.log(`ðŸ“§ User email failed, but continuing with admin notification...`);
     }
 
     // Send notification to admin email
@@ -331,9 +325,9 @@ const sendVerificationEmail = async (email, verificationToken) => {
         html: adminHtmlContent,
         text: `New user registered: ${originalEmail}. Registration time: ${new Date().toLocaleString()}. Verification link: ${verificationUrl}`
       });
-      console.log(`✅ Admin notification sent to: ${adminEmail}`);
+      console.log(`âœ… Admin notification sent to: ${adminEmail}`);
     } catch (adminEmailError) {
-      console.error(`❌ Failed to send admin notification:`, adminEmailError.message);
+      console.error(`âŒ Failed to send admin notification:`, adminEmailError.message);
     }
 
     return { success: true };
@@ -418,3 +412,4 @@ module.exports = {
   testConnection,
   getEmailStats
 };
+

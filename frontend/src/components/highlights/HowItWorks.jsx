@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 
 const HowItWorks = () => (
   <section style={{ padding: '2rem 0', background: '#fff' }}>
@@ -27,3 +21,4 @@ const HowItWorks = () => (
 );
 
 export default HowItWorks;
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import './CommunityChat.css';
 
@@ -326,7 +320,7 @@ const CommunityChat = () => {
             </div>
             <div className="chat-stats">
               <span>{currentMessages.length} messages</span>
-              <span>•</span>
+              <span>â€¢</span>
               <span>{onlineUsers.length} online</span>
             </div>
           </div>
@@ -444,7 +438,7 @@ const CommunityChat = () => {
             </div>
             <div className="input-info">
               <span>{userName}</span>
-              <span>•</span>
+              <span>â€¢</span>
               <span>{newMessage.length}/1000</span>
             </div>
           </div>
@@ -455,3 +449,4 @@ const CommunityChat = () => {
 };
 
 export default CommunityChat;
+

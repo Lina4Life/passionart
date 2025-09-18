@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import './ArtistEvents.css';
 
 const ArtistEvents = ({ artistId, isOwnProfile }) => {
@@ -27,14 +21,14 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
   });
 
   const eventTypes = [
-    { value: 'exhibition', label: 'Exhibition', icon: '🖼️', color: '#6c5ce7' },
-    { value: 'workshop', label: 'Workshop', icon: '🎨', color: '#fd79a8' },
-    { value: 'gallery-opening', label: 'Gallery Opening', icon: '🎭', color: '#fdcb6e' },
-    { value: 'art-fair', label: 'Art Fair', icon: '🏛️', color: '#e84393' },
-    { value: 'studio-visit', label: 'Studio Visit', icon: '🏠', color: '#00b894' },
-    { value: 'lecture', label: 'Lecture/Talk', icon: '🎤', color: '#74b9ff' },
-    { value: 'collaboration', label: 'Collaboration', icon: '🤝', color: '#a29bfe' },
-    { value: 'other', label: 'Other', icon: '📅', color: '#636e72' }
+    { value: 'exhibition', label: 'Exhibition', icon: 'ðŸ–¼ï¸', color: '#6c5ce7' },
+    { value: 'workshop', label: 'Workshop', icon: 'ðŸŽ¨', color: '#fd79a8' },
+    { value: 'gallery-opening', label: 'Gallery Opening', icon: 'ðŸŽ­', color: '#fdcb6e' },
+    { value: 'art-fair', label: 'Art Fair', icon: 'ðŸ›ï¸', color: '#e84393' },
+    { value: 'studio-visit', label: 'Studio Visit', icon: 'ðŸ ', color: '#00b894' },
+    { value: 'lecture', label: 'Lecture/Talk', icon: 'ðŸŽ¤', color: '#74b9ff' },
+    { value: 'collaboration', label: 'Collaboration', icon: 'ðŸ¤', color: '#a29bfe' },
+    { value: 'other', label: 'Other', icon: 'ðŸ“…', color: '#636e72' }
   ];
 
   const filterOptions = [
@@ -147,7 +141,7 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
     return (
       <div className="events-container">
         <div className="events-header">
-          <h2>📅 Artist Events</h2>
+          <h2>ðŸ“… Artist Events</h2>
           <div className="loading-placeholder">Loading events...</div>
         </div>
       </div>
@@ -157,7 +151,7 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
   return (
     <div className="events-container">
       <div className="events-header">
-        <h2>📅 Artist Events</h2>
+        <h2>ðŸ“… Artist Events</h2>
         <div className="events-controls">
           <div className="filter-tabs">
             {filterOptions.map(option => (
@@ -175,7 +169,7 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
               className="create-event-btn"
               onClick={() => setShowCreateModal(true)}
             >
-              ➕ Create Event
+              âž• Create Event
             </button>
           )}
         </div>
@@ -184,7 +178,7 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
       <div className="events-grid">
         {filteredEvents.length === 0 ? (
           <div className="no-events">
-            <div className="no-events-icon">📅</div>
+            <div className="no-events-icon">ðŸ“…</div>
             <h3>No events found</h3>
             <p>
               {isOwnProfile 
@@ -217,9 +211,9 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
                     <span className="event-type-label">{eventType.label}</span>
                   </div>
                   <div className={`event-status ${status}`}>
-                    {status === 'upcoming' && '🔮 Upcoming'}
-                    {status === 'ongoing' && '🔴 Live'}
-                    {status === 'past' && '✅ Completed'}
+                    {status === 'upcoming' && 'ðŸ”® Upcoming'}
+                    {status === 'ongoing' && 'ðŸ”´ Live'}
+                    {status === 'past' && 'âœ… Completed'}
                   </div>
                 </div>
 
@@ -229,7 +223,7 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
 
                   <div className="event-details">
                     <div className="event-detail">
-                      <span className="detail-icon">📅</span>
+                      <span className="detail-icon">ðŸ“…</span>
                       <div className="detail-content">
                         <strong>Date & Time</strong>
                         <div className="event-dates">
@@ -240,7 +234,7 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
                     </div>
 
                     <div className="event-detail">
-                      <span className="detail-icon">{event.is_virtual ? '💻' : '📍'}</span>
+                      <span className="detail-icon">{event.is_virtual ? 'ðŸ’»' : 'ðŸ“'}</span>
                       <div className="detail-content">
                         <strong>{event.is_virtual ? 'Virtual Event' : 'Location'}</strong>
                         <div>
@@ -261,7 +255,7 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
 
                     {event.max_attendees && (
                       <div className="event-detail">
-                        <span className="detail-icon">👥</span>
+                        <span className="detail-icon">ðŸ‘¥</span>
                         <div className="detail-content">
                           <strong>Capacity</strong>
                           <div>{event.current_attendees || 0} / {event.max_attendees}</div>
@@ -270,7 +264,7 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
                     )}
 
                     <div className="event-detail">
-                      <span className="detail-icon">💰</span>
+                      <span className="detail-icon">ðŸ’°</span>
                       <div className="detail-content">
                         <strong>Price</strong>
                         <div>
@@ -283,14 +277,14 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
                   <div className="event-actions">
                     {!isOwnProfile && status !== 'past' && (
                       <button className="attend-btn">
-                        {event.is_attending ? '✅ Attending' : '🎫 Attend Event'}
+                        {event.is_attending ? 'âœ… Attending' : 'ðŸŽ« Attend Event'}
                       </button>
                     )}
-                    <button className="share-btn">📤 Share</button>
+                    <button className="share-btn">ðŸ“¤ Share</button>
                     {isOwnProfile && (
                       <>
-                        <button className="edit-btn">✏️ Edit</button>
-                        <button className="manage-btn">⚙️ Manage</button>
+                        <button className="edit-btn">âœï¸ Edit</button>
+                        <button className="manage-btn">âš™ï¸ Manage</button>
                       </>
                     )}
                   </div>
@@ -306,8 +300,8 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
         <div className="modal-overlay" onClick={() => setShowCreateModal(false)}>
           <div className="create-event-modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>📅 Create New Event</h2>
-              <button className="close-btn" onClick={() => setShowCreateModal(false)}>×</button>
+              <h2>ðŸ“… Create New Event</h2>
+              <button className="close-btn" onClick={() => setShowCreateModal(false)}>Ã—</button>
             </div>
 
             <form onSubmit={handleCreateEvent} className="event-form">
@@ -454,7 +448,7 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
                   Cancel
                 </button>
                 <button type="submit" className="submit-btn">
-                  📅 Create Event
+                  ðŸ“… Create Event
                 </button>
               </div>
             </form>
@@ -466,3 +460,4 @@ const ArtistEvents = ({ artistId, isOwnProfile }) => {
 };
 
 export default ArtistEvents;
+

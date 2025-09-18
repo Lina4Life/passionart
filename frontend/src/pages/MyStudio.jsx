@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect, useContext } from 'react';
+﻿import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { getMyArtworks } from '../services/api';
@@ -82,35 +76,35 @@ const MyStudio = () => {
 
       <div className="studio-stats">
         <div className="stat-card">
-          <div className="stat-icon">🎨</div>
+          <div className="stat-icon">ðŸŽ¨</div>
           <div className="stat-content">
             <h3>{stats.totalArtworks}</h3>
             <p>Total Artworks</p>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">✅</div>
+          <div className="stat-icon">âœ…</div>
           <div className="stat-content">
             <h3>{stats.approvedArtworks}</h3>
             <p>Approved</p>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">⏳</div>
+          <div className="stat-icon">â³</div>
           <div className="stat-content">
             <h3>{stats.pendingArtworks}</h3>
             <p>Pending Review</p>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">👁️</div>
+          <div className="stat-icon">ðŸ‘ï¸</div>
           <div className="stat-content">
             <h3>{stats.totalViews}</h3>
             <p>Total Views</p>
           </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon">❤️</div>
+          <div className="stat-icon">â¤ï¸</div>
           <div className="stat-content">
             <h3>{stats.totalLikes}</h3>
             <p>Total Likes</p>
@@ -120,15 +114,15 @@ const MyStudio = () => {
 
       <div className="studio-actions">
         <button className="action-btn primary" onClick={handleUploadNew}>
-          <span className="btn-icon">📤</span>
+          <span className="btn-icon">ðŸ“¤</span>
           Upload New Artwork
         </button>
         <button className="action-btn secondary" onClick={handleViewArtworks}>
-          <span className="btn-icon">🖼️</span>
+          <span className="btn-icon">ðŸ–¼ï¸</span>
           Manage My Artworks
         </button>
         <button className="action-btn secondary" onClick={() => navigate('/profile')}>
-          <span className="btn-icon">👤</span>
+          <span className="btn-icon">ðŸ‘¤</span>
           Edit Profile
         </button>
       </div>
@@ -155,8 +149,8 @@ const MyStudio = () => {
                   <h3>{artwork.title}</h3>
                   <p className="price">${artwork.price}</p>
                   <div className="artwork-stats">
-                    <span>👁️ {artwork.views || 0}</span>
-                    <span>❤️ {artwork.likes || 0}</span>
+                    <span>ðŸ‘ï¸ {artwork.views || 0}</span>
+                    <span>â¤ï¸ {artwork.likes || 0}</span>
                   </div>
                 </div>
               </div>
@@ -164,7 +158,7 @@ const MyStudio = () => {
           </div>
         ) : (
           <div className="empty-state">
-            <div className="empty-icon">🎨</div>
+            <div className="empty-icon">ðŸŽ¨</div>
             <h3>No artworks yet</h3>
             <p>Start your artistic journey by uploading your first piece!</p>
             <button className="action-btn primary" onClick={handleUploadNew}>
@@ -178,22 +172,22 @@ const MyStudio = () => {
         <h2>Tips for Success</h2>
         <div className="tips-grid">
           <div className="tip-card">
-            <div className="tip-icon">📸</div>
+            <div className="tip-icon">ðŸ“¸</div>
             <h3>High-Quality Images</h3>
             <p>Use high-resolution images with good lighting to showcase your work effectively.</p>
           </div>
           <div className="tip-card">
-            <div className="tip-icon">📝</div>
+            <div className="tip-icon">ðŸ“</div>
             <h3>Detailed Descriptions</h3>
             <p>Write compelling descriptions that tell the story behind your artwork.</p>
           </div>
           <div className="tip-card">
-            <div className="tip-icon">🏷️</div>
+            <div className="tip-icon">ðŸ·ï¸</div>
             <h3>Smart Pricing</h3>
             <p>Research similar artworks and price competitively while valuing your work.</p>
           </div>
           <div className="tip-card">
-            <div className="tip-icon">📱</div>
+            <div className="tip-icon">ðŸ“±</div>
             <h3>Stay Active</h3>
             <p>Regularly upload new pieces and engage with the community to grow your audience.</p>
           </div>
@@ -204,3 +198,4 @@ const MyStudio = () => {
 };
 
 export default MyStudio;
+

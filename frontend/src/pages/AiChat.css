@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-.ai-chat-container {
+﻿.ai-chat-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
@@ -318,3 +312,4 @@
 .messages-container::-webkit-scrollbar-thumb:hover {
   background: #764ba2;
 }
+

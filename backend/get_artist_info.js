@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const dbPath = path.join(__dirname, 'config', 'database.db');
@@ -21,3 +15,4 @@ db.all('SELECT id, email, username, name FROM users WHERE id IN (34, 26, 3, 4, 5
   });
   db.close();
 });
+

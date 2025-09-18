@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 const path = require('path');
 
@@ -40,7 +34,7 @@ async function createNewAdmin() {
         if (err) {
           reject(err);
         } else {
-          console.log(`✅ Deleted ${this.changes} old admin account(s)`);
+          console.log(`âœ… Deleted ${this.changes} old admin account(s)`);
           resolve();
         }
       });
@@ -49,7 +43,7 @@ async function createNewAdmin() {
     // Step 2: Hash the new password
     console.log('Step 2: Hashing new password...');
     const hashedPassword = await bcrypt.hash(newAdmin.password, 10);
-    console.log('✅ Password hashed successfully');
+    console.log('âœ… Password hashed successfully');
     
     // Step 3: Create new admin account
     console.log('Step 3: Creating new admin account...');
@@ -61,7 +55,7 @@ async function createNewAdmin() {
         if (err) {
           reject(err);
         } else {
-          console.log(`✅ Created new admin account with ID: ${this.lastID}`);
+          console.log(`âœ… Created new admin account with ID: ${this.lastID}`);
           resolve();
         }
       });
@@ -77,35 +71,36 @@ async function createNewAdmin() {
       if (err) {
         console.error('Error verifying new admin:', err);
       } else if (row) {
-        console.log('\n🎉 NEW ADMIN ACCOUNT CREATED SUCCESSFULLY!\n');
+        console.log('\nðŸŽ‰ NEW ADMIN ACCOUNT CREATED SUCCESSFULLY!\n');
         console.log('=== LOGIN CREDENTIALS ===');
-        console.log(`📧 Email: ${row.email}`);
-        console.log(`👤 Username: ${row.username}`);
-        console.log(`🔑 Password: ${newAdmin.password}`);
-        console.log(`🆔 User ID: ${row.id}`);
-        console.log(`📅 Created: ${row.created_at}`);
+        console.log(`ðŸ“§ Email: ${row.email}`);
+        console.log(`ðŸ‘¤ Username: ${row.username}`);
+        console.log(`ðŸ”‘ Password: ${newAdmin.password}`);
+        console.log(`ðŸ†” User ID: ${row.id}`);
+        console.log(`ðŸ“… Created: ${row.created_at}`);
         console.log('\n=== LOGIN INSTRUCTIONS ===');
         console.log('1. Go to your PassionArt login page');
         console.log('2. Use the email and password above');
         console.log('3. Access the admin dashboard after login');
       } else {
-        console.log('❌ Failed to verify new admin account');
+        console.log('âŒ Failed to verify new admin account');
       }
       
       db.close((err) => {
         if (err) {
           console.error('Error closing database:', err);
         } else {
-          console.log('\n✅ Database operation completed!');
+          console.log('\nâœ… Database operation completed!');
         }
       });
     });
     
   } catch (error) {
-    console.error('❌ Error creating new admin:', error);
+    console.error('âŒ Error creating new admin:', error);
     db.close();
   }
 }
 
 // Run the function
 createNewAdmin();
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const { sendVerificationEmail } = require('./controllers/resend.controller');
+﻿const { sendVerificationEmail } = require('./controllers/resend.controller');
 
 async function testEmail() {
   console.log('Testing email send...');
@@ -18,16 +12,17 @@ async function testEmail() {
     console.log('Email test result:', result);
     
     if (result.success) {
-      console.log('✅ Email sent successfully to:', testEmail);
+      console.log('âœ… Email sent successfully to:', testEmail);
       console.log('Check your inbox!');
     } else {
-      console.log('❌ Email failed:', result.error);
+      console.log('âŒ Email failed:', result.error);
     }
   } catch (error) {
-    console.log('❌ Email error:', error.message);
+    console.log('âŒ Email error:', error.message);
   }
   
   process.exit(0);
 }
 
 testEmail();
+

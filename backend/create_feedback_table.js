@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
 
@@ -47,34 +41,34 @@ db.serialize(() => {
   // Create feedback table
   db.run(createFeedbackTable, (err) => {
     if (err) {
-      console.error('❌ Error creating feedback table:', err);
+      console.error('âŒ Error creating feedback table:', err);
     } else {
-      console.log('✅ Feedback table created successfully');
+      console.log('âœ… Feedback table created successfully');
     }
   });
   
   // Create indexes for faster queries
   db.run('CREATE INDEX IF NOT EXISTS idx_feedback_status ON feedback(status)', (err) => {
     if (err) {
-      console.error('❌ Error creating status index:', err);
+      console.error('âŒ Error creating status index:', err);
     } else {
-      console.log('✅ Feedback status index created successfully');
+      console.log('âœ… Feedback status index created successfully');
     }
   });
   
   db.run('CREATE INDEX IF NOT EXISTS idx_feedback_created_at ON feedback(created_at)', (err) => {
     if (err) {
-      console.error('❌ Error creating created_at index:', err);
+      console.error('âŒ Error creating created_at index:', err);
     } else {
-      console.log('✅ Feedback created_at index created successfully');
+      console.log('âœ… Feedback created_at index created successfully');
     }
   });
   
   db.run('CREATE INDEX IF NOT EXISTS idx_feedback_user_id ON feedback(user_id)', (err) => {
     if (err) {
-      console.error('❌ Error creating user_id index:', err);
+      console.error('âŒ Error creating user_id index:', err);
     } else {
-      console.log('✅ Feedback user_id index created successfully');
+      console.log('âœ… Feedback user_id index created successfully');
     }
     
     // Close database connection
@@ -87,3 +81,4 @@ db.serialize(() => {
     });
   });
 });
+

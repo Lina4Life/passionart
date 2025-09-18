@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 
 const artworks = [
   { title: 'Kate Cooper', img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', desc: 'Screens Series' },
@@ -29,3 +23,4 @@ const FeaturedArtworks = () => (
 );
 
 export default FeaturedArtworks;
+

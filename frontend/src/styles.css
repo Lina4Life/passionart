@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-body {
+﻿body {
   font-family: system-ui, sans-serif;
   background: #f8f9fa;
   color: #222;
@@ -147,3 +141,4 @@ body {
 .logout-btn:hover {
   color: #e00;
 }
+

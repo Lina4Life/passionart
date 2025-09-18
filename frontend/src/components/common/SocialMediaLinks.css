@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-.social-media-links {
+﻿.social-media-links {
   display: flex;
   gap: 0.75rem;
   align-items: center;
@@ -179,3 +173,4 @@
 .social-link[title*="Website"] {
   background: linear-gradient(45deg, #6366F1, #8B5CF6);
 }
+

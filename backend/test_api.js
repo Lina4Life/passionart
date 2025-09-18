@@ -1,12 +1,6 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const http = require('http');
+﻿const http = require('http');
 
-console.log('🔍 Testing API endpoints...');
+console.log('ðŸ” Testing API endpoints...');
 console.log('=' .repeat(50));
 
 // Test health endpoint
@@ -88,20 +82,21 @@ const testLoginEndpoint = () => {
 async function runTests() {
   try {
     // Test health endpoint
-    console.log('📊 Testing health endpoint...');
+    console.log('ðŸ“Š Testing health endpoint...');
     const healthResult = await testHealthEndpoint();
     console.log(`   Status: ${healthResult.status}`);
     console.log(`   Response: ${healthResult.data}`);
     
     // Test login endpoint
-    console.log('\n🔐 Testing login endpoint with admin credentials...');
+    console.log('\nðŸ” Testing login endpoint with admin credentials...');
     const loginResult = await testLoginEndpoint();
     console.log(`   Status: ${loginResult.status}`);
     console.log(`   Response: ${loginResult.data}`);
     
   } catch (error) {
-    console.error('❌ Error:', error.message);
+    console.error('âŒ Error:', error.message);
   }
 }
 
 runTests();
+

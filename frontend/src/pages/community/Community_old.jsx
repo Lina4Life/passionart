@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './Community.css';
 
@@ -82,7 +76,7 @@ const Community = () => {
     <div className="community-container">
       {/* Sidebar with categories */}
       <div className="community-sidebar">
-        <h3>🎨 Art Communities</h3>
+        <h3>ðŸŽ¨ Art Communities</h3>
         <div className="categories-list">
           {categories.map(category => (
             <Link
@@ -90,11 +84,11 @@ const Community = () => {
               to={`/community/${category.slug}`}
               className={`category-item ${selectedCategory?.slug === category.slug ? 'active' : ''}`}
             >
-              <div className="category-icon">🎨</div>
+              <div className="category-icon">ðŸŽ¨</div>
               <div className="category-info">
                 <h4>{category.display_name || category.name}</h4>
                 <span className="category-stats">
-                  {category.member_count} members • {category.post_count} posts
+                  {category.member_count} members â€¢ {category.post_count} posts
                 </span>
               </div>
             </Link>
@@ -116,10 +110,10 @@ const Community = () => {
                     className="btn-primary"
                     onClick={() => setShowCreatePost(true)}
                   >
-                    ✍️ Create Post
+                    âœï¸ Create Post
                   </button>
                   <button className="btn-secondary">
-                    ➕ Join Community
+                    âž• Join Community
                   </button>
                 </div>
               </div>
@@ -134,10 +128,10 @@ const Community = () => {
                     className={`sort-btn ${sortBy === sort ? 'active' : ''}`}
                     onClick={() => setSortBy(sort)}
                   >
-                    {sort === 'hot' && '🔥'} 
-                    {sort === 'new' && '🆕'} 
-                    {sort === 'top' && '⭐'} 
-                    {sort === 'rising' && '📈'} 
+                    {sort === 'hot' && 'ðŸ”¥'} 
+                    {sort === 'new' && 'ðŸ†•'} 
+                    {sort === 'top' && 'â­'} 
+                    {sort === 'rising' && 'ðŸ“ˆ'} 
                     {sort.charAt(0).toUpperCase() + sort.slice(1)}
                   </button>
                 ))}
@@ -176,7 +170,7 @@ const Community = () => {
       {/* Ads sidebar */}
       <div className="community-ads">
         <div className="ad-banner">
-          <h4>🎨 Featured</h4>
+          <h4>ðŸŽ¨ Featured</h4>
           <div className="google-ad">
             {/* Google Ads will be integrated here */}
             <div className="ad-placeholder">
@@ -187,10 +181,10 @@ const Community = () => {
         </div>
         
         <div className="community-rules">
-          <h4>📋 Community Rules</h4>
+          <h4>ðŸ“‹ Community Rules</h4>
           <ul>
             <li>Be respectful to all community members</li>
-            <li>Original artwork requires €5 verification fee</li>
+            <li>Original artwork requires â‚¬5 verification fee</li>
             <li>No spam or self-promotion without contribution</li>
             <li>Credit original artists when sharing</li>
             <li>Use appropriate language and content warnings</li>
@@ -225,14 +219,14 @@ const PostCard = ({ post, onVote }) => {
           className="vote-btn upvote"
           onClick={() => onVote(post.id, 'upvote')}
         >
-          ⬆️
+          â¬†ï¸
         </button>
         <span className="vote-score">{score}</span>
         <button 
           className="vote-btn downvote"
           onClick={() => onVote(post.id, 'downvote')}
         >
-          ⬇️
+          â¬‡ï¸
         </button>
       </div>
 
@@ -245,13 +239,13 @@ const PostCard = ({ post, onVote }) => {
           </h3>
           <div className="post-meta">
             {post.post_type === 'artwork' && (
-              <span className="post-type artwork">🎨 Artwork</span>
+              <span className="post-type artwork">ðŸŽ¨ Artwork</span>
             )}
             {post.verification_status === 'verified' && (
-              <span className="verified-badge">✅ Verified</span>
+              <span className="verified-badge">âœ… Verified</span>
             )}
             {post.is_featured && (
-              <span className="featured-badge">⭐ Featured</span>
+              <span className="featured-badge">â­ Featured</span>
             )}
           </div>
         </div>
@@ -273,8 +267,8 @@ const PostCard = ({ post, onVote }) => {
         <div className="post-footer">
           <span className="post-author">by {post.author_name}</span>
           <span className="post-time">{timeAgo}</span>
-          <span className="post-comments">💬 {post.comment_count} comments</span>
-          <span className="post-views">👁️ {post.view_count} views</span>
+          <span className="post-comments">ðŸ’¬ {post.comment_count} comments</span>
+          <span className="post-views">ðŸ‘ï¸ {post.view_count} views</span>
         </div>
       </div>
     </div>
@@ -354,13 +348,13 @@ const CreatePostModal = ({ category, onClose, onSuccess }) => {
     return (
       <div className="modal-overlay">
         <div className="modal-content payment-modal">
-          <h2>💳 Payment Required</h2>
-          <p>To publish artwork, a verification fee of €{paymentInfo.amount} is required.</p>
+          <h2>ðŸ’³ Payment Required</h2>
+          <p>To publish artwork, a verification fee of â‚¬{paymentInfo.amount} is required.</p>
           <p>This helps us maintain quality and support our verification team.</p>
           
           <div className="payment-options">
             <button className="btn-primary" onClick={handlePayment}>
-              Pay €{paymentInfo.amount} with Stripe
+              Pay â‚¬{paymentInfo.amount} with Stripe
             </button>
             <button className="btn-secondary" onClick={onClose}>
               Cancel
@@ -375,8 +369,8 @@ const CreatePostModal = ({ category, onClose, onSuccess }) => {
     <div className="modal-overlay">
       <div className="modal-content create-post-modal">
         <div className="modal-header">
-          <h2>✍️ Create Post in {category.name}</h2>
-          <button className="close-btn" onClick={onClose}>✕</button>
+          <h2>âœï¸ Create Post in {category.name}</h2>
+          <button className="close-btn" onClick={onClose}>âœ•</button>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -386,10 +380,10 @@ const CreatePostModal = ({ category, onClose, onSuccess }) => {
               value={formData.postType}
               onChange={(e) => setFormData({...formData, postType: e.target.value})}
             >
-              <option value="text">💬 Text Post</option>
-              <option value="image">🖼️ Image Post</option>
-              <option value="link">🔗 Link Post</option>
-              <option value="artwork">🎨 Original Artwork (€5 fee)</option>
+              <option value="text">ðŸ’¬ Text Post</option>
+              <option value="image">ðŸ–¼ï¸ Image Post</option>
+              <option value="link">ðŸ”— Link Post</option>
+              <option value="artwork">ðŸŽ¨ Original Artwork (â‚¬5 fee)</option>
             </select>
           </div>
 
@@ -416,7 +410,7 @@ const CreatePostModal = ({ category, onClose, onSuccess }) => {
 
           {formData.postType === 'artwork' && (
             <div className="artwork-notice">
-              ⚠️ Artwork posts require a €5 verification fee and manual approval by our team.
+              âš ï¸ Artwork posts require a â‚¬5 verification fee and manual approval by our team.
             </div>
           )}
 
@@ -425,7 +419,7 @@ const CreatePostModal = ({ category, onClose, onSuccess }) => {
               Cancel
             </button>
             <button type="submit" className="btn-primary">
-              {formData.postType === 'artwork' ? 'Create & Pay €5' : 'Create Post'}
+              {formData.postType === 'artwork' ? 'Create & Pay â‚¬5' : 'Create Post'}
             </button>
           </div>
         </form>
@@ -435,3 +429,4 @@ const CreatePostModal = ({ category, onClose, onSuccess }) => {
 };
 
 export default Community;
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { createContext, useContext, useState, useEffect } from 'react';
+﻿import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const LanguageContext = createContext();
 
@@ -21,17 +15,17 @@ export const LanguageProvider = ({ children }) => {
   const [translations, setTranslations] = useState({});
 
   const languages = {
-    en: { name: 'English', flag: '🇺🇸' },
-    fr: { name: 'Français', flag: '🇫🇷' },
-    es: { name: 'Español', flag: '🇪🇸' },
-    de: { name: 'Deutsch', flag: '🇩🇪' },
-    it: { name: 'Italiano', flag: '🇮🇹' },
-    pt: { name: 'Português', flag: '🇵🇹' },
-    ru: { name: 'Русский', flag: '🇷🇺' },
-    ja: { name: '日本語', flag: '🇯🇵' },
-    ko: { name: '한국어', flag: '🇰🇷' },
-    zh: { name: '中文', flag: '🇨🇳' },
-    ar: { name: 'العربية', flag: '🇸🇦' }
+    en: { name: 'English', flag: 'ðŸ‡ºðŸ‡¸' },
+    fr: { name: 'FranÃ§ais', flag: 'ðŸ‡«ðŸ‡·' },
+    es: { name: 'EspaÃ±ol', flag: 'ðŸ‡ªðŸ‡¸' },
+    de: { name: 'Deutsch', flag: 'ðŸ‡©ðŸ‡ª' },
+    it: { name: 'Italiano', flag: 'ðŸ‡®ðŸ‡¹' },
+    pt: { name: 'PortuguÃªs', flag: 'ðŸ‡µðŸ‡¹' },
+    ru: { name: 'Ð ÑƒÑÑÐºÐ¸Ð¹', flag: 'ðŸ‡·ðŸ‡º' },
+    ja: { name: 'æ—¥æœ¬èªž', flag: 'ðŸ‡¯ðŸ‡µ' },
+    ko: { name: 'í•œêµ­ì–´', flag: 'ðŸ‡°ðŸ‡·' },
+    zh: { name: 'ä¸­æ–‡', flag: 'ðŸ‡¨ðŸ‡³' },
+    ar: { name: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', flag: 'ðŸ‡¸ðŸ‡¦' }
   };
 
   // Load translations
@@ -86,21 +80,21 @@ export const LanguageProvider = ({ children }) => {
         'post.create.textPost': 'Text Post',
         'post.create.imagePost': 'Image Post',
         'post.create.linkPost': 'Link Post',
-        'post.create.artworkPost': 'Original Artwork (€5 fee)',
+        'post.create.artworkPost': 'Original Artwork (â‚¬5 fee)',
         'post.create.titleLabel': 'Title',
         'post.create.titlePlaceholder': "What's your post about?",
         'post.create.contentLabel': 'Content',
         'post.create.contentPlaceholder': 'Share your thoughts, techniques, or story...',
-        'post.create.artworkNotice': 'Artwork posts require a €5 verification fee and manual approval by our team.',
+        'post.create.artworkNotice': 'Artwork posts require a â‚¬5 verification fee and manual approval by our team.',
         'post.create.cancel': 'Cancel',
         'post.create.submit': 'Create Post',
-        'post.create.submitArtwork': 'Create & Pay €5',
+        'post.create.submitArtwork': 'Create & Pay â‚¬5',
         
         // Payment
         'payment.required': 'Payment Required',
-        'payment.artworkFee': 'To publish artwork, a verification fee of €{amount} is required.',
+        'payment.artworkFee': 'To publish artwork, a verification fee of â‚¬{amount} is required.',
         'payment.feeExplanation': 'This helps us maintain quality and support our verification team.',
-        'payment.payWithStripe': 'Pay €{amount} with Stripe',
+        'payment.payWithStripe': 'Pay â‚¬{amount} with Stripe',
         'payment.cancel': 'Cancel',
         'payment.success': 'Payment successful! Your artwork is now in the verification queue.',
         
@@ -151,71 +145,71 @@ export const LanguageProvider = ({ children }) => {
       fr: {
         // Navigation
         'nav.gallery': 'Galerie',
-        'nav.community': 'Communauté',
-        'nav.upload': 'Télécharger',
+        'nav.community': 'CommunautÃ©',
+        'nav.upload': 'TÃ©lÃ©charger',
         'nav.profile': 'Profil',
         'nav.login': 'Connexion',
         'nav.register': 'Inscription',
-        'nav.logout': 'Déconnexion',
+        'nav.logout': 'DÃ©connexion',
         
         // Community
-        'community.title': 'Communauté Artistique',
-        'community.createPost': 'Créer un Post',
-        'community.joinCommunity': 'Rejoindre la Communauté',
+        'community.title': 'CommunautÃ© Artistique',
+        'community.createPost': 'CrÃ©er un Post',
+        'community.joinCommunity': 'Rejoindre la CommunautÃ©',
         'community.hot': 'Populaire',
         'community.new': 'Nouveau',
         'community.top': 'Top',
         'community.rising': 'Tendance',
-        'community.noPostsTitle': 'Aucun post dans cette communauté',
-        'community.noPostsDesc': 'Soyez le premier à partager quelque chose d\'incroyable!',
-        'community.createFirstPost': 'Créer le Premier Post',
+        'community.noPostsTitle': 'Aucun post dans cette communautÃ©',
+        'community.noPostsDesc': 'Soyez le premier Ã  partager quelque chose d\'incroyable!',
+        'community.createFirstPost': 'CrÃ©er le Premier Post',
         'community.by': 'par',
         'community.comments': 'commentaires',
         'community.views': 'vues',
-        'community.verified': 'Vérifié',
+        'community.verified': 'VÃ©rifiÃ©',
         'community.featured': 'En Vedette',
-        'community.artwork': 'Œuvre d\'Art',
+        'community.artwork': 'Å’uvre d\'Art',
         
         // Post Creation
-        'post.create.title': 'Créer un Post',
+        'post.create.title': 'CrÃ©er un Post',
         'post.create.type': 'Type de Post',
         'post.create.textPost': 'Post Texte',
         'post.create.imagePost': 'Post Image',
         'post.create.linkPost': 'Post Lien',
-        'post.create.artworkPost': 'Œuvre Originale (5€ de frais)',
+        'post.create.artworkPost': 'Å’uvre Originale (5â‚¬ de frais)',
         'post.create.titleLabel': 'Titre',
         'post.create.titlePlaceholder': 'De quoi parle votre post?',
         'post.create.contentLabel': 'Contenu',
-        'post.create.contentPlaceholder': 'Partagez vos pensées, techniques, ou histoire...',
-        'post.create.artworkNotice': 'Les posts d\'œuvres d\'art nécessitent des frais de vérification de 5€ et une approbation manuelle par notre équipe.',
+        'post.create.contentPlaceholder': 'Partagez vos pensÃ©es, techniques, ou histoire...',
+        'post.create.artworkNotice': 'Les posts d\'Å“uvres d\'art nÃ©cessitent des frais de vÃ©rification de 5â‚¬ et une approbation manuelle par notre Ã©quipe.',
         'post.create.cancel': 'Annuler',
-        'post.create.submit': 'Créer le Post',
-        'post.create.submitArtwork': 'Créer & Payer 5€',
+        'post.create.submit': 'CrÃ©er le Post',
+        'post.create.submitArtwork': 'CrÃ©er & Payer 5â‚¬',
         
         // Add more French translations...
       },
       
       es: {
         // Navigation
-        'nav.gallery': 'Galería',
+        'nav.gallery': 'GalerÃ­a',
         'nav.community': 'Comunidad',
         'nav.upload': 'Subir',
         'nav.profile': 'Perfil',
-        'nav.login': 'Iniciar Sesión',
+        'nav.login': 'Iniciar SesiÃ³n',
         'nav.register': 'Registrarse',
-        'nav.logout': 'Cerrar Sesión',
+        'nav.logout': 'Cerrar SesiÃ³n',
         
         // Community
         'community.title': 'Comunidad de Arte',
-        'community.createPost': 'Crear Publicación',
+        'community.createPost': 'Crear PublicaciÃ³n',
         'community.joinCommunity': 'Unirse a la Comunidad',
         'community.hot': 'Popular',
         'community.new': 'Nuevo',
         'community.top': 'Top',
         'community.rising': 'Tendencia',
-        'community.noPostsTitle': 'Aún no hay publicaciones en esta comunidad',
-        'community.noPostsDesc': '¡Sé el primero en compartir algo increíble!',
-        'community.createFirstPost': 'Crear Primera Publicación',
+        'community.noPostsTitle': 'AÃºn no hay publicaciones en esta comunidad',
+        'community.noPostsDesc': 'Â¡SÃ© el primero en compartir algo increÃ­ble!',
+        'community.createFirstPost': 'Crear Primera PublicaciÃ³n',
         'community.by': 'por',
         'community.comments': 'comentarios',
         'community.views': 'vistas',
@@ -303,3 +297,4 @@ export const LanguageSelector = () => {
     </div>
   );
 };
+

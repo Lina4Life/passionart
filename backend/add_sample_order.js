@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('./config/database');
+﻿const db = require('./config/database');
 
 const insertQuery = `INSERT INTO orders (buyer_id, artwork_id, total_amount, payment_status, payment_intent_id, shipping_address, created_at, updated_at) 
 VALUES (?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))`;
@@ -22,7 +16,7 @@ db.run(insertQuery, orderData, function(err) {
   if (err) {
     console.error('Error inserting order:', err);
   } else {
-    console.log('✅ Successfully added pending order with ID:', this.lastID);
+    console.log('âœ… Successfully added pending order with ID:', this.lastID);
     console.log('Order details:');
     console.log('- Buyer: Youssef Mohamed Ali (ID: 3)');
     console.log('- Artwork: Digital Horizons (ID: 2)');
@@ -32,3 +26,4 @@ db.run(insertQuery, orderData, function(err) {
   }
   process.exit();
 });
+

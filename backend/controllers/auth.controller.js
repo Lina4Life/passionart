@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const { createUser, findUserByEmail, findUserByVerificationToken, verifyUserEmail } = require('../models/user.model');
+﻿const { createUser, findUserByEmail, findUserByVerificationToken, verifyUserEmail } = require('../models/user.model');
 const { generateToken } = require('../utils/jwt');
 const axios = require('axios');
 const bcrypt = require('bcrypt');
@@ -33,7 +27,7 @@ const register = async (req, res) => {
       });
       
       if (response.data.success) {
-        console.log('✅ Verification email sent successfully!');
+        console.log('âœ… Verification email sent successfully!');
       }
     } catch (emailError) {
       console.error('Failed to send verification email:', emailError.message);
@@ -41,7 +35,7 @@ const register = async (req, res) => {
     }
     
     // Sync user to HubSpot CRM
-    console.log(`📞 Syncing user to HubSpot: ${email}`);
+    console.log(`ðŸ“ž Syncing user to HubSpot: ${email}`);
     try {
       const hubspotResponse = await axios.post(`http://localhost:${process.env.PORT || 3001}/api/hybrid-email/sync-user`, {
         email,
@@ -51,10 +45,10 @@ const register = async (req, res) => {
       });
       
       if (hubspotResponse.data.success) {
-        console.log(`✅ User synced to HubSpot: ${hubspotResponse.data.message}`);
+        console.log(`âœ… User synced to HubSpot: ${hubspotResponse.data.message}`);
       }
     } catch (hubspotError) {
-      console.error(`❌ HubSpot sync failed: ${hubspotError.message}`);
+      console.error(`âŒ HubSpot sync failed: ${hubspotError.message}`);
       // Continue with registration even if HubSpot sync fails
     }
     
@@ -148,3 +142,4 @@ const login = async (req, res) => {
 };
 
 module.exports = { register, login, verifyEmail };
+

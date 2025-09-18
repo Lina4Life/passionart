@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-/* PassionArt Community Chat - Theme Integrated */
+﻿/* PassionArt Community Chat - Theme Integrated */
 .community-chat-container {
   height: calc(100vh - 80px);
   background: var(--bg-primary, #ffffff);
@@ -598,3 +592,4 @@
 .online-users::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+

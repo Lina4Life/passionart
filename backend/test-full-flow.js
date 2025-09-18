@@ -1,16 +1,10 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-// Complete PassionArt Registration Flow Test
+﻿// Complete PassionArt Registration Flow Test
 require('dotenv').config();
 const { Resend } = require('resend');
 const { Client } = require('@hubspot/api-client');
 
 async function testRegistrationFlow() {
-    console.log('🎨 Testing PassionArt Registration Flow...\n');
+    console.log('ðŸŽ¨ Testing PassionArt Registration Flow...\n');
     
     const resend = new Resend(process.env.RESEND_API_KEY);
     const hubspotClient = new Client({ accessToken: process.env.HUBSPOT_ACCESS_TOKEN });
@@ -24,7 +18,7 @@ async function testRegistrationFlow() {
     };
     
     try {
-        console.log('1️⃣ Testing Email Verification System...');
+        console.log('1ï¸âƒ£ Testing Email Verification System...');
         
         // Test sending verification email
         const verificationLink = `http://217.154.119.33/verify-email?token=test-token-123`;
@@ -32,10 +26,10 @@ async function testRegistrationFlow() {
         const emailData = {
             from: 'PassionArt <noreply@passionart.com>',
             to: [testUser.email],
-            subject: '🎨 Welcome to PassionArt - Verify Your Email',
+            subject: 'ðŸŽ¨ Welcome to PassionArt - Verify Your Email',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                    <h1 style="color: #2563eb;">Welcome to PassionArt! 🎨</h1>
+                    <h1 style="color: #2563eb;">Welcome to PassionArt! ðŸŽ¨</h1>
                     <p>Hi ${testUser.firstname},</p>
                     <p>Thank you for joining PassionArt, the ultimate platform for artists and art lovers!</p>
                     <p>Please verify your email address to complete your registration:</p>
@@ -50,7 +44,7 @@ async function testRegistrationFlow() {
                     <p><a href="${verificationLink}">${verificationLink}</a></p>
                     <hr style="margin: 30px 0;">
                     <p style="color: #666; font-size: 14px;">
-                        Welcome to our community of passionate artists! 🌟<br>
+                        Welcome to our community of passionate artists! ðŸŒŸ<br>
                         - The PassionArt Team
                     </p>
                 </div>
@@ -58,10 +52,10 @@ async function testRegistrationFlow() {
         };
         
         const emailResult = await resend.emails.send(emailData);
-        console.log('✅ Verification email sent successfully!');
-        console.log('📧 Email ID:', emailResult.data?.id || emailResult.id || 'N/A');
+        console.log('âœ… Verification email sent successfully!');
+        console.log('ðŸ“§ Email ID:', emailResult.data?.id || emailResult.id || 'N/A');
         
-        console.log('\n2️⃣ Testing HubSpot Contact Sync...');
+        console.log('\n2ï¸âƒ£ Testing HubSpot Contact Sync...');
         
         // Test creating contact in HubSpot
         const hubspotContact = {
@@ -78,11 +72,11 @@ async function testRegistrationFlow() {
         };
         
         const contactResult = await hubspotClient.crm.contacts.basicApi.create(hubspotContact);
-        console.log('✅ Contact created in HubSpot!');
-        console.log('👤 Contact ID:', contactResult.id);
-        console.log('📧 Contact Email:', contactResult.properties.email);
+        console.log('âœ… Contact created in HubSpot!');
+        console.log('ðŸ‘¤ Contact ID:', contactResult.id);
+        console.log('ðŸ“§ Contact Email:', contactResult.properties.email);
         
-        console.log('\n3️⃣ Testing Contact Update...');
+        console.log('\n3ï¸âƒ£ Testing Contact Update...');
         
         // Test updating contact (simulate email verification)
         const updateData = {
@@ -94,28 +88,28 @@ async function testRegistrationFlow() {
         };
         
         await hubspotClient.crm.contacts.basicApi.update(contactResult.id, updateData);
-        console.log('✅ Contact updated with verification status!');
+        console.log('âœ… Contact updated with verification status!');
         
-        console.log('\n4️⃣ Cleaning up test data...');
+        console.log('\n4ï¸âƒ£ Cleaning up test data...');
         
         // Clean up - delete test contact
         await hubspotClient.crm.contacts.basicApi.archive(contactResult.id);
-        console.log('✅ Test contact cleaned up');
+        console.log('âœ… Test contact cleaned up');
         
-        console.log('\n🎉 COMPLETE REGISTRATION FLOW TEST SUCCESSFUL! 🎉');
-        console.log('\n📋 What was tested:');
-        console.log('  ✅ Professional email verification system');
-        console.log('  ✅ Beautiful HTML email templates');
-        console.log('  ✅ Automatic HubSpot contact creation');
-        console.log('  ✅ Contact property updates');
-        console.log('  ✅ Lead status management');
-        console.log('  ✅ Email verification tracking');
+        console.log('\nðŸŽ‰ COMPLETE REGISTRATION FLOW TEST SUCCESSFUL! ðŸŽ‰');
+        console.log('\nðŸ“‹ What was tested:');
+        console.log('  âœ… Professional email verification system');
+        console.log('  âœ… Beautiful HTML email templates');
+        console.log('  âœ… Automatic HubSpot contact creation');
+        console.log('  âœ… Contact property updates');
+        console.log('  âœ… Lead status management');
+        console.log('  âœ… Email verification tracking');
         
-        console.log('\n🚀 Your PassionArt platform is ready for production!');
-        console.log('🌟 Users will receive professional emails and be tracked in HubSpot CRM.');
+        console.log('\nðŸš€ Your PassionArt platform is ready for production!');
+        console.log('ðŸŒŸ Users will receive professional emails and be tracked in HubSpot CRM.');
         
     } catch (error) {
-        console.log('❌ Test failed:', error.message);
+        console.log('âŒ Test failed:', error.message);
         if (error.response) {
             console.log('Error details:', error.response.data);
         }
@@ -123,3 +117,4 @@ async function testRegistrationFlow() {
 }
 
 testRegistrationFlow();
+

@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-.modal-overlay {
+﻿.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -385,3 +379,4 @@
     padding: 20px;
   }
 }
+

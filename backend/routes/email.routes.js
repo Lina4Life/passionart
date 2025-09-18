@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
 const { sendBulkEmail, testEmailConfig } = require('../controllers/email.controller');
 const { verifyToken } = require('../utils/jwt');
@@ -28,3 +22,4 @@ router.post('/send-bulk-email', verifyToken, requireAdmin, sendBulkEmail);
 router.get('/test-config', verifyToken, requireAdmin, testEmailConfig);
 
 module.exports = router;
+

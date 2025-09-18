@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import './FeedbackPopup.css';
 
@@ -99,7 +93,7 @@ const FeedbackPopup = ({ isOpen, onClose, user }) => {
         <div className="feedback-header">
           <h2>{t('feedback.title')}</h2>
           <button className="feedback-close-btn" onClick={handleClose}>
-            ×
+            Ã—
           </button>
         </div>
 
@@ -164,3 +158,4 @@ const FeedbackPopup = ({ isOpen, onClose, user }) => {
 };
 
 export default FeedbackPopup;
+

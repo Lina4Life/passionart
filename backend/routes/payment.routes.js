@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const express = require('express');
+﻿const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_dummy_key_for_development');
 const router = express.Router();
 
@@ -168,3 +162,4 @@ router.get('/payment-methods', async (req, res) => {
 });
 
 module.exports = router;
+

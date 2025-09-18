@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('./config/database');
+﻿const db = require('./config/database');
 
 const query = `SELECT o.*, u.first_name, u.last_name, u.email, a.title as artwork_title 
 FROM orders o 
@@ -17,8 +11,9 @@ db.all(query, (err, orders) => {
   if (err) {
     console.error('Error:', err);
   } else {
-    console.log('✅ Pending orders found:');
+    console.log('âœ… Pending orders found:');
     console.table(orders);
   }
   process.exit();
 });
+

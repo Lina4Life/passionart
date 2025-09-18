@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-/* Enhanced Artists Page Styles */
+﻿/* Enhanced Artists Page Styles */
 .artists-container {
   min-height: 100vh;
   padding: 80px 20px 40px 20px;
@@ -1296,7 +1290,7 @@
 }
 
 .follow-btn.following::before {
-  content: '✓ ';
+  content: 'âœ“ ';
 }
 
 .loading-state,
@@ -1413,3 +1407,4 @@
     max-width: none;
   }
 }
+

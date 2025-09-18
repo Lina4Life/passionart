@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import './CollaborationRequestModal.css';
 
 const CollaborationRequestModal = ({ artist, isOpen, onClose }) => {
@@ -19,12 +13,12 @@ const CollaborationRequestModal = ({ artist, isOpen, onClose }) => {
   const [submitting, setSubmitting] = useState(false);
 
   const collaborationTypes = [
-    { value: 'art-piece', label: 'Joint Art Piece', icon: '🎨', description: 'Create artwork together' },
-    { value: 'exhibition', label: 'Exhibition', icon: '🖼️', description: 'Organize joint exhibition' },
-    { value: 'project', label: 'Creative Project', icon: '💡', description: 'Collaborative creative project' },
-    { value: 'mentorship', label: 'Mentorship', icon: '👥', description: 'Learning and guidance' },
-    { value: 'workshop', label: 'Workshop', icon: '🎓', description: 'Educational collaboration' },
-    { value: 'series', label: 'Art Series', icon: '📚', description: 'Multi-piece series' }
+    { value: 'art-piece', label: 'Joint Art Piece', icon: 'ðŸŽ¨', description: 'Create artwork together' },
+    { value: 'exhibition', label: 'Exhibition', icon: 'ðŸ–¼ï¸', description: 'Organize joint exhibition' },
+    { value: 'project', label: 'Creative Project', icon: 'ðŸ’¡', description: 'Collaborative creative project' },
+    { value: 'mentorship', label: 'Mentorship', icon: 'ðŸ‘¥', description: 'Learning and guidance' },
+    { value: 'workshop', label: 'Workshop', icon: 'ðŸŽ“', description: 'Educational collaboration' },
+    { value: 'series', label: 'Art Series', icon: 'ðŸ“š', description: 'Multi-piece series' }
   ];
 
   const durationOptions = [
@@ -83,9 +77,9 @@ const CollaborationRequestModal = ({ artist, isOpen, onClose }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="collaboration-modal" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>🤝 Collaboration Request</h2>
+          <h2>ðŸ¤ Collaboration Request</h2>
           <p>Propose a collaboration with {artist.first_name || artist.username}</p>
-          <button className="close-btn" onClick={onClose}>×</button>
+          <button className="close-btn" onClick={onClose}>Ã—</button>
         </div>
 
         <form onSubmit={handleSubmit} className="collaboration-form">
@@ -171,31 +165,31 @@ const CollaborationRequestModal = ({ artist, isOpen, onClose }) => {
           </div>
 
           <div className="collaboration-benefits">
-            <h3>✨ Benefits of Collaboration</h3>
+            <h3>âœ¨ Benefits of Collaboration</h3>
             <div className="benefits-grid">
               <div className="benefit-card">
-                <span className="benefit-icon">🎯</span>
+                <span className="benefit-icon">ðŸŽ¯</span>
                 <div>
                   <h4>Shared Vision</h4>
                   <p>Combine unique perspectives and skills</p>
                 </div>
               </div>
               <div className="benefit-card">
-                <span className="benefit-icon">📈</span>
+                <span className="benefit-icon">ðŸ“ˆ</span>
                 <div>
                   <h4>Growth</h4>
                   <p>Learn new techniques and expand your network</p>
                 </div>
               </div>
               <div className="benefit-card">
-                <span className="benefit-icon">🌟</span>
+                <span className="benefit-icon">ðŸŒŸ</span>
                 <div>
                   <h4>Recognition</h4>
                   <p>Reach new audiences and gain exposure</p>
                 </div>
               </div>
               <div className="benefit-card">
-                <span className="benefit-icon">🎨</span>
+                <span className="benefit-icon">ðŸŽ¨</span>
                 <div>
                   <h4>Creativity</h4>
                   <p>Push creative boundaries together</p>
@@ -217,7 +211,7 @@ const CollaborationRequestModal = ({ artist, isOpen, onClose }) => {
               className="submit-btn"
               disabled={submitting || !request.title || !request.collaboration_type || !request.description}
             >
-              {submitting ? 'Sending...' : '🤝 Send Collaboration Request'}
+              {submitting ? 'Sending...' : 'ðŸ¤ Send Collaboration Request'}
             </button>
           </div>
         </form>
@@ -227,3 +221,4 @@ const CollaborationRequestModal = ({ artist, isOpen, onClose }) => {
 };
 
 export default CollaborationRequestModal;
+

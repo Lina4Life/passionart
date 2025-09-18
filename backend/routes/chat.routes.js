@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const express = require('express');
+﻿const express = require('express');
 const { verifyToken } = require('../utils/jwt');
 const router = express.Router();
 
@@ -97,3 +91,4 @@ router.get('/online-users', (req, res) => {
 });
 
 module.exports = router;
+

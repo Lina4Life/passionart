@@ -1,14 +1,8 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('../config/database');
+﻿const db = require('../config/database');
 const bcrypt = require('bcrypt');
 
 const getAdminStats = async (req, res) => {
-  console.log('🔍 getAdminStats called at:', new Date().toISOString());
+  console.log('ðŸ” getAdminStats called at:', new Date().toISOString());
   console.log('Authorization header:', req.headers.authorization);
   try {
     // Get user count
@@ -60,7 +54,7 @@ const getAdminStats = async (req, res) => {
                 pendingModeration: 0 // No moderation system yet
               };
               
-              console.log('📊 Sending stats response:', statsResponse);
+              console.log('ðŸ“Š Sending stats response:', statsResponse);
               res.json(statsResponse);
             });
           });
@@ -935,3 +929,4 @@ module.exports = {
   updateOrderPrice,
   getRejectionHistory
 };
+

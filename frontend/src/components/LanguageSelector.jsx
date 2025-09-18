@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React from 'react';
+﻿import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './LanguageSelector.css';
 
@@ -12,10 +6,10 @@ const LanguageSelector = () => {
   const { i18n, t } = useTranslation();
 
   const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+    { code: 'en', name: 'English', flag: 'ðŸ‡ºðŸ‡¸' },
+    { code: 'fr', name: 'FranÃ§ais', flag: 'ðŸ‡«ðŸ‡·' },
+    { code: 'es', name: 'EspaÃ±ol', flag: 'ðŸ‡ªðŸ‡¸' },
+    { code: 'ar', name: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', flag: 'ðŸ‡¸ðŸ‡¦' }
   ];
 
   const handleLanguageChange = (langCode) => {
@@ -38,7 +32,7 @@ const LanguageSelector = () => {
         <button className="language-toggle">
           <span className="language-flag">{currentLanguage.flag}</span>
           <span className="language-name">{currentLanguage.name}</span>
-          <span className="dropdown-arrow">▼</span>
+          <span className="dropdown-arrow">â–¼</span>
         </button>
         <div className="language-menu">
           {languages.map((language) => (
@@ -58,3 +52,4 @@ const LanguageSelector = () => {
 };
 
 export default LanguageSelector;
+

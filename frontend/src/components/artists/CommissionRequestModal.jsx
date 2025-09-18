@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import './CommissionRequestModal.css';
 
 const CommissionRequestModal = ({ artist, isOpen, onClose }) => {
@@ -19,15 +13,15 @@ const CommissionRequestModal = ({ artist, isOpen, onClose }) => {
   const [submitting, setSubmitting] = useState(false);
 
   const commissionTypes = [
-    { value: 'digital-art', label: 'Digital Art', icon: '🎨' },
-    { value: 'portrait', label: 'Portrait', icon: '👤' },
-    { value: 'logo-design', label: 'Logo Design', icon: '🎯' },
-    { value: 'illustration', label: 'Illustration', icon: '✏️' },
-    { value: 'character-design', label: 'Character Design', icon: '🧙‍♂️' },
-    { value: 'concept-art', label: 'Concept Art', icon: '💭' },
-    { value: 'nft-art', label: 'NFT Art', icon: '🔗' },
-    { value: 'animation', label: 'Animation', icon: '🎬' },
-    { value: 'other', label: 'Other', icon: '💡' }
+    { value: 'digital-art', label: 'Digital Art', icon: 'ðŸŽ¨' },
+    { value: 'portrait', label: 'Portrait', icon: 'ðŸ‘¤' },
+    { value: 'logo-design', label: 'Logo Design', icon: 'ðŸŽ¯' },
+    { value: 'illustration', label: 'Illustration', icon: 'âœï¸' },
+    { value: 'character-design', label: 'Character Design', icon: 'ðŸ§™â€â™‚ï¸' },
+    { value: 'concept-art', label: 'Concept Art', icon: 'ðŸ’­' },
+    { value: 'nft-art', label: 'NFT Art', icon: 'ðŸ”—' },
+    { value: 'animation', label: 'Animation', icon: 'ðŸŽ¬' },
+    { value: 'other', label: 'Other', icon: 'ðŸ’¡' }
   ];
 
   const handleSubmit = async (e) => {
@@ -81,7 +75,7 @@ const CommissionRequestModal = ({ artist, isOpen, onClose }) => {
         <div className="modal-header">
           <h2>Request Commission</h2>
           <p>Send a commission request to {artist.first_name || artist.username}</p>
-          <button className="close-btn" onClick={onClose}>×</button>
+          <button className="close-btn" onClick={onClose}>Ã—</button>
         </div>
 
         <form onSubmit={handleSubmit} className="commission-form">
@@ -164,7 +158,7 @@ const CommissionRequestModal = ({ artist, isOpen, onClose }) => {
                   id="reference-images"
                 />
                 <label htmlFor="reference-images" className="file-upload-label">
-                  <span className="upload-icon">📁</span>
+                  <span className="upload-icon">ðŸ“</span>
                   <span>Click to upload reference images</span>
                   <small>PNG, JPG up to 10MB each</small>
                 </label>
@@ -173,7 +167,7 @@ const CommissionRequestModal = ({ artist, isOpen, onClose }) => {
           </div>
 
           <div className="commission-info">
-            <h3>📋 Commission Process</h3>
+            <h3>ðŸ“‹ Commission Process</h3>
             <div className="process-steps">
               <div className="step">
                 <span className="step-number">1</span>
@@ -219,7 +213,7 @@ const CommissionRequestModal = ({ artist, isOpen, onClose }) => {
               className="submit-btn"
               disabled={submitting || !request.title || !request.type || !request.description}
             >
-              {submitting ? 'Sending...' : '💼 Send Commission Request'}
+              {submitting ? 'Sending...' : 'ðŸ’¼ Send Commission Request'}
             </button>
           </div>
         </form>
@@ -229,3 +223,4 @@ const CommissionRequestModal = ({ artist, isOpen, onClose }) => {
 };
 
 export default CommissionRequestModal;
+

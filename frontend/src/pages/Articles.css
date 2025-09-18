@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-/* Articles page specific styles */
+﻿/* Articles page specific styles */
 
 .articles-page {
   min-height: 100vh;
@@ -563,3 +557,4 @@
   border-color: var(--accent-color);
   box-shadow: 0 0 0 3px rgba(0, 180, 166, 0.1);
 }
+

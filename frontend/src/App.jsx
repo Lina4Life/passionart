@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
@@ -132,7 +126,7 @@ function App() {
               }}
               title={t('nav.send_feedback')}
             >
-              💬
+              ðŸ’¬
             </button>
             <FeedbackPopup
               isOpen={feedbackOpen}
@@ -149,3 +143,4 @@ function App() {
 }
 
 export default App;
+

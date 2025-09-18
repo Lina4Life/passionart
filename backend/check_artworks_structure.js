@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -16,7 +10,7 @@ function checkArtworksTable() {
       console.error('Error opening database:', err.message);
       return;
     }
-    console.log('✅ Connected to SQLite database');
+    console.log('âœ… Connected to SQLite database');
   });
 
   // Check current table structure
@@ -26,7 +20,7 @@ function checkArtworksTable() {
       return;
     }
     
-    console.log('📋 Current artworks table structure:');
+    console.log('ðŸ“‹ Current artworks table structure:');
     console.log('='.repeat(50));
     columns.forEach(col => {
       console.log(`${col.name}: ${col.type} ${col.notnull ? 'NOT NULL' : ''} ${col.pk ? 'PRIMARY KEY' : ''}`);
@@ -36,12 +30,12 @@ function checkArtworksTable() {
     const hasTagsColumn = columns.some(col => col.name === 'tags');
     
     if (!hasTagsColumn) {
-      console.log('\n🔧 Adding tags column...');
+      console.log('\nðŸ”§ Adding tags column...');
       db.run("ALTER TABLE artworks ADD COLUMN tags TEXT", (err) => {
         if (err) {
           console.error('Error adding tags column:', err.message);
         } else {
-          console.log('✅ Tags column added successfully');
+          console.log('âœ… Tags column added successfully');
         }
         
         // Show updated structure
@@ -49,7 +43,7 @@ function checkArtworksTable() {
           if (err) {
             console.error('Error checking updated table structure:', err.message);
           } else {
-            console.log('\n📋 Updated artworks table structure:');
+            console.log('\nðŸ“‹ Updated artworks table structure:');
             console.log('='.repeat(50));
             newColumns.forEach(col => {
               console.log(`${col.name}: ${col.type} ${col.notnull ? 'NOT NULL' : ''} ${col.pk ? 'PRIMARY KEY' : ''}`);
@@ -60,10 +54,11 @@ function checkArtworksTable() {
         });
       });
     } else {
-      console.log('\n✅ Tags column already exists');
+      console.log('\nâœ… Tags column already exists');
       db.close();
     }
   });
 }
 
 checkArtworksTable();
+

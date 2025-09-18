@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -42,9 +36,9 @@ function checkAdminAccounts() {
     }
     
     if (rows.length === 0) {
-      console.log('❌ No admin accounts found in database.');
+      console.log('âŒ No admin accounts found in database.');
     } else {
-      console.log(`✅ Found ${rows.length} admin account(s):\n`);
+      console.log(`âœ… Found ${rows.length} admin account(s):\n`);
       
       rows.forEach((admin, index) => {
         console.log(`Admin Account #${index + 1}:`);
@@ -78,7 +72,7 @@ function checkAdminAccounts() {
         if (err) {
           console.error('Error closing database:', err);
         } else {
-          console.log('\n✅ Database check completed!');
+          console.log('\nâœ… Database check completed!');
         }
       });
     });
@@ -87,3 +81,4 @@ function checkAdminAccounts() {
 
 // Run the function
 checkAdminAccounts();
+

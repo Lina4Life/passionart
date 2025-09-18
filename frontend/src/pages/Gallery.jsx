@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { getArtworks } from '../services/api';
 import '../styles.css';
 
@@ -36,3 +30,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+

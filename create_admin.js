@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-// Create default admin account
+﻿// Create default admin account
 // Run this script after setting up the database: node create_admin.js
 
 const bcrypt = require('bcrypt');
@@ -12,7 +6,7 @@ const pool = require('./backend/config/db');
 
 async function createAdminAccount() {
   try {
-    console.log('🔄 Creating default admin account...');
+    console.log('ðŸ”„ Creating default admin account...');
     
     // Admin credentials
     const adminEmail = 'admin@passionart.com';
@@ -25,7 +19,7 @@ async function createAdminAccount() {
     );
     
     if (existingAdmin.rows.length > 0) {
-      console.log('⚠️  Admin account already exists!');
+      console.log('âš ï¸  Admin account already exists!');
       console.log(`Email: ${adminEmail}`);
       console.log('Use existing credentials or delete the account first.');
       return;
@@ -49,15 +43,15 @@ async function createAdminAccount() {
       [adminUser.rows[0].id]
     );
     
-    console.log('✅ Admin account created successfully!');
+    console.log('âœ… Admin account created successfully!');
     console.log('');
-    console.log('🔑 Admin Login Credentials:');
+    console.log('ðŸ”‘ Admin Login Credentials:');
     console.log(`Email: ${adminEmail}`);
     console.log(`Password: ${adminPassword}`);
     console.log('');
-    console.log('⚠️  IMPORTANT: Change this password after first login!');
+    console.log('âš ï¸  IMPORTANT: Change this password after first login!');
     console.log('');
-    console.log('🎯 Admin Features:');
+    console.log('ðŸŽ¯ Admin Features:');
     console.log('- Access to Management Dashboard');
     console.log('- User account management');
     console.log('- Product/artwork management');
@@ -66,7 +60,7 @@ async function createAdminAccount() {
     console.log('- Analytics and reports');
     
   } catch (error) {
-    console.error('❌ Failed to create admin account:', error.message);
+    console.error('âŒ Failed to create admin account:', error.message);
     
     if (error.code === '23505') {
       console.log('Email already exists in database.');
@@ -79,3 +73,4 @@ async function createAdminAccount() {
 }
 
 createAdminAccount();
+

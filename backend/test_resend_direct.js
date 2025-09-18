@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const { Resend } = require('resend');
+﻿const { Resend } = require('resend');
 
 const resend = new Resend('re_AS2hfFer_2sWWNn7ySNdB6uo1XxszmjVR');
 
@@ -20,11 +14,11 @@ async function testResendDirect() {
     });
 
     if (error) {
-      console.error('❌ Resend error:', error);
+      console.error('âŒ Resend error:', error);
       return;
     }
 
-    console.log('✅ Email sent successfully!');
+    console.log('âœ… Email sent successfully!');
     console.log('Response data:', data);
     
     // Now test with our PassionArt format
@@ -67,7 +61,7 @@ async function testResendDirect() {
             </div>
             <div class="footer">
               <p>Best regards,<br>The PassionArt Team</p>
-              <p style="margin-top: 20px;">© 2025 PassionArt. All rights reserved.</p>
+              <p style="margin-top: 20px;">Â© 2025 PassionArt. All rights reserved.</p>
             </div>
           </div>
         </body>
@@ -83,16 +77,17 @@ async function testResendDirect() {
     });
 
     if (error2) {
-      console.error('❌ PassionArt email error:', error2);
+      console.error('âŒ PassionArt email error:', error2);
       return;
     }
 
-    console.log('✅ PassionArt verification email sent successfully!');
+    console.log('âœ… PassionArt verification email sent successfully!');
     console.log('Response data:', data2);
     
   } catch (error) {
-    console.error('❌ Test failed:', error);
+    console.error('âŒ Test failed:', error);
   }
 }
 
 testResendDirect();
+

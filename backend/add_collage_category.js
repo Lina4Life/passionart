@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
@@ -39,7 +33,7 @@ function addCollageCategory() {
     const collageExists = rows.some(row => row.name.toLowerCase() === 'collage');
     
     if (collageExists) {
-      console.log('\n❌ Collage category already exists!');
+      console.log('\nâŒ Collage category already exists!');
       db.close();
       return;
     }
@@ -54,7 +48,7 @@ function addCollageCategory() {
       if (err) {
         console.error('Error inserting Collage category:', err);
       } else {
-        console.log('\n✅ Successfully added Collage category!');
+        console.log('\nâœ… Successfully added Collage category!');
         console.log(`   ID: ${this.lastID}`);
         console.log('   Name: Collage');
         console.log('   Slug: collage');
@@ -76,7 +70,7 @@ function addCollageCategory() {
           if (err) {
             console.error('Error closing database:', err);
           } else {
-            console.log('\n🎉 Database updated successfully! Collage category is now available.');
+            console.log('\nðŸŽ‰ Database updated successfully! Collage category is now available.');
           }
         });
       });
@@ -86,3 +80,4 @@ function addCollageCategory() {
 
 // Run the function
 addCollageCategory();
+

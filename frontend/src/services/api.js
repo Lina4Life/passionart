@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import axios from 'axios';
+﻿import axios from 'axios';
 
 const API_URL = (import.meta.env.VITE_API_URL || 'http://217.154.119.33:3001/api').replace(/\/$/, '');
 
@@ -115,3 +109,4 @@ export const getDatabaseHealth = () =>
   api.get('/database/health').then(r => r.data);
 
 export default api;
+

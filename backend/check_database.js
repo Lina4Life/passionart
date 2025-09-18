@@ -1,35 +1,29 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const sqlite3 = require('sqlite3').verbose();
+﻿const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 // Database path
 const dbPath = path.join(__dirname, 'data', 'passionart.db');
 
-console.log('🔍 Checking database at:', dbPath);
+console.log('ðŸ” Checking database at:', dbPath);
 console.log('=' .repeat(80));
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
-    console.error('❌ Error opening database:', err.message);
+    console.error('âŒ Error opening database:', err.message);
     return;
   }
   
-  console.log('✅ Connected to SQLite database');
+  console.log('âœ… Connected to SQLite database');
   console.log('=' .repeat(80));
   
   // Get all table names
   db.all("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name", [], (err, tables) => {
     if (err) {
-      console.error('❌ Error fetching tables:', err.message);
+      console.error('âŒ Error fetching tables:', err.message);
       return;
     }
     
-    console.log(`📋 Found ${tables.length} tables:`);
+    console.log(`ðŸ“‹ Found ${tables.length} tables:`);
     tables.forEach(table => console.log(`  - ${table.name}`));
     console.log('=' .repeat(80));
     
@@ -42,11 +36,11 @@ const db = new sqlite3.Database(dbPath, (err) => {
       // Get table schema
       db.all(`PRAGMA table_info(${tableName})`, [], (err, columns) => {
         if (err) {
-          console.error(`❌ Error getting schema for ${tableName}:`, err.message);
+          console.error(`âŒ Error getting schema for ${tableName}:`, err.message);
           return;
         }
         
-        console.log(`\n📊 Table: ${tableName.toUpperCase()}`);
+        console.log(`\nðŸ“Š Table: ${tableName.toUpperCase()}`);
         console.log('-'.repeat(50));
         
         // Show columns
@@ -61,7 +55,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
         // Get row count
         db.get(`SELECT COUNT(*) as count FROM ${tableName}`, [], (err, countResult) => {
           if (err) {
-            console.error(`❌ Error counting rows in ${tableName}:`, err.message);
+            console.error(`âŒ Error counting rows in ${tableName}:`, err.message);
             return;
           }
           
@@ -72,7 +66,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
             // Show first 10 rows of data
             db.all(`SELECT * FROM ${tableName} LIMIT 10`, [], (err, rows) => {
               if (err) {
-                console.error(`❌ Error fetching data from ${tableName}:`, err.message);
+                console.error(`âŒ Error fetching data from ${tableName}:`, err.message);
                 return;
               }
               
@@ -86,7 +80,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
               processedTables++;
               if (processedTables === tables.length) {
                 console.log('\n' + '=' .repeat(80));
-                console.log('✅ Database analysis complete!');
+                console.log('âœ… Database analysis complete!');
                 db.close();
               }
             });
@@ -95,7 +89,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
             processedTables++;
             if (processedTables === tables.length) {
               console.log('\n' + '=' .repeat(80));
-              console.log('✅ Database analysis complete!');
+              console.log('âœ… Database analysis complete!');
               db.close();
             }
           }
@@ -104,3 +98,4 @@ const db = new sqlite3.Database(dbPath, (err) => {
     });
   });
 });
+

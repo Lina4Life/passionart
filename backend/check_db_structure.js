@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('./config/database.js');
+﻿const db = require('./config/database.js');
 
 console.log('Checking users table structure...');
 
@@ -25,3 +19,4 @@ db.all("PRAGMA table_info(users)", (err, rows) => {
     db.close();
   });
 });
+

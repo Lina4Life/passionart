@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -605,9 +599,9 @@ function Admin() {
       
       // Show success feedback
       if (newStatus === 'approved') {
-        console.log('✅ Product approved! It will now appear in the store.');
+        console.log('âœ… Product approved! It will now appear in the store.');
       } else if (newStatus === 'rejected') {
-        console.log('❌ Product rejected. Artist will be notified.');
+        console.log('âŒ Product rejected. Artist will be notified.');
       }
       
     } catch (error) {
@@ -1107,15 +1101,15 @@ function Admin() {
       <div className="admin-dashboard">
         {/* Enhanced Stats Grid */}
         <div className="dashboard-header">
-          <h2>📊 Admin Dashboard Overview</h2>
+          <h2>ðŸ“Š Admin Dashboard Overview</h2>
           <div className="revenue-summary">
             <div className="revenue-card admin-revenue">
-              <h4>💰 Total Revenue Received</h4>
+              <h4>ðŸ’° Total Revenue Received</h4>
               <div className="amount">${totalRevenue.toFixed(2)}</div>
               <div className="note">All customer payments received by admin</div>
             </div>
             <div className="revenue-card artist-revenue">
-              <h4>💸 To Send to Artists (10%)</h4>
+              <h4>ðŸ’¸ To Send to Artists (10%)</h4>
               <div className="amount">${artistPaymentCalculation.toFixed(2)}</div>
               <div className="note">Amount calculated for artist payments</div>
             </div>
@@ -1124,7 +1118,7 @@ function Admin() {
 
         <div className="stats-grid">
           <div className="stat-card users">
-            <div className="stat-icon">👥</div>
+            <div className="stat-icon">ðŸ‘¥</div>
             <div className="stat-content">
               <h3>Total Users</h3>
               <div className="stat-number">{stats.totalUsers}</div>
@@ -1132,7 +1126,7 @@ function Admin() {
             </div>
           </div>
           <div className="stat-card products">
-            <div className="stat-icon">🎨</div>
+            <div className="stat-icon">ðŸŽ¨</div>
             <div className="stat-content">
               <h3>Artworks</h3>
               <div className="stat-number">{stats.totalProducts}</div>
@@ -1140,7 +1134,7 @@ function Admin() {
             </div>
           </div>
           <div className="stat-card articles">
-            <div className="stat-icon">📝</div>
+            <div className="stat-icon">ðŸ“</div>
             <div className="stat-content">
               <h3>Articles</h3>
               <div className="stat-number">{stats.totalArticles}</div>
@@ -1148,7 +1142,7 @@ function Admin() {
             </div>
           </div>
           <div className="stat-card orders">
-            <div className="stat-icon">🛒</div>
+            <div className="stat-icon">ðŸ›’</div>
             <div className="stat-content">
               <h3>Orders</h3>
               <div className="stat-number">{stats.totalOrders}</div>
@@ -1160,31 +1154,31 @@ function Admin() {
         {/* Charts Section */}
         <div className="charts-grid">
           <div className="chart-container">
-            <h3>📈 Revenue & Artist Payments</h3>
+            <h3>ðŸ“ˆ Revenue & Artist Payments</h3>
             <div className="chart-wrapper">
               <Line data={revenueData} options={chartOptions} />
             </div>
             <div className="chart-note">
-              <p>💡 <strong>Payment Flow:</strong> Admin receives 100% → Calculates 10% for artists → Sends artist payments manually</p>
+              <p>ðŸ’¡ <strong>Payment Flow:</strong> Admin receives 100% â†’ Calculates 10% for artists â†’ Sends artist payments manually</p>
             </div>
           </div>
 
           <div className="chart-container">
-            <h3>📊 Order Status Distribution</h3>
+            <h3>ðŸ“Š Order Status Distribution</h3>
             <div className="chart-wrapper doughnut">
               <Doughnut data={orderStatusData} options={doughnutOptions} />
             </div>
           </div>
 
           <div className="chart-container">
-            <h3>👥 User Growth (Weekly)</h3>
+            <h3>ðŸ‘¥ User Growth (Weekly)</h3>
             <div className="chart-wrapper">
               <Bar data={userGrowthData} options={chartOptions} />
             </div>
           </div>
 
           <div className="chart-container quick-stats">
-            <h3>⚡ Quick Stats</h3>
+            <h3>âš¡ Quick Stats</h3>
             <div className="quick-stats-grid">
               <div className="quick-stat">
                 <span className="quick-stat-number">{orders.filter(o => o.status === 'pending').length}</span>
@@ -1208,12 +1202,12 @@ function Admin() {
 
         {/* Recent Activity */}
         <div className="recent-activity">
-          <h3>🔥 Recent Activity</h3>
+          <h3>ðŸ”¥ Recent Activity</h3>
           <div className="activity-list">
             {orders.slice(0, 5).map((order, index) => (
               <div key={order.id} className="activity-item">
                 <div className={`activity-icon ${order.status}`}>
-                  {order.status === 'paid' ? '�' : order.status === 'pending' ? '⏳' : '❌'}
+                  {order.status === 'paid' ? 'ï¿½' : order.status === 'pending' ? 'â³' : 'âŒ'}
                 </div>
                 <div className="activity-content">
                   <div className="activity-title">
@@ -1245,7 +1239,7 @@ function Admin() {
         </button>
       </div>
       <div className="testing-warning">
-        ⚠️ <strong>TESTING MODE:</strong> Passwords are visible for testing purposes only. Remove in production!
+        âš ï¸ <strong>TESTING MODE:</strong> Passwords are visible for testing purposes only. Remove in production!
       </div>
       <div className="table-container">
         <table className="admin-table">
@@ -1271,14 +1265,14 @@ function Admin() {
                 <td className="password-cell">
                   <div className="password-container">
                     <span className="password-text">
-                      {showPasswords[user.id] ? user.password : '••••••••'}
+                      {showPasswords[user.id] ? user.password : 'â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢'}
                     </span>
                     <button 
                       onClick={() => togglePasswordVisibility(user.id)}
                       className="password-toggle-btn"
                       title={showPasswords[user.id] ? 'Hide password' : 'Show password'}
                     >
-                      {showPasswords[user.id] ? '👁️‍🗨️' : '👁️'}
+                      {showPasswords[user.id] ? 'ðŸ‘ï¸â€ðŸ—¨ï¸' : 'ðŸ‘ï¸'}
                     </button>
                   </div>
                 </td>
@@ -1327,7 +1321,7 @@ function Admin() {
                 fetchFeaturedArtworks();
               }}
             >
-              🔄 Refresh Featured
+              ðŸ”„ Refresh Featured
             </button>
             <button className="admin-btn primary" onClick={handleAddProductClick}>Add Product</button>
           </div>
@@ -1367,12 +1361,12 @@ function Admin() {
                     <td>
                       <div className="status-management">
                         <span className={`status-badge ${product.status}`}>
-                          {product.status === 'pending' && '⏳ Pending'}
-                          {product.status === 'approved' && '✅ Approved'}
-                          {product.status === 'rejected' && '❌ Rejected'}
-                          {product.status === 'available' && '🛍️ Available'}
-                          {product.status === 'sold' && '💰 Sold'}
-                          {product.status === 'reserved' && '🔒 Reserved'}
+                          {product.status === 'pending' && 'â³ Pending'}
+                          {product.status === 'approved' && 'âœ… Approved'}
+                          {product.status === 'rejected' && 'âŒ Rejected'}
+                          {product.status === 'available' && 'ðŸ›ï¸ Available'}
+                          {product.status === 'sold' && 'ðŸ’° Sold'}
+                          {product.status === 'reserved' && 'ðŸ”’ Reserved'}
                         </span>
                         
                         {product.status === 'pending' && (
@@ -1383,7 +1377,7 @@ function Admin() {
                               disabled={updatingProductStatus === product.id}
                               title="Approve this artwork"
                             >
-                              ✅ Approve
+                              âœ… Approve
                             </button>
                             <button 
                               className="admin-btn small danger"
@@ -1391,7 +1385,7 @@ function Admin() {
                               disabled={updatingProductStatus === product.id}
                               title="Reject this artwork"
                             >
-                              ❌ Reject
+                              âŒ Reject
                             </button>
                           </div>
                         )}
@@ -1409,12 +1403,12 @@ function Admin() {
                             className="status-select small"
                             disabled={updatingProductStatus === product.id}
                           >
-                            <option value="pending">⏳ Pending</option>
-                            <option value="approved">✅ Approved</option>
-                            <option value="rejected">❌ Rejected</option>
-                            <option value="available">🛍️ Available</option>
-                            <option value="sold">💰 Sold</option>
-                            <option value="reserved">🔒 Reserved</option>
+                            <option value="pending">â³ Pending</option>
+                            <option value="approved">âœ… Approved</option>
+                            <option value="rejected">âŒ Rejected</option>
+                            <option value="available">ðŸ›ï¸ Available</option>
+                            <option value="sold">ðŸ’° Sold</option>
+                            <option value="reserved">ðŸ”’ Reserved</option>
                           </select>
                         )}
                         
@@ -1439,7 +1433,7 @@ function Admin() {
                             disabled={featuringArtwork === product.id || (!isFeatured && featuredArtworks.length >= 6)}
                           />
                           <span className="checkmark">
-                            {isFeatured ? '⭐' : '☆'}
+                            {isFeatured ? 'â­' : 'â˜†'}
                           </span>
                         </label>
                         {featuringArtwork === product.id && (
@@ -1622,7 +1616,7 @@ function Admin() {
     return (
       <div className="admin-section">
         <div className="section-header">
-          <h2>💼 Order Management</h2>
+          <h2>ðŸ’¼ Order Management</h2>
           <div className="order-stats">
             <div className="stat-card">
               <span className="stat-number">{filteredOrders.length}</span>
@@ -1734,7 +1728,7 @@ function Admin() {
                               className="price-btn save"
                               onClick={() => handleUpdateOrderPrice(order.id, newPrice)}
                             >
-                              ✓
+                              âœ“
                             </button>
                             <button 
                               className="price-btn cancel"
@@ -1743,7 +1737,7 @@ function Admin() {
                                 setNewPrice('');
                               }}
                             >
-                              ✗
+                              âœ—
                             </button>
                           </div>
                         </div>
@@ -1755,7 +1749,7 @@ function Admin() {
                             onClick={() => handlePriceEdit(order.id, order.total_amount)}
                             title="Edit price (Admin power)"
                           >
-                            ✏️
+                            âœï¸
                           </button>
                         </div>
                       )}
@@ -1775,14 +1769,14 @@ function Admin() {
                               onClick={() => handleUpdateOrderStatus(order.id, 'paid')}
                               disabled={updatingOrderStatus === order.id}
                             >
-                              ✓ Mark Paid
+                              âœ“ Mark Paid
                             </button>
                             <button 
                               className="status-btn danger"
                               onClick={() => handleUpdateOrderStatus(order.id, 'failed')}
                               disabled={updatingOrderStatus === order.id}
                             >
-                              ✗ Mark Failed
+                              âœ— Mark Failed
                             </button>
                           </div>
                         )}
@@ -1802,7 +1796,7 @@ function Admin() {
                           className="admin-btn small primary"
                           onClick={() => handleViewOrder(order)}
                         >
-                          📋 View Details
+                          ðŸ“‹ View Details
                         </button>
                         {order.status === 'pending' && (
                           <button 
@@ -1810,7 +1804,7 @@ function Admin() {
                             onClick={() => handleUpdateOrderStatus(order.id, 'paid')}
                             disabled={updatingOrderStatus === order.id}
                           >
-                            💳 Process Payment
+                            ðŸ’³ Process Payment
                           </button>
                         )}
                       </div>
@@ -1827,19 +1821,19 @@ function Admin() {
           <div className="modal-overlay" onClick={() => setShowOrderModal(false)}>
             <div className="modal-content order-modal" onClick={(e) => e.stopPropagation()}>
               <div className="modal-header">
-                <h3>📋 Order Details - #{selectedOrder.id}</h3>
+                <h3>ðŸ“‹ Order Details - #{selectedOrder.id}</h3>
                 <button 
                   className="close-btn"
                   onClick={() => setShowOrderModal(false)}
                 >
-                  ✕
+                  âœ•
                 </button>
               </div>
               
               <div className="modal-body">
                 <div className="order-details-grid">
                   <div className="detail-section">
-                    <h4>👤 Customer Information</h4>
+                    <h4>ðŸ‘¤ Customer Information</h4>
                     <div className="detail-row">
                       <span>Name:</span>
                       <span>{selectedOrder.customer_name || 'Not provided'}</span>
@@ -1857,7 +1851,7 @@ function Admin() {
                   </div>
 
                   <div className="detail-section">
-                    <h4>🎨 Product Information</h4>
+                    <h4>ðŸŽ¨ Product Information</h4>
                     <div className="product-detail">
                       {selectedOrder.product_image && (
                         <img 
@@ -1880,7 +1874,7 @@ function Admin() {
                   </div>
 
                   <div className="detail-section">
-                    <h4>💰 Payment Information</h4>
+                    <h4>ðŸ’° Payment Information</h4>
                     <div className="detail-row">
                       <span>Total Amount:</span>
                       <span><strong>${selectedOrder.total_amount}</strong></span>
@@ -1911,7 +1905,7 @@ function Admin() {
                       <span>{new Date(selectedOrder.created_at).toLocaleString()}</span>
                     </div>
                     <div className="payment-flow-info">
-                      <h5>💳 Actual Payment Flow:</h5>
+                      <h5>ðŸ’³ Actual Payment Flow:</h5>
                       <div className="flow-step">
                         <span className="step-number">1</span>
                         <span>Customer pays ${selectedOrder.total_amount}</span>
@@ -1942,7 +1936,7 @@ function Admin() {
                           setShowOrderModal(false);
                         }}
                       >
-                        ✓ Mark as Paid
+                        âœ“ Mark as Paid
                       </button>
                       <button 
                         className="admin-btn danger"
@@ -1951,7 +1945,7 @@ function Admin() {
                           setShowOrderModal(false);
                         }}
                       >
-                        ✗ Mark as Failed
+                        âœ— Mark as Failed
                       </button>
                     </>
                   )}
@@ -1974,7 +1968,7 @@ function Admin() {
     return (
       <div className="admin-section">
         <div className="section-header">
-          <h2>📧 HubSpot Email System</h2>
+          <h2>ðŸ“§ HubSpot Email System</h2>
           <div className="email-stats">
             <span>Total Users: {emailStats.totalUsers || users.length}</span>
             <span>Verified Emails: {emailStats.verifiedUsers || users.filter(user => user.email_verified).length}</span>
@@ -2008,7 +2002,7 @@ function Admin() {
             className="admin-btn primary"
             onClick={fetchEmailStats}
           >
-            📊 Refresh Stats
+            ðŸ“Š Refresh Stats
           </button>
         </div>
         
@@ -2056,7 +2050,7 @@ function Admin() {
                 disabled={!emailData.subject || !emailData.message || sending}
                 onClick={() => handleSendEmail(emailData)}
               >
-                {sending ? 'Sending...' : `📤 Send to ${emailStats.verifiedUsers || users.filter(user => user.email_verified).length} users`}
+                {sending ? 'Sending...' : `ðŸ“¤ Send to ${emailStats.verifiedUsers || users.filter(user => user.email_verified).length} users`}
               </button>
               <button 
                 className="admin-btn secondary"
@@ -2067,12 +2061,12 @@ function Admin() {
             </div>
             
             <div className="resend-features">
-              <h4>✨ Resend Features:</h4>
+              <h4>âœ¨ Resend Features:</h4>
               <ul>
-                <li>📨 Beautiful HTML email templates</li>
-                <li>📊 Real-time delivery tracking</li>
-                <li>🚀 99.9% uptime guarantee</li>
-                <li>💎 Professional email infrastructure</li>
+                <li>ðŸ“¨ Beautiful HTML email templates</li>
+                <li>ðŸ“Š Real-time delivery tracking</li>
+                <li>ðŸš€ 99.9% uptime guarantee</li>
+                <li>ðŸ’Ž Professional email infrastructure</li>
               </ul>
             </div>
           </div>
@@ -2103,7 +2097,7 @@ function Admin() {
     return (
       <div className="admin-section">
         <div className="section-header">
-          <h2>💬 User Feedback Management</h2>
+          <h2>ðŸ’¬ User Feedback Management</h2>
           <div className="feedback-controls">
             <select 
               value={feedbackFilter} 
@@ -2111,17 +2105,17 @@ function Admin() {
               className="filter-select"
             >
               <option value="all">All Feedback</option>
-              <option value="pending">⏳ Pending</option>
-              <option value="reviewing">👀 Reviewing</option>
-              <option value="resolved">✅ Resolved</option>
-              <option value="dismissed">❌ Dismissed</option>
+              <option value="pending">â³ Pending</option>
+              <option value="reviewing">ðŸ‘€ Reviewing</option>
+              <option value="resolved">âœ… Resolved</option>
+              <option value="dismissed">âŒ Dismissed</option>
             </select>
             <button 
               className="admin-btn primary"
               onClick={fetchFeedback}
               disabled={feedbackLoading}
             >
-              {feedbackLoading ? '⏳ Loading...' : '🔄 Refresh'}
+              {feedbackLoading ? 'â³ Loading...' : 'ðŸ”„ Refresh'}
             </button>
           </div>
         </div>
@@ -2136,7 +2130,7 @@ function Admin() {
             <div className="feedback-grid">
               {feedback.length === 0 ? (
                 <div className="no-feedback-card">
-                  <div className="no-feedback-icon">📭</div>
+                  <div className="no-feedback-icon">ðŸ“­</div>
                   <h3>No feedback found</h3>
                   <p>No feedback matches the selected filter.</p>
                 </div>
@@ -2146,10 +2140,10 @@ function Admin() {
                     <div className="feedback-card-header">
                       <div className="feedback-priority">
                         <span className={`status-badge status-${item.status}`}>
-                          {item.status === 'pending' && '⏳'}
-                          {item.status === 'reviewing' && '👀'}
-                          {item.status === 'resolved' && '✅'}
-                          {item.status === 'dismissed' && '❌'}
+                          {item.status === 'pending' && 'â³'}
+                          {item.status === 'reviewing' && 'ðŸ‘€'}
+                          {item.status === 'resolved' && 'âœ…'}
+                          {item.status === 'dismissed' && 'âŒ'}
                           {item.status.toUpperCase()}
                         </span>
                         <span className="feedback-date">
@@ -2170,21 +2164,21 @@ function Admin() {
                           }}
                           title="View details"
                         >
-                          👁️
+                          ðŸ‘ï¸
                         </button>
                         <button
                           className="action-btn delete-btn"
                           onClick={() => deleteFeedback(item.id)}
                           title="Delete feedback"
                         >
-                          🗑️
+                          ðŸ—‘ï¸
                         </button>
                       </div>
                     </div>
 
                     <div className="feedback-content">
                       <h4 className="feedback-issue">
-                        📋 {item.issue}
+                        ðŸ“‹ {item.issue}
                       </h4>
                       <div className="feedback-preview">
                         {item.feedback.length > 120 
@@ -2192,7 +2186,7 @@ function Admin() {
                           : item.feedback}
                       </div>
                       <div className="feedback-user">
-                        <span className="user-avatar">👤</span>
+                        <span className="user-avatar">ðŸ‘¤</span>
                         <div className="user-details">
                           <span className="user-name">{item.user_name}</span>
                           <span className="user-email">{item.user_email}</span>
@@ -2212,7 +2206,7 @@ function Admin() {
                   disabled={feedbackPagination.page === 1}
                   onClick={() => setFeedbackPagination(prev => ({ ...prev, page: prev.page - 1 }))}
                 >
-                  ⬅️ Previous
+                  â¬…ï¸ Previous
                 </button>
                 <div className="page-info">
                   <span className="page-current">{feedbackPagination.page}</span>
@@ -2224,7 +2218,7 @@ function Admin() {
                   disabled={feedbackPagination.page === feedbackPagination.pages}
                   onClick={() => setFeedbackPagination(prev => ({ ...prev, page: prev.page + 1 }))}
                 >
-                  Next ➡️
+                  Next âž¡ï¸
                 </button>
               </div>
             )}
@@ -2237,12 +2231,12 @@ function Admin() {
             <div className="modal-content feedback-modal-enhanced">
               <div className="modal-header">
                 <div className="modal-title">
-                  <h2>📋 Feedback Details</h2>
+                  <h2>ðŸ“‹ Feedback Details</h2>
                   <span className={`status-badge status-${selectedFeedback.status}`}>
-                    {selectedFeedback.status === 'pending' && '⏳'}
-                    {selectedFeedback.status === 'reviewing' && '👀'}
-                    {selectedFeedback.status === 'resolved' && '✅'}
-                    {selectedFeedback.status === 'dismissed' && '❌'}
+                    {selectedFeedback.status === 'pending' && 'â³'}
+                    {selectedFeedback.status === 'reviewing' && 'ðŸ‘€'}
+                    {selectedFeedback.status === 'resolved' && 'âœ…'}
+                    {selectedFeedback.status === 'dismissed' && 'âŒ'}
                     {selectedFeedback.status.toUpperCase()}
                   </span>
                 </div>
@@ -2250,14 +2244,14 @@ function Admin() {
                   className="modal-close"
                   onClick={() => setShowFeedbackModal(false)}
                 >
-                  ×
+                  Ã—
                 </button>
               </div>
               
               <div className="feedback-details-enhanced">
                 <div className="detail-card">
                   <div className="detail-header">
-                    <h4>👤 User Information</h4>
+                    <h4>ðŸ‘¤ User Information</h4>
                   </div>
                   <div className="detail-content">
                     <div className="detail-row">
@@ -2277,7 +2271,7 @@ function Admin() {
                 
                 <div className="detail-card">
                   <div className="detail-header">
-                    <h4>📋 Issue/Topic</h4>
+                    <h4>ðŸ“‹ Issue/Topic</h4>
                   </div>
                   <div className="detail-content">
                     <div className="issue-content">{selectedFeedback.issue}</div>
@@ -2286,7 +2280,7 @@ function Admin() {
                 
                 <div className="detail-card">
                   <div className="detail-header">
-                    <h4>💬 Feedback Details</h4>
+                    <h4>ðŸ’¬ Feedback Details</h4>
                   </div>
                   <div className="detail-content">
                     <div className="feedback-full-content">
@@ -2297,7 +2291,7 @@ function Admin() {
                 
                 <div className="detail-card">
                   <div className="detail-header">
-                    <h4>⚙️ Status Management</h4>
+                    <h4>âš™ï¸ Status Management</h4>
                   </div>
                   <div className="detail-content">
                     <div className="status-management">
@@ -2315,15 +2309,15 @@ function Admin() {
                           }}
                           className="status-select-enhanced"
                         >
-                          <option value="pending">⏳ Pending</option>
-                          <option value="reviewing">👀 Reviewing</option>
-                          <option value="resolved">✅ Resolved</option>
-                          <option value="dismissed">❌ Dismissed</option>
+                          <option value="pending">â³ Pending</option>
+                          <option value="reviewing">ðŸ‘€ Reviewing</option>
+                          <option value="resolved">âœ… Resolved</option>
+                          <option value="dismissed">âŒ Dismissed</option>
                         </select>
                       </div>
                       {selectedFeedback.admin_notes && (
                         <div className="admin-notes">
-                          <h5>📝 Admin Notes:</h5>
+                          <h5>ðŸ“ Admin Notes:</h5>
                           <div className="admin-notes-content">{selectedFeedback.admin_notes}</div>
                         </div>
                       )}
@@ -2336,7 +2330,7 @@ function Admin() {
                     className="action-btn-large delete-btn-large"
                     onClick={() => deleteFeedback(selectedFeedback.id)}
                   >
-                    🗑️ Delete Feedback
+                    ðŸ—‘ï¸ Delete Feedback
                   </button>
                   <button
                     className="action-btn-large cancel-btn"
@@ -2368,20 +2362,20 @@ function Admin() {
     return (
       <div className="admin-section">
         <div className="section-header">
-          <h2>🗄️ Database Management</h2>
+          <h2>ðŸ—„ï¸ Database Management</h2>
           <div className="database-actions">
             <button 
               className="admin-btn primary"
               onClick={loadDatabaseInfo}
               disabled={databaseLoading}
             >
-              🔄 Refresh
+              ðŸ”„ Refresh
             </button>
             <button 
               className="admin-btn success"
               onClick={handleDatabaseExport}
             >
-              📥 Export Database
+              ðŸ“¥ Export Database
             </button>
           </div>
         </div>
@@ -2389,23 +2383,23 @@ function Admin() {
         <div className="database-layout">
           {/* Database Overview */}
           <div className="database-panel">
-            <h3>📊 Database Overview</h3>
+            <h3>ðŸ“Š Database Overview</h3>
             {databaseInfo && (
               <div className="database-overview">
                 <div className="db-info-card">
-                  <h4>📁 Database File</h4>
+                  <h4>ðŸ“ Database File</h4>
                   <p><strong>Path:</strong> {databaseInfo.database.path}</p>
                   <p><strong>Size:</strong> {(databaseInfo.database.size / 1024 / 1024).toFixed(2)} MB</p>
                   <p><strong>Last Modified:</strong> {new Date(databaseInfo.database.lastModified).toLocaleString()}</p>
                   <p><strong>Status:</strong> 
                     <span className={`status-badge ${databaseInfo.database.exists ? 'status-connected' : 'status-error'}`}>
-                      {databaseInfo.database.exists ? '✅ Connected' : '❌ Not Found'}
+                      {databaseInfo.database.exists ? 'âœ… Connected' : 'âŒ Not Found'}
                     </span>
                   </p>
                 </div>
 
                 <div className="db-info-card">
-                  <h4>🔗 Connection Info</h4>
+                  <h4>ðŸ”— Connection Info</h4>
                   <p><strong>Type:</strong> {databaseInfo.connections.type}</p>
                   <p><strong>Version:</strong> {databaseInfo.connections.version || 'Unknown'}</p>
                   <p><strong>Status:</strong> 
@@ -2416,7 +2410,7 @@ function Admin() {
                 </div>
 
                 <div className="db-info-card">
-                  <h4>📋 Tables ({databaseInfo.tables.length})</h4>
+                  <h4>ðŸ“‹ Tables ({databaseInfo.tables.length})</h4>
                   <div className="table-list">
                     {databaseInfo.tables.map(table => (
                       <div 
@@ -2424,7 +2418,7 @@ function Admin() {
                         className={`table-item ${selectedTable === table.name ? 'selected' : ''}`}
                         onClick={() => handleTableSelect(table.name)}
                       >
-                        <div className="table-name">🗂️ {table.name}</div>
+                        <div className="table-name">ðŸ—‚ï¸ {table.name}</div>
                         <div className="table-stats">
                           <span>{table.rowCount} rows</span>
                           <span>{table.columnCount} columns</span>
@@ -2440,10 +2434,10 @@ function Admin() {
           {/* Table Details */}
           {selectedTable && tableDetails && (
             <div className="database-panel">
-              <h3>🗂️ Table: {selectedTable}</h3>
+              <h3>ðŸ—‚ï¸ Table: {selectedTable}</h3>
               <div className="table-details">
                 <div className="table-schema">
-                  <h4>📋 Schema</h4>
+                  <h4>ðŸ“‹ Schema</h4>
                   <div className="schema-table">
                     <table>
                       <thead>
@@ -2474,7 +2468,7 @@ function Admin() {
 
                 {tableDetails.sampleData && tableDetails.sampleData.length > 0 && (
                   <div className="sample-data">
-                    <h4>📊 Sample Data (First 10 rows)</h4>
+                    <h4>ðŸ“Š Sample Data (First 10 rows)</h4>
                     <div className="data-table">
                       <table>
                         <thead>
@@ -2509,7 +2503,7 @@ function Admin() {
 
           {/* Query Executor */}
           <div className="database-panel">
-            <h3>⚡ Query Executor</h3>
+            <h3>âš¡ Query Executor</h3>
             <div className="query-executor">
               <div className="query-input">
                 <textarea
@@ -2525,13 +2519,13 @@ function Admin() {
                     onClick={handleQueryExecute}
                     disabled={queryLoading}
                   >
-                    {queryLoading ? '⏳ Executing...' : '▶️ Execute Query'}
+                    {queryLoading ? 'â³ Executing...' : 'â–¶ï¸ Execute Query'}
                   </button>
                   <button 
                     className="admin-btn secondary"
                     onClick={() => setQueryText('SELECT * FROM users LIMIT 10;')}
                   >
-                    📝 Example Query
+                    ðŸ“ Example Query
                   </button>
                 </div>
               </div>
@@ -2540,12 +2534,12 @@ function Admin() {
                 <div className="query-result">
                   {queryResult.error ? (
                     <div className="error-result">
-                      <h4>❌ Query Error</h4>
+                      <h4>âŒ Query Error</h4>
                       <pre>{queryResult.error}</pre>
                     </div>
                   ) : (
                     <div className="success-result">
-                      <h4>✅ Query Result ({queryResult.rowCount || queryResult.data?.length || 0} rows)</h4>
+                      <h4>âœ… Query Result ({queryResult.rowCount || queryResult.data?.length || 0} rows)</h4>
                       {queryResult.data && queryResult.data.length > 0 ? (
                         <div className="result-table">
                           <table>
@@ -2591,11 +2585,11 @@ function Admin() {
           {/* Health Check */}
           {databaseHealth && (
             <div className="database-panel">
-              <h3>🏥 Database Health</h3>
+              <h3>ðŸ¥ Database Health</h3>
               <div className="health-check">
                 <div className={`health-status ${databaseHealth.status}`}>
                   <h4>
-                    {databaseHealth.status === 'healthy' ? '✅' : databaseHealth.status === 'unhealthy' ? '❌' : '⚠️'} 
+                    {databaseHealth.status === 'healthy' ? 'âœ…' : databaseHealth.status === 'unhealthy' ? 'âŒ' : 'âš ï¸'} 
                     Status: {databaseHealth.status.toUpperCase()}
                   </h4>
                   <p className="health-timestamp">
@@ -2607,7 +2601,7 @@ function Admin() {
                   {databaseHealth.checks.map((check, index) => (
                     <div key={index} className={`health-check-item ${check.status}`}>
                       <div className="check-status">
-                        {check.status === 'pass' ? '✅' : check.status === 'fail' ? '❌' : '⚠️'}
+                        {check.status === 'pass' ? 'âœ…' : check.status === 'fail' ? 'âŒ' : 'âš ï¸'}
                       </div>
                       <div className="check-details">
                         <strong>{check.name}</strong>
@@ -2682,49 +2676,49 @@ function Admin() {
               className={`admin-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
               onClick={() => setActiveTab('dashboard')}
             >
-              📊 Dashboard
+              ðŸ“Š Dashboard
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'users' ? 'active' : ''}`}
               onClick={() => setActiveTab('users')}
             >
-              👥 Users
+              ðŸ‘¥ Users
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'products' ? 'active' : ''}`}
               onClick={() => setActiveTab('products')}
             >
-              🎨 Products
+              ðŸŽ¨ Products
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'articles' ? 'active' : ''}`}
               onClick={() => setActiveTab('articles')}
             >
-              📝 Articles
+              ðŸ“ Articles
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'orders' ? 'active' : ''}`}
               onClick={() => setActiveTab('orders')}
             >
-              🛍️ Orders
+              ðŸ›ï¸ Orders
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'mail' ? 'active' : ''}`}
               onClick={() => setActiveTab('mail')}
             >
-              📧 Mail
+              ðŸ“§ Mail
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'feedback' ? 'active' : ''}`}
               onClick={() => setActiveTab('feedback')}
             >
-              💬 Feedback
+              ðŸ’¬ Feedback
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'database' ? 'active' : ''}`}
               onClick={() => setActiveTab('database')}
             >
-              🗄️ Database
+              ðŸ—„ï¸ Database
             </button>
           </nav>
         </div>
@@ -2745,7 +2739,7 @@ function Admin() {
                 onClick={handleAddUserCancel}
                 type="button"
               >
-                ×
+                Ã—
               </button>
             </div>
             
@@ -2872,7 +2866,7 @@ function Admin() {
                 }}
                 type="button"
               >
-                ×
+                Ã—
               </button>
             </div>
             
@@ -2995,7 +2989,7 @@ function Admin() {
                 onClick={handleAddProductCancel}
                 type="button"
               >
-                ×
+                Ã—
               </button>
             </div>
             
@@ -3165,7 +3159,7 @@ function Admin() {
           <div className="modal-content">
             <div className="modal-header">
               <h2>Add New Article</h2>
-              <button className="modal-close" onClick={handleAddArticleCancel} type="button">×</button>
+              <button className="modal-close" onClick={handleAddArticleCancel} type="button">Ã—</button>
             </div>
             <form onSubmit={handleAddArticleSubmit} className="modal-form">
               {addArticleError && <div className="error-message">{addArticleError}</div>}
@@ -3199,13 +3193,13 @@ function Admin() {
         <div className="modal-overlay">
           <div className="modal-content rejection-modal">
             <div className="modal-header">
-              <h2>🚫 Reject Artwork</h2>
+              <h2>ðŸš« Reject Artwork</h2>
               <button 
                 className="modal-close" 
                 onClick={() => setShowRejectionModal(false)}
                 type="button"
               >
-                ×
+                Ã—
               </button>
             </div>
             
@@ -3213,7 +3207,7 @@ function Admin() {
               <div className="rejection-info">
                 <p><strong>Artwork:</strong> {rejectionData.productTitle}</p>
                 <p className="rejection-warning">
-                  ⚠️ This artwork will be rejected and the artist will be notified.
+                  âš ï¸ This artwork will be rejected and the artist will be notified.
                 </p>
               </div>
               
@@ -3253,7 +3247,7 @@ function Admin() {
                 onClick={handleRejectionSubmit}
                 disabled={!rejectionData.rejectionReason.trim()}
               >
-                🚫 Reject Artwork
+                ðŸš« Reject Artwork
               </button>
             </div>
           </div>
@@ -3264,3 +3258,4 @@ function Admin() {
 }
 
 export default Admin;
+

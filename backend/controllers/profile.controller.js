@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const db = require('../config/database');
+﻿const db = require('../config/database');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
@@ -307,3 +301,4 @@ module.exports = {
   updateSocialMedia,
   upload
 };
+

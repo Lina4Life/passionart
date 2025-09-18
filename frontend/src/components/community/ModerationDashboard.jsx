@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import './ModerationDashboard.css';
 
 const ModerationDashboard = () => {
@@ -63,11 +57,11 @@ const ModerationDashboard = () => {
   return (
     <div className="moderation-dashboard">
       <div className="dashboard-header">
-        <h1>🛡️ Content Moderation</h1>
+        <h1>ðŸ›¡ï¸ Content Moderation</h1>
         <p>Review and verify paid artwork submissions</p>
         <div className="stats">
           <span className="stat-item">
-            📝 {pendingPosts.length} posts pending review
+            ðŸ“ {pendingPosts.length} posts pending review
           </span>
         </div>
       </div>
@@ -77,7 +71,7 @@ const ModerationDashboard = () => {
           <h2>Verification Queue</h2>
           {pendingPosts.length === 0 ? (
             <div className="no-posts">
-              <h3>🎉 All caught up!</h3>
+              <h3>ðŸŽ‰ All caught up!</h3>
               <p>No posts pending verification at the moment.</p>
             </div>
           ) : (
@@ -99,9 +93,9 @@ const ModerationDashboard = () => {
                     <div className="post-info">
                       <h4>{post.title}</h4>
                       <p className="post-meta">
-                        By {post.author_name} • €{post.payment_amount} • {new Date(post.created_at).toLocaleDateString()}
+                        By {post.author_name} â€¢ â‚¬{post.payment_amount} â€¢ {new Date(post.created_at).toLocaleDateString()}
                       </p>
-                      <span className="payment-badge">💳 Payment Verified</span>
+                      <span className="payment-badge">ðŸ’³ Payment Verified</span>
                     </div>
                   </div>
                 </div>
@@ -119,7 +113,7 @@ const ModerationDashboard = () => {
                   className="btn-approve"
                   onClick={() => moderatePost(selectedPost.id, 'approve')}
                 >
-                  ✅ Approve
+                  âœ… Approve
                 </button>
                 <button 
                   className="btn-reject"
@@ -130,7 +124,7 @@ const ModerationDashboard = () => {
                     }
                   }}
                 >
-                  ❌ Reject
+                  âŒ Reject
                 </button>
               </div>
             </div>
@@ -171,7 +165,7 @@ const ModerationDashboard = () => {
                     <strong>Category:</strong> {selectedPost.category_name}
                   </div>
                   <div className="info-row">
-                    <strong>Payment:</strong> €{selectedPost.payment_amount} via {selectedPost.payment_method}
+                    <strong>Payment:</strong> â‚¬{selectedPost.payment_amount} via {selectedPost.payment_method}
                   </div>
                   <div className="info-row">
                     <strong>Submitted:</strong> {new Date(selectedPost.created_at).toLocaleString()}
@@ -189,23 +183,23 @@ const ModerationDashboard = () => {
                 <div className="checklist">
                   <label className="checklist-item">
                     <input type="checkbox" />
-                    <span>✅ Original artwork by the submitter</span>
+                    <span>âœ… Original artwork by the submitter</span>
                   </label>
                   <label className="checklist-item">
                     <input type="checkbox" />
-                    <span>✅ High quality and appropriate content</span>
+                    <span>âœ… High quality and appropriate content</span>
                   </label>
                   <label className="checklist-item">
                     <input type="checkbox" />
-                    <span>✅ Follows community guidelines</span>
+                    <span>âœ… Follows community guidelines</span>
                   </label>
                   <label className="checklist-item">
                     <input type="checkbox" />
-                    <span>✅ Payment has been processed</span>
+                    <span>âœ… Payment has been processed</span>
                   </label>
                   <label className="checklist-item">
                     <input type="checkbox" />
-                    <span>✅ No copyright violations</span>
+                    <span>âœ… No copyright violations</span>
                   </label>
                 </div>
               </div>
@@ -218,3 +212,4 @@ const ModerationDashboard = () => {
 };
 
 export default ModerationDashboard;
+

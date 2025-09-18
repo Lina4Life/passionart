@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   getAdminStats, 
@@ -384,7 +378,7 @@ function Admin() {
       
       // Show success feedback
       if (newStatus === 'approved') {
-        console.log('✅ Product approved! It will now appear in the store.');
+        console.log('âœ… Product approved! It will now appear in the store.');
       }
       
     } catch (error) {
@@ -602,21 +596,21 @@ function Admin() {
         <h3>Recent Activity</h3>
         <div className="activity-list">
           <div className="activity-item">
-            <div className="activity-icon">👤</div>
+            <div className="activity-icon">ðŸ‘¤</div>
             <div className="activity-content">
               <div className="activity-title">New user registered</div>
               <div className="activity-time">2 hours ago</div>
             </div>
           </div>
           <div className="activity-item">
-            <div className="activity-icon">🎨</div>
+            <div className="activity-icon">ðŸŽ¨</div>
             <div className="activity-content">
               <div className="activity-title">New artwork uploaded</div>
               <div className="activity-time">5 hours ago</div>
             </div>
           </div>
           <div className="activity-item">
-            <div className="activity-icon">📝</div>
+            <div className="activity-icon">ðŸ“</div>
             <div className="activity-content">
               <div className="activity-title">Article published</div>
               <div className="activity-time">1 day ago</div>
@@ -636,7 +630,7 @@ function Admin() {
         </button>
       </div>
       <div className="testing-warning">
-        ⚠️ <strong>TESTING MODE:</strong> Passwords are visible for testing purposes only. Remove in production!
+        âš ï¸ <strong>TESTING MODE:</strong> Passwords are visible for testing purposes only. Remove in production!
       </div>
       <div className="table-container">
         <table className="admin-table">
@@ -662,14 +656,14 @@ function Admin() {
                 <td className="password-cell">
                   <div className="password-container">
                     <span className="password-text">
-                      {showPasswords[user.id] ? user.password : '••••••••'}
+                      {showPasswords[user.id] ? user.password : 'â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢'}
                     </span>
                     <button 
                       onClick={() => togglePasswordVisibility(user.id)}
                       className="password-toggle-btn"
                       title={showPasswords[user.id] ? 'Hide password' : 'Show password'}
                     >
-                      {showPasswords[user.id] ? '👁️‍🗨️' : '👁️'}
+                      {showPasswords[user.id] ? 'ðŸ‘ï¸â€ðŸ—¨ï¸' : 'ðŸ‘ï¸'}
                     </button>
                   </div>
                 </td>
@@ -750,9 +744,9 @@ function Admin() {
                       }}
                     >
                       <option value="pending">Pending</option>
-                      <option value="approved">Approved ✅</option>
-                      <option value="rejected">Rejected ❌</option>
-                      <option value="available">Available 🛍️</option>
+                      <option value="approved">Approved âœ…</option>
+                      <option value="rejected">Rejected âŒ</option>
+                      <option value="available">Available ðŸ›ï¸</option>
                     </select>
                     {updatingProductStatus === product.id && (
                       <span style={{ 
@@ -897,7 +891,7 @@ function Admin() {
     return (
       <div className="admin-section">
         <div className="section-header">
-          <h2>📧 HubSpot Email System</h2>
+          <h2>ðŸ“§ HubSpot Email System</h2>
           <div className="email-stats">
             <span>Total Users: {emailStats.totalUsers || users.length}</span>
             <span>Verified Emails: {emailStats.verifiedUsers || users.filter(user => user.email_verified).length}</span>
@@ -931,7 +925,7 @@ function Admin() {
             className="admin-btn primary"
             onClick={fetchEmailStats}
           >
-            📊 Refresh Stats
+            ðŸ“Š Refresh Stats
           </button>
         </div>
         
@@ -979,7 +973,7 @@ function Admin() {
                 disabled={!emailData.subject || !emailData.message || sending}
                 onClick={() => handleSendEmail(emailData)}
               >
-                {sending ? 'Sending...' : `📤 Send to ${emailStats.verifiedUsers || users.filter(user => user.email_verified).length} users`}
+                {sending ? 'Sending...' : `ðŸ“¤ Send to ${emailStats.verifiedUsers || users.filter(user => user.email_verified).length} users`}
               </button>
               <button 
                 className="admin-btn secondary"
@@ -990,12 +984,12 @@ function Admin() {
             </div>
             
             <div className="resend-features">
-              <h4>✨ Resend Features:</h4>
+              <h4>âœ¨ Resend Features:</h4>
               <ul>
-                <li>📨 Beautiful HTML email templates</li>
-                <li>📊 Real-time delivery tracking</li>
-                <li>🚀 99.9% uptime guarantee</li>
-                <li>💎 Professional email infrastructure</li>
+                <li>ðŸ“¨ Beautiful HTML email templates</li>
+                <li>ðŸ“Š Real-time delivery tracking</li>
+                <li>ðŸš€ 99.9% uptime guarantee</li>
+                <li>ðŸ’Ž Professional email infrastructure</li>
               </ul>
             </div>
           </div>
@@ -1076,37 +1070,37 @@ function Admin() {
               className={`admin-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
               onClick={() => setActiveTab('dashboard')}
             >
-              📊 Dashboard
+              ðŸ“Š Dashboard
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'users' ? 'active' : ''}`}
               onClick={() => setActiveTab('users')}
             >
-              👥 Users
+              ðŸ‘¥ Users
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'products' ? 'active' : ''}`}
               onClick={() => setActiveTab('products')}
             >
-              🎨 Products
+              ðŸŽ¨ Products
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'articles' ? 'active' : ''}`}
               onClick={() => setActiveTab('articles')}
             >
-              📝 Articles
+              ðŸ“ Articles
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'orders' ? 'active' : ''}`}
               onClick={() => setActiveTab('orders')}
             >
-              🛍️ Orders
+              ðŸ›ï¸ Orders
             </button>
             <button
               className={`admin-nav-item ${activeTab === 'mail' ? 'active' : ''}`}
               onClick={() => setActiveTab('mail')}
             >
-              📧 Mail
+              ðŸ“§ Mail
             </button>
           </nav>
         </div>
@@ -1127,7 +1121,7 @@ function Admin() {
                 onClick={handleAddUserCancel}
                 type="button"
               >
-                ×
+                Ã—
               </button>
             </div>
             
@@ -1253,7 +1247,7 @@ function Admin() {
                 }}
                 type="button"
               >
-                ×
+                Ã—
               </button>
             </div>
             
@@ -1373,7 +1367,7 @@ function Admin() {
                 onClick={handleAddProductCancel}
                 type="button"
               >
-                ×
+                Ã—
               </button>
             </div>
             
@@ -1540,3 +1534,4 @@ function Admin() {
 }
 
 export default Admin;
+

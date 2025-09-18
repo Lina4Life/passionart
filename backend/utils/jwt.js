@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const jwt = require('jsonwebtoken');
+﻿const jwt = require('jsonwebtoken');
 
 const generateToken = (user) =>
   jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -23,3 +17,4 @@ const verifyToken = (req, res, next) => {
 };
 
 module.exports = { generateToken, verifyToken };
+

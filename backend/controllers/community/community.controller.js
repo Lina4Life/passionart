@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-const { Pool } = require('pg');
+﻿const { Pool } = require('pg');
 
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -130,7 +124,7 @@ const createPost = async (req, res) => {
         paymentRequired: true,
         amount: 5.00,
         currency: 'EUR',
-        message: 'Payment of €5.00 is required before your artwork can be published and verified.'
+        message: 'Payment of â‚¬5.00 is required before your artwork can be published and verified.'
       });
     } else {
       // Update category post count
@@ -404,3 +398,4 @@ module.exports = {
   getComments,
   createComment
 };
+

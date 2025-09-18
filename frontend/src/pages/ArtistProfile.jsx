@@ -1,10 +1,4 @@
-/*
- * Clean Minimalistic Template
- * Copyright (c) 2025 Youssef Mohamed Ali
- * Licensed under the MIT License
- * https://github.com/Lina4Life/clean-minimalistic-template
- */
-import React, { useState, useEffect, useContext } from 'react';
+﻿import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -231,7 +225,7 @@ const ArtistProfile = () => {
                   className="back-btn"
                   onClick={() => navigate('/artists')}
                 >
-                  ← Back to Artists
+                  â† Back to Artists
                 </button>
                 
                 {user && user.email !== artist.email && (
@@ -239,7 +233,7 @@ const ArtistProfile = () => {
                     className={`follow-btn-large ${isFollowing ? 'following' : ''}`}
                     onClick={handleFollow}
                   >
-                    {isFollowing ? '✓ Following' : '+ Follow'}
+                    {isFollowing ? 'âœ“ Following' : '+ Follow'}
                   </button>
                 )}
               </div>
@@ -250,7 +244,7 @@ const ArtistProfile = () => {
 
       <div className="artist-content">
         <div className="content-section">
-          <h2>🎨 Artworks</h2>
+          <h2>ðŸŽ¨ Artworks</h2>
           
           {artworks.length === 0 ? (
             <div className="empty-artworks">
@@ -268,7 +262,7 @@ const ArtistProfile = () => {
                       />
                     ) : (
                       <div className="artwork-placeholder">
-                        🎨
+                        ðŸŽ¨
                       </div>
                     )}
                   </div>
@@ -306,3 +300,4 @@ const ArtistProfile = () => {
 };
 
 export default ArtistProfile;
+
